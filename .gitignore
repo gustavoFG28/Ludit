@@ -13,6 +13,32 @@ bin/
 gen/
 out/
 
+# Created by https://www.gitignore.io/api/microsoftoffice
+# Edit at https://www.gitignore.io/?templates=microsoftoffice
+
+### MicrosoftOffice ###
+*.tmp
+
+# Word temporary
+~$*.doc*
+
+# Word Auto Backup File
+Backup of *.doc*
+
+# Excel temporary
+~$*.xls*
+
+# Excel Backup File
+*.xlk
+
+# PowerPoint temporary
+~$*.ppt*
+
+# Visio autosave temporary files
+*.~vsd*
+
+# End of https://www.gitignore.io/api/microsoftoffice
+
 # Gradle files
 .gradle/
 build/
@@ -63,3 +89,30 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+
+
+# Created by https://www.gitignore.io/api/microsoftoffice
+# Edit at https://www.gitignore.io/?templates=microsoftoffice
+
+### MicrosoftOffice ###
+*.tmp
+
+# Word temporary
+~$*.doc*
+
+# Word Auto Backup File
+Backup of *.doc*
+
+# Excel temporary
+~$*.xls*
+
+# Excel Backup File
+*.xlk
+
+# PowerPoint temporary
+~$*.ppt*
+
+# Visio autosave temporary files
+*.~vsd*
+
+# End of https://www.gitignore.io/api/microsoftoffice
