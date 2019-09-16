@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         btnVideos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                trocarPagina(SliderActivity.class);
             }
         });
 
