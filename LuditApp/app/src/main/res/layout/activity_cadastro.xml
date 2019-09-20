@@ -39,8 +39,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="20dp"
-        android:text="Kids"
-        android:fontFamily="@font/FredokaOne-Regular"/>
+        android:text="Kids">
+        <!-- android:fontFamily="@font/FredokaOne-Regular" -->
+    </TextView>
 
     <GridLayout
         android:layout_width="match_parent"
