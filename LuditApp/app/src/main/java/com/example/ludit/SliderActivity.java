@@ -21,7 +21,9 @@ public class SliderActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
-        sliderAdapter = new SliderAdapter(this);
+        int[] imagens = {R.drawable.background_gradient, R.drawable.logo};
+
+        sliderAdapter = new SliderAdapter(this, imagens, R.layout.imagens_slider);
         viewPager.setAdapter(sliderAdapter);
 
         tabLayout.setupWithViewPager(viewPager, true);

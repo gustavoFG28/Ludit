@@ -2,6 +2,7 @@ package com.example.ludit;
 
 import android.content.Context;
 import android.os.Parcelable;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +16,13 @@ public class SliderAdapter extends PagerAdapter {
 
     private LayoutInflater inflater;
     private Context context;
-    private String[] titles = {"logo", "fundo"};
-    private String[] descriptions = {"aaaaaaaaaaaaaaaaaaa", "bbbbbbbbbbbbbbbbbbbbbbb"};
-    private int[] images = {R.drawable.logo, R.drawable.background_gradient};
+    int layout;
+    private int[] images;
 
-    public SliderAdapter(Context context) {
+    public SliderAdapter(Context context, int[] img, int layout) {
         this.context = context;
+        this.images = img;
+        this.layout = layout;
     }
 
     @Override
@@ -38,17 +40,13 @@ public class SliderAdapter extends PagerAdapter {
     {
         inflater = (LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.imagens_slider, container, false);
+        View view = inflater.inflate(layout, container, false);
 
         LinearLayout layoutSlide = view.findViewById(R.id.slideLinearLayout);
         ImageView imageView = (ImageView)view.findViewById(R.id.slideImage);
-        TextView textView1 = (TextView)view.findViewById(R.id.tvTitulo);
-        TextView textView2 = (TextView)view.findViewById(R.id.tvDescricao);
 
         layoutSlide.setBackgroundColor(R.drawable.background_gradient);
         imageView.setImageResource(images[position]);
-        textView1.setText(titles[position]);
-        textView2.setText(descriptions[position]);
         container.addView(view);
 
         return view;
