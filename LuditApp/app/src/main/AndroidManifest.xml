@@ -9,7 +9,7 @@
         android:roundIcon="@drawable/icone"
         android:supportsRtl="true"
         android:theme="@style/FullScreen">
-        <activity android:name=".SlideActivity"></activity>
+        <activity android:name=".SliderActivity"></activity>
         <activity android:name=".FilhoCadastroActivity" />
         <activity android:name=".CadastroActivity" />
         <activity android:name=".MusicaActivity" />
