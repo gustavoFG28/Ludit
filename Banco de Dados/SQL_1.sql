@@ -2,6 +2,7 @@ create table L_Usuario
 (
 id int identity primary key not null,
 nome varchar(30) not null,
+email varchar(30) not null,
 senha varchar(30) not null
 )
 
@@ -20,9 +21,10 @@ idPai int not null
 constraint FK_USUARIO foreign key (idPai) references L_Usuario(id),
 deficiencia varchar(50),
 idade int not null,
-dataNascimento dateti me not null,
+dataNascimento datetime not null,
 texto nText,
-imgPerfil ntext
+imgPerfil ntext, 
+nome varchar(30) not null
 )
 
 create table L_Habilidade
