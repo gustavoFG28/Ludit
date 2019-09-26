@@ -18,37 +18,7 @@ import java.util.Map;
 
 public class Conexao {
 
-    public static void inserir(final HashMap<String, String> params, String url, final Context context, final  VolleyCallback callback)
-    {
-        StringRequest jsObjRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>()  {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONArray array = new JSONArray(response);
-                            JSONObject jsonObject = array.getJSONObject(0);
-                            callback.onSuccess(jsonObject);
-                        } catch (JSONException erro) {
-                            erro.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG ).show();
-            }
-        })
-        {
-            @Override
-            protected Map<String, String> getParams(){
-                return  params;
-            }
-        };
-
-        Volley.newRequestQueue(context).add(jsObjRequest);
-    }
-
-    public static void login(final HashMap<String, String> params, String url, final Context context, final  VolleyCallback callback)
+    public static void enviarDados(final HashMap<String, String> params, String url, final Context context, final  VolleyCallback callback)
     {
         StringRequest jsObjRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()  {

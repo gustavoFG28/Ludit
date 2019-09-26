@@ -12,9 +12,9 @@
         android:theme="@style/FullScreen">
         <activity android:name=".SliderActivity"></activity>
         <activity android:name=".FilhoCadastroActivity" />
-        <activity android:name=".CadastroActivity" />
+        <activity android:name=".SplashScreenActivity" />
         <activity android:name=".MusicaActivity" />
-        <activity android:name=".SplashScreenActivity">
+        <activity android:name=".CadastroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

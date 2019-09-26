@@ -2,6 +2,7 @@ package com.example.ludit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -43,18 +44,19 @@ public class CadastroActivity extends AppCompatActivity {
                 params.put("senha", edtSenha.getText().toString());
 
                 if(edtSenha.getText().toString().equals(edtConSenha.getText().toString()))
-                    Conexao.inserir(params, url, getApplicationContext(), new VolleyCallback() {
+                    Conexao.enviarDados(params, url, getApplicationContext(), new VolleyCallback() {
                     @Override
                     public void onSuccess(JSONObject result) throws JSONException {
                         SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
                         editor.putString("email", result.getString("email"));
                         editor.commit();
+
+                        Intent i = new Intent(CadastroActivity.this, FilhoCadastroActivity.class);
+                        startActivity(i);
                     }
 
                     @Override
                     public void onError(String erro)  {
-
-
                             //avisar o usuário que a não foi possível inseri-lo
                     }
                 });

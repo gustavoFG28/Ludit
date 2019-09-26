@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +22,7 @@ public class FilhoCadastroActivity extends AppCompatActivity {
     EditText edtNome,edtDeficiencia,edtTexto;
     DatePicker dataNascimento;
     Button btnCadastrarFilho;
+    TextView tvResposta;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -32,13 +34,14 @@ public class FilhoCadastroActivity extends AppCompatActivity {
 
         final String email = sharedPreferences.getString("email", "default@gmail.com");
 
-
-
+        tvResposta = (TextView) findViewById(R.id.tvResposta);
         edtNome = (EditText) findViewById(R.id.edNome);
         edtDeficiencia = (EditText) findViewById(R.id.edDeficiencia);
         edtTexto = (EditText) findViewById(R.id.edTexto);
         dataNascimento = (DatePicker) findViewById(R.id.dtNascimento);
         btnCadastrarFilho  = (Button)findViewById(R.id.btnCadastrar);
+
+        tvResposta.append("O email é: "+ email + "\n");
 
         btnCadastrarFilho.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,10 +60,10 @@ public class FilhoCadastroActivity extends AppCompatActivity {
                 params.put("imgPerfil", "default");
 
 
-                Conexao.inserir(params, url, getApplicationContext(), new VolleyCallback() {
+                Conexao.enviarDados(params, url, getApplicationContext(), new VolleyCallback() {
                     @Override
                     public void onSuccess(JSONObject result) throws JSONException {
-                            //avisar que deu certo
+                           tvResposta.append(result.getString("nome"));
                     }
 
                     @Override
