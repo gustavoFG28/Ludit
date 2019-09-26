@@ -21,10 +21,33 @@
         android:layout_margin="24dp"
         android:hint="Nome"/>
 
+    <EditText
+        android:id="@+id/edDeficiencia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:hint="Deficiência"/>
+
+    <EditText
+        android:id="@+id/edTexto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:hint="Observações"/>
+
     <DatePicker
         android:layout_width="match_parent"
-        android:layout_height="79dp"
-        android:calendarViewShown="false"></DatePicker>
+        android:id="@+id/dtNascimento"
+        android:layout_height="109dp"
+        android:calendarViewShown="false"
+        ></DatePicker>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnCadastrarFilho"
+        android:text="Cadastrar Filho"
+        android:textSize="24dp"/>
 
 
 </LinearLayout>

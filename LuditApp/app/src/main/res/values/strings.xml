@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Ludit</string>
+    <string name="defaultValue">Email</string>
 </resources>

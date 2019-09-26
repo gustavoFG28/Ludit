@@ -18,6 +18,14 @@
         android:textSize="24dp" />
 
     <EditText
+        android:id="@+id/edEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:hint="Email"
+        android:textSize="24dp" />
+
+    <EditText
         android:id="@+id/edSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,32 +41,6 @@
         android:layout_margin="24dp"
         android:hint="Confirmar senha"
         android:textSize="24dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:text="Kids">
-        <!-- android:fontFamily="@font/FredokaOne-Regular" -->
-    </TextView>
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:columnCount="2"
-        android:orientation="horizontal"
-        android:useDefaultMargins="true">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_menu"
-            android:layout_gravity="center"/>
-
-
-    </GridLayout>
 
     <Button
         android:id="@+id/btnCadastrar"
