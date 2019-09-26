@@ -1,10 +1,13 @@
 package com.example.ludit;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import com.example.ludit.R;
 
 public class MainActivity extends AppCompatActivity {
 

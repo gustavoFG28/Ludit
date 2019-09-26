@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.ludit.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,7 +49,7 @@ public class CadastroActivity extends AppCompatActivity {
                     Conexao.enviarDados(params, url, getApplicationContext(), new VolleyCallback() {
                     @Override
                     public void onSuccess(JSONObject result) throws JSONException {
-                        SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+                        SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).edit();
                         editor.putString("email", result.getString("email"));
                         editor.commit();
 

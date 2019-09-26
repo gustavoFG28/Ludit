@@ -1,5 +1,6 @@
 package com.example.ludit;
 
+
 import android.content.Context;
 import android.os.Parcelable;
 import android.text.Layout;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.example.ludit.R;
 
 
 public class SliderAdapter extends PagerAdapter {

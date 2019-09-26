@@ -1,5 +1,6 @@
 package com.example.ludit;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
@@ -9,6 +10,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.ludit.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,9 +33,9 @@ public class FilhoCadastroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filho_cadastro);
 
-        sharedPreferences = getPreferences(MODE_PRIVATE);
+        sharedPreferences = getApplicationContext().getSharedPreferences("minhaShared",MODE_PRIVATE);
 
-        final String email = sharedPreferences.getString("email", "default@gmail.com");
+        final String email = sharedPreferences.getString("email", null);
 
         tvResposta = (TextView) findViewById(R.id.tvResposta);
         edtNome = (EditText) findViewById(R.id.edNome);

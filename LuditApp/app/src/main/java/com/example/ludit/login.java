@@ -1,5 +1,6 @@
 package com.example.ludit;
 
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.ludit.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
