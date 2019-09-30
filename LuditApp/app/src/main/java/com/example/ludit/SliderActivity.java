@@ -28,6 +28,4 @@ public class SliderActivity extends AppCompatActivity {
 
         tabLayout.setupWithViewPager(viewPager, true);
     }
-
-
 }

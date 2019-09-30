@@ -1,14 +1,12 @@
 package com.example.ludit;
 
 import android.content.Context;
-import android.os.Parcelable;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+
 import androidx.viewpager.widget.PagerAdapter;
 
 
@@ -17,11 +15,11 @@ public class SliderAdapter extends PagerAdapter {
     private LayoutInflater inflater;
     private Context context;
     int layout;
-    private int[] images;
+    private int[] imagens;
 
     public SliderAdapter(Context context, int[] img, int layout) {
         this.context = context;
-        this.images = img;
+        this.imagens = img;
         this.layout = layout;
     }
 
@@ -32,7 +30,7 @@ public class SliderAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return images.length;
+        return imagens.length;
     }
 
     @Override
@@ -46,7 +44,7 @@ public class SliderAdapter extends PagerAdapter {
         ImageView imageView = (ImageView)view.findViewById(R.id.slideImage);
 
         layoutSlide.setBackgroundColor(R.drawable.background_gradient);
-        imageView.setImageResource(images[position]);
+        imageView.setImageResource(imagens[position]);
         container.addView(view);
 
         return view;
