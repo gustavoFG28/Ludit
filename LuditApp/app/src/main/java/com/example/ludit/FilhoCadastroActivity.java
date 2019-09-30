@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +34,6 @@ public class FilhoCadastroActivity extends AppCompatActivity {
     EditText edtNome,edtDeficiencia,edtTexto;
     DatePicker dataNascimento;
     Button btnCadastrarFilho;
-    TextView tvResposta;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -45,7 +45,6 @@ public class FilhoCadastroActivity extends AppCompatActivity {
 
         final String email = sharedPreferences.getString("email", null);
 
-        tvResposta = (TextView) findViewById(R.id.tvResposta);
         edtNome = (EditText) findViewById(R.id.edNome);
         edtDeficiencia = (EditText) findViewById(R.id.edDeficiencia);
         edtTexto = (EditText) findViewById(R.id.edTexto);
@@ -67,7 +66,11 @@ public class FilhoCadastroActivity extends AppCompatActivity {
         dlgAlert.setCancelable(true);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String date = dateFormat.format(new Date(dataNascimento.getYear(), dataNascimento.getMonth(),dataNascimento.getDayOfMonth()));
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, dataNascimento.getYear());
+        c.set(Calendar.MONTH, dataNascimento.getMonth());
+        c.set(Calendar.DAY_OF_MONTH, dataNascimento.getDayOfMonth());
+        String date = dateFormat.format(c);
 
         UserService service = RetrofitConfig.getClient().create(UserService.class);
 

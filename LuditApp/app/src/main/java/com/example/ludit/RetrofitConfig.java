@@ -10,7 +10,7 @@ public class RetrofitConfig {
     public static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://177.220.18.105:3000/")
+                    .baseUrl("http://177.220.18.104:3000/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
