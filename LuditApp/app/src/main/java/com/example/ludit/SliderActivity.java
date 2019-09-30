@@ -1,10 +1,12 @@
 package com.example.ludit;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
+import com.example.ludit.R;
 import com.google.android.material.tabs.TabLayout;
 
 public class SliderActivity extends AppCompatActivity {
