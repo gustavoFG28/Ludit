@@ -1,3 +1,5 @@
+import { log } from 'util';
+
 const express = require('express');
 const fs = require('fs');
 const app = express();         
@@ -38,10 +40,12 @@ function execSQL(sql, resposta) {
 }
 
 rota.post('/cadastrarUsuario', (requisicao, resposta) =>{
+	console.log('CAIU AQUI');
+console.log(requisicao.body.nome);
 const nome = requisicao.body.nome;
 const senha = requisicao.body.senha;
 const email = requisicao.body.email;
-execSQL(`cadastrar_sp '${nome}','${senha}','${email}'`, resposta);
+execSQL(`cadastro_sp '${nome}','${email}','${senha}'`, resposta);
 })
 
 rota.post('/cadastrarFilho/:email', (requisicao, resposta) =>{

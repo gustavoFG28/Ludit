@@ -11,6 +11,7 @@
 
     <EditText
         android:id="@+id/edNome"
+        android:inputType="textNoSuggestions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
@@ -19,6 +20,7 @@
 
     <EditText
         android:id="@+id/edEmail"
+        android:inputType="textEmailAddress|textNoSuggestions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
@@ -28,6 +30,7 @@
     <EditText
         android:id="@+id/edSenha"
         android:layout_width="match_parent"
+        android:inputType="textPassword|textNoSuggestions"
         android:layout_height="wrap_content"
         android:textSize="24dp"
         android:layout_marginLeft="24dp"
@@ -37,6 +40,7 @@
     <EditText
         android:id="@+id/edConfimarSenha"
         android:layout_width="match_parent"
+        android:inputType="textPassword|textNoSuggestions"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:hint="Confirmar senha"
