@@ -1,21 +1,21 @@
 package com.example.ludit;
 
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.ludit.R;
+import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     EditText edtLogin, edtSenha;
@@ -33,30 +33,56 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "http://177.220.18.104:3000/loginUsuario";
-
-                HashMap<String, String> params = new HashMap<String, String>();
-                params.put("login", edtLogin.getText().toString());
-                params.put("senha", edtSenha.getText().toString());
-
-                Conexao.enviarDados(params, url, getApplicationContext(), new VolleyCallback() {
-                    @Override
-                    public void onSuccess(JSONObject result) throws JSONException {
-                        SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
-                        editor.putString("email", result.getString("email"));
-                        editor.commit();
-
-                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(i);
-                    }
-
-                    @Override
-                    public void onError(String erro) {
-
-                    }
-                });
-
+                logar();
             }
         });
     }
+
+    public  void  logar()   {
+
+        final  AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+        dlgAlert.setTitle("LUDIT - Erro no Login");
+        dlgAlert.setPositiveButton("OK", null);
+        dlgAlert.setCancelable(true);
+
+        if(edtLogin.getText().toString() == null || edtSenha.getText().toString() == null)
+        {
+            dlgAlert.setMessage("Preencha todos os Campos");
+            dlgAlert.create().show();
+        } else {
+            UserService service = RetrofitConfig.getClient().create(UserService.class);
+
+            UserLogin user = new UserLogin(edtLogin.getText().toString(), edtSenha.getText().toString());
+
+            Call<List<Usuario>> call = service.logar(user);
+
+            call.enqueue(new Callback<List<Usuario>>() {
+                @Override
+                public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
+                    if(!response.isSuccessful()){
+                        dlgAlert.setMessage("Erro ao Logar, verifique os dados");
+                        edtSenha.setText("");
+                        edtLogin.setText("");
+                        dlgAlert.create().show();
+                        return;
+                    }
+
+                    SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).edit();
+                    editor.putString("email", response.body().get(0).getEmail());
+                    editor.putString("nome", response.body().get(0).getNome());
+
+                    editor.commit();
+
+                    Intent i = new Intent(LoginActivity.this, FilhoActivity.class);
+                    startActivity(i);
+                }
+
+                @Override
+                public void onFailure(Call<List<Usuario>> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG ).show();
+                }
+            });
+        }
+    }
 }
+

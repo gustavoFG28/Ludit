@@ -88,6 +88,8 @@ public class CadastroActivity extends AppCompatActivity {
 
                     SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).edit();
                     editor.putString("email", response.body().get(0).getEmail());
+
+                    editor.putString("nome", response.body().get(0).getNome());
                     editor.commit();
 
                     Intent i = new Intent(CadastroActivity.this, FilhoCadastroActivity.class);

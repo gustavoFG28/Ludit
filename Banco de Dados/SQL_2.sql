@@ -8,10 +8,14 @@ begin
 	if exists (select * from L_Usuario where email = @login and senha = @senha)
 	begin
 		insert into L_Acesso values(GetDate(), (select id from L_Usuario where email = @login))
-		return 0
+		select email from L_Usuario where email = @login
+	end
+	else if exists(select * from L_Usuario where nome = @login and senha = @senha)
+	begin
+		insert into L_Acesso values(GetDate(), (select id from L_Usuario where nome = @login))
+		select email from L_Usuario where nome = @login
 	end
 end	
-	return 1
 end
 
 alter procedure cadastro_sp
