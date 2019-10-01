@@ -12,6 +12,6 @@ public interface UserService {
     @POST("cadastrarUsuario")
     Call<List<Usuario>> inserirUsuario(@Body Usuario user);
 
-    @POST("cadastarFilho/{email}")
+    @POST("cadastrarFilho/{email}")
     Call<List<Filho>> inserirFilho(@Path("email") String email, @Body Filho filho);
 }

@@ -45,7 +45,7 @@ public class FilhoCadastroActivity extends AppCompatActivity {
 
         final String email = sharedPreferences.getString("email", null);
 
-        edtNome = (EditText) findViewById(R.id.edNome);
+        edtNome = (EditText) findViewById(R.id.edNomeFilho);
         edtDeficiencia = (EditText) findViewById(R.id.edDeficiencia);
         edtTexto = (EditText) findViewById(R.id.edTexto);
         dataNascimento = (DatePicker) findViewById(R.id.dtNascimento);
@@ -65,12 +65,12 @@ public class FilhoCadastroActivity extends AppCompatActivity {
         dlgAlert.setPositiveButton("OK", null);
         dlgAlert.setCancelable(true);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, dataNascimento.getYear());
         c.set(Calendar.MONTH, dataNascimento.getMonth());
         c.set(Calendar.DAY_OF_MONTH, dataNascimento.getDayOfMonth());
-        String date = dateFormat.format(c);
+        String date = dateFormat.format(c.getTime());
 
         UserService service = RetrofitConfig.getClient().create(UserService.class);
 
@@ -97,7 +97,7 @@ public class FilhoCadastroActivity extends AppCompatActivity {
                     editor.putString("nomeFilho", response.body().get(0).getNome());
                     editor.commit();
 
-                    Intent i = new Intent(FilhoCadastroActivity.this, Filho.class);
+                    Intent i = new Intent(FilhoCadastroActivity.this, FilhoActivity.class);
                     startActivity(i);
                 }
 
