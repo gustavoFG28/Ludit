@@ -17,7 +17,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     EditText edtLogin, edtSenha;
     Button btnLogin;
 
@@ -46,7 +46,7 @@ public class login extends AppCompatActivity {
                         editor.putString("email", result.getString("email"));
                         editor.commit();
 
-                        Intent i = new Intent(login.this, MainActivity.class);
+                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(i);
                     }
 
