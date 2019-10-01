@@ -8,12 +8,12 @@ begin
 	if exists (select * from L_Usuario where email = @login and senha = @senha)
 	begin
 		insert into L_Acesso values(GetDate(), (select id from L_Usuario where email = @login))
-		select email from L_Usuario where email = @login
+		select nome, email from L_Usuario where email = @login
 	end
 	else if exists(select * from L_Usuario where nome = @login and senha = @senha)
 	begin
 		insert into L_Acesso values(GetDate(), (select id from L_Usuario where nome = @login))
-		select email from L_Usuario where nome = @login
+		select nome, email from L_Usuario where nome = @login
 	end
 end	
 end
@@ -29,7 +29,7 @@ begin
 	if not exists (select * from L_Usuario where email = @email)
 		insert into L_Usuario values(@nome, @email, @senha)
 
-	select email from L_Usuario where nome = @nome and email = @email and senha = @senha
+	select nome, email from L_Usuario where nome = @nome and email = @email and senha = @senha
 end
 end
 
