@@ -5,8 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".FilhoCadastroActivity">
+    tools:context=".FilhoCadastroActivity"
+    android:scrollbars="vertical"
+    >
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,6 +47,13 @@
         android:calendarViewShown="false"
         ></DatePicker>
 
+    <TextView
+        android:id="@+id/tvResposta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textSize="24dp" />
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,12 +61,7 @@
         android:text="Cadastrar Filho"
         android:textSize="24dp"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24dp"
-        android:layout_margin="20dp"
-        android:id="@+id/tvResposta"/>
+    </ScrollView>
 
 
 </LinearLayout>

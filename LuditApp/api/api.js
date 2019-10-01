@@ -1,4 +1,4 @@
-const express = require('express');
+﻿const express = require('express');
 const fs = require('fs');
 const app = express();         
 const bodyParser = require('body-parser');
@@ -39,9 +39,9 @@ function execSQL(sql, resposta) {
 
 rota.post('/cadastrarUsuario', (requisicao, resposta) =>{
 const nome = requisicao.body.nome;
-const senha = requisicao.body.senha;
 const email = requisicao.body.email;
-execSQL(`cadastrar_sp '${nome}','${senha}','${email}'`, resposta);
+const senha = requisicao.body.senha;
+execSQL(`cadastro_sp '${nome}','${email}','${senha}'`, resposta);
 })
 
 rota.post('/cadastrarFilho/:email', (requisicao, resposta) =>{
@@ -49,8 +49,8 @@ rota.post('/cadastrarFilho/:email', (requisicao, resposta) =>{
     const data = requisicao.body.data;
     const texto = requisicao.body.texto;
     const imgPerfil = requisicao.body.imgPerfil;
-    const nome = requisicao.body.nome;
-    execSQL(`cadastrarFilho_sp '${requisicao.params.email}','${def}','${data}', '${texto}', '${imgPerfil}', '${nome}'`, resposta);
+	const nome = requisicao.body.nome;
+    execSQL(`cadastrarFilho_sp '${requisicao.params.email}','${nome}','${def}', '${data}', '${texto}', '${imgPerfil}'`, resposta);
     })
 
 

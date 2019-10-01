@@ -25,7 +25,7 @@ begin
 	if not exists (select * from L_Usuario where email = @email)
 		insert into L_Usuario values(@nome, @email, @senha)
 
-	select * from L_Usuario where nome = @nome and email = @email and senha = @senha
+	select email from L_Usuario where nome = @nome and email = @email and senha = @senha
 end
 end
 
@@ -47,7 +47,7 @@ begin
 		if not exists (select * from L_Filho where idpai = @idPai and nome = @nome)
 		begin
 			insert into L_Filho values(@idPai, @def, DATEDIFF(year, @dataNascimento,  GETDATE()), @dataNascimento, @texto, @imgPerfil, @nome)
-			select * from L_Filho where nome = @nome and idPai = @idPai
+			select nome from L_Filho where nome = @nome and idPai = @idPai
 		end
 	end	
 end
