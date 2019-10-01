@@ -4,8 +4,14 @@
 
     <item
         android:title="edicao"
+        android:icon="@android:drawable/ic_menu_delete"
         app:showAsAction="always"
-        
+        ></item>
+
+    <item
+        android:title="edicao"
+        android:icon="@android:drawable/ic_menu_delete"
+        app:showAsAction="always"
         ></item>
 
 
