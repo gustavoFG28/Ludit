@@ -18,12 +18,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-<<<<<<< HEAD
-=======
+
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
->>>>>>> e7e9d57bdc2989a4b5c4420c9cf6dc0206cd783a
+
 import android.widget.Toast;
 
 import com.example.ludit.ui.filho.Filho;
@@ -33,12 +32,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-<<<<<<< HEAD
-=======
+
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
->>>>>>> e7e9d57bdc2989a4b5c4420c9cf6dc0206cd783a
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -163,6 +161,5 @@ public class FilhoCadastroActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 }
