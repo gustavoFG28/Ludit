@@ -43,6 +43,7 @@ public class PerfilActivity extends AppCompatActivity {
         sharedPreferences = getApplicationContext().getSharedPreferences("minhaShared",MODE_PRIVATE);
 
         final String email = sharedPreferences.getString("email", null);
+        final String nome = sharedPreferences.getString("nome", null);
 
         construirLista(email);
 

@@ -5,10 +5,8 @@
     <item>
         <shape android:shape="rectangle">
             <corners
-                android:radius="100dp"/>
-            <gradient android:angle="0"
-                android:startColor="@color/startColorGradient"
-                android:endColor="@color/endColorGradient"/>
+                android:radius="40dp"/>
+            <solid android:color="#fff"></solid>
         </shape>
     </item>
 </ripple>
