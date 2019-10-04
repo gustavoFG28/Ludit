@@ -1,4 +1,4 @@
-package com.example.ludit;
+package com.example.ludit.ui.filho;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
