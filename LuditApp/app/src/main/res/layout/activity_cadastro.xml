@@ -1,57 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#323232"
+    android:background="#fafafa"
+    android:padding="20dp"
     tools:context=".CadastroActivity">
 
-
-    <EditText
-        android:id="@+id/edNome"
-        android:inputType="textNoSuggestions"
+    <ImageView
+        android:id="@+id/imgCadastro"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="24dp"
-        android:hint="Nome"
-        android:textSize="24dp" />
+        android:layout_height="180dp"
+        android:src="@drawable/xvbfxb"/>
 
-    <EditText
-        android:id="@+id/edEmail"
-        android:inputType="textEmailAddress|textNoSuggestions"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="24dp"
-        android:hint="Email"
-        android:textSize="24dp" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/imgCadastro"
+        android:background="@drawable/fundo_arredondado"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp">
 
-    <EditText
-        android:id="@+id/edSenha"
-        android:layout_width="match_parent"
-        android:inputType="textPassword|textNoSuggestions"
-        android:layout_height="wrap_content"
-        android:textSize="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_margin="24dp"
-        android:hint="Senha"/>
+        <EditText
+            android:id="@+id/edNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:drawableRight="@drawable/ic_person_white_24dp"
+            android:fontFamily="@font/fredoka"
+            android:hint="Nome"
+            android:inputType="textNoSuggestions"
+            android:textColor="#fff"
+            android:textSize="24dp" />
 
-    <EditText
-        android:id="@+id/edConfimarSenha"
-        android:layout_width="match_parent"
-        android:inputType="textPassword|textNoSuggestions"
-        android:layout_height="wrap_content"
-        android:layout_margin="24dp"
-        android:hint="Confirmar senha"
-        android:textSize="24dp" />
+        <EditText
+            android:id="@+id/edEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:drawableRight="@drawable/ic_email_white_24dp"
+            android:fontFamily="@font/fredoka"
+            android:hint="Email"
+            android:inputType="textEmailAddress|textNoSuggestions"
+            android:textSize="24dp" />
 
-    <Button
-        android:id="@+id/btnCadastrar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="24dp"
-        android:text="Cadastrar"
-        />
+        <EditText
+            android:id="@+id/edSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:drawableRight="@drawable/ic_lock_white_24dp"
+            android:fontFamily="@font/fredoka"
+            android:hint="Senha"
+            android:inputType="textPassword|textNoSuggestions"
+            android:textSize="24dp" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/edConfimarSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:drawableRight="@drawable/ic_lock_white_24dp"
+            android:fontFamily="@font/fredoka"
+            android:hint="Confirmar senha"
+            android:inputType="textPassword|textNoSuggestions"
+            android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/btnCadastrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/btn_gradient"
+            android:fontFamily="@font/fredoka"
+            android:text="Cadastrar"
+            android:textColor="#000" />
+    </LinearLayout>
+
+
+</RelativeLayout>

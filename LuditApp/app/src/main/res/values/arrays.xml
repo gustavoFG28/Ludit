@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="vetorImagensPerfil">
+        <item>@drawable/xvbfxb</item>
+        <item>@drawable/xvbfxb</item>
+        <item>@drawable/xvbfxb</item>
+        <item>@drawable/xvbfxb</item>
+    </array>
+</resources>

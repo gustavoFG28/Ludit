@@ -3,14 +3,23 @@ package com.example.ludit;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.DialogFragment;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,8 +28,12 @@ import com.example.ludit.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +46,7 @@ public class FilhoCadastroActivity extends AppCompatActivity {
 
     EditText edtNome,edtDeficiencia,edtTexto;
     DatePicker dataNascimento;
-    Button btnCadastrarFilho;
+    Button btnCadastrarFilho, imgPerfilFilho;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -45,6 +58,7 @@ public class FilhoCadastroActivity extends AppCompatActivity {
 
         final String email = sharedPreferences.getString("email", null);
 
+        imgPerfilFilho = findViewById(R.id.imgPerfilFilho);
         edtNome = (EditText) findViewById(R.id.edNomeFilho);
         edtDeficiencia = (EditText) findViewById(R.id.edDeficiencia);
         edtTexto = (EditText) findViewById(R.id.edTexto);
@@ -57,6 +71,45 @@ public class FilhoCadastroActivity extends AppCompatActivity {
                cadastarFilho(email);
             }
         });
+
+        imgPerfilFilho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                abrirDialog();
+            }
+        });
+    }
+
+    private void abrirDialog () {
+        AlertDialog.Builder builder = new AlertDialog.Builder(FilhoCadastroActivity.this);
+        View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_lista_imagens, null);
+        int img = R.drawable.xvbfxb;
+        final List<Integer> array = new ArrayList<>();
+        array.add(img);
+        array.add(img);
+        array.add(img);
+        array.add(img);
+
+
+        ListView lvDialogImagens = dialogView.findViewById(R.id.dialogListImagens);
+        ListaImagensAdapter adapter = new ListaImagensAdapter(FilhoCadastroActivity.this, array);
+        lvDialogImagens.setAdapter(adapter);
+
+
+        builder.setView(dialogView);
+        final AlertDialog dialog = builder.create();
+        dialog.setTitle("Selecione uma imagem de perfil");
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        lvDialogImagens.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                    imgPerfilFilho.setBackground(ResourcesCompat.getDrawable(getResources(), array.get(position), null));
+                    dialog.dismiss();
+            }});
     }
 
     public  void  cadastarFilho(String email) {
