@@ -59,6 +59,15 @@
         android:layout_margin="24dp"
         android:text="Alterar Senha"
         android:id="@+id/btnAlteraSenha"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnDeletar"
+        android:textSize="24dp"
+        android:layout_gravity="center"
+        android:layout_margin="24dp"
+        android:text="Excluir Conta"
+        />
 
 
     <ListView
