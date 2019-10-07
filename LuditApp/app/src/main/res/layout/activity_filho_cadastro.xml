@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".FilhoCadastroActivity"
+    android:background="@color/endColorGradient"
     >
 
     <ScrollView
@@ -20,47 +21,74 @@
 
             <Button
                 android:id="@+id/imgPerfilFilho"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="100dp"
-                android:background="@drawable/btn_menu"
                 android:layout_gravity="center"
-                android:layout_margin="24dp"/>
+                android:layout_marginTop="48dp"
+                android:background="@drawable/btn_menu" />
 
             <EditText
                 android:id="@+id/edNomeFilho"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="24dp"
-                android:hint="Nome"/>
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginVertical="16dp"
+                android:hint="Nome"
+                android:fontFamily="@font/fredoka"
+                android:inputType="textNoSuggestions"
+                android:textColor="#fff"
+                android:textSize="24dp" />
 
             <EditText
                 android:id="@+id/edDeficiencia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="24dp"
-                android:hint="Deficiência"/>
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginVertical="16dp"
+                android:hint="Deficiência"
+                android:fontFamily="@font/fredoka"
+                android:inputType="textNoSuggestions"
+                android:textColor="#fff"
+                android:textSize="24dp" />
 
             <EditText
                 android:id="@+id/edTexto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="24dp"
-                android:hint="Observações"/>
- 
-            <DatePicker
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginVertical="16dp"
+                android:hint="Observações"
+                android:fontFamily="@font/fredoka"
+                android:inputType="textNoSuggestions"
+                android:textColor="#fff"
+                android:textSize="24dp" />
+
+            <Button
+                android:id="@+id/btnDataDeNascimento"
                 android:layout_width="match_parent"
-                android:id="@+id/dtNascimento"
-                android:layout_height="109dp"
-                android:calendarViewShown="false"
-                ></DatePicker>
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginVertical="16dp"
+                android:background="@color/startColorGradient"
+                android:fontFamily="@font/fredoka"
+                android:inputType="textNoSuggestions"
+                android:text="Data de nascimento"
+                android:textColor="#fff"
+                android:textSize="24dp" />
 
 
             <Button
+                android:id="@+id/btnCadastrarFilho"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnCadastrarFilho"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginVertical="16dp"
+                android:background="@drawable/btn_gradient"
+                android:fontFamily="@font/fredoka"
+                android:inputType="textNoSuggestions"
                 android:text="Cadastrar Filho"
-                android:textSize="24dp"/>
+                android:textColor="@color/endColorGradient"
+                android:textSize="24dp" />
 
         </LinearLayout>
     </ScrollView>
