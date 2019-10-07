@@ -4,48 +4,34 @@ package com.example.ludit;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.fragment.app.DialogFragment;
 
-import android.app.Dialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
+import android.icu.text.DateFormat;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ludit.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FilhoCadastroActivity extends AppCompatActivity {
+public class FilhoCadastroActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
+    String dataDeNascimento;
     EditText edtNome,edtDeficiencia,edtTexto;
-    DatePicker dataNascimento;
+    Button btnDataNascimento;
     Button btnCadastrarFilho, imgPerfilFilho;
     SharedPreferences sharedPreferences;
 
@@ -62,7 +48,7 @@ public class FilhoCadastroActivity extends AppCompatActivity {
         edtNome = (EditText) findViewById(R.id.edNomeFilho);
         edtDeficiencia = (EditText) findViewById(R.id.edDeficiencia);
         edtTexto = (EditText) findViewById(R.id.edTexto);
-        dataNascimento = (DatePicker) findViewById(R.id.dtNascimento);
+        btnDataNascimento = (Button) findViewById(R.id.btnDataDeNascimento);
         btnCadastrarFilho  = (Button)findViewById(R.id.btnCadastrarFilho);
 
         btnCadastrarFilho.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +64,18 @@ public class FilhoCadastroActivity extends AppCompatActivity {
                 abrirDialog();
             }
         });
+
+        btnDataNascimento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DataDialog dataDialog = new DataDialog();
+                dataDialog.show(getSupportFragmentManager(), "Selecione a data de nascimento");
+            }
+        });
     }
+
+
+
 
     private void abrirDialog () {
         AlertDialog.Builder builder = new AlertDialog.Builder(FilhoCadastroActivity.this);
@@ -110,6 +107,8 @@ public class FilhoCadastroActivity extends AppCompatActivity {
                     imgPerfilFilho.setBackground(ResourcesCompat.getDrawable(getResources(), array.get(position), null));
                     dialog.dismiss();
             }});
+
+
     }
 
     public  void  cadastarFilho(String email) {
@@ -118,17 +117,11 @@ public class FilhoCadastroActivity extends AppCompatActivity {
         dlgAlert.setPositiveButton("OK", null);
         dlgAlert.setCancelable(true);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, dataNascimento.getYear());
-        c.set(Calendar.MONTH, dataNascimento.getMonth());
-        c.set(Calendar.DAY_OF_MONTH, dataNascimento.getDayOfMonth());
-        String date = dateFormat.format(c.getTime());
 
         UserService service = RetrofitConfig.getClient().create(UserService.class);
 
-        Filho filho = new Filho(date, edtTexto.getText().toString(), "null", edtNome.getText().toString(), edtDeficiencia.getText().toString());
-        if(edtTexto.getText().toString() == null || edtDeficiencia.getText().toString() == null || edtNome.getText().toString() == null || date == null)
+        Filho filho = new Filho(dataDeNascimento, edtTexto.getText().toString(), "null", edtNome.getText().toString(), edtDeficiencia.getText().toString());
+        if(edtTexto.getText().toString() == null || edtDeficiencia.getText().toString() == null || edtNome.getText().toString() == null || dataDeNascimento == null)
         {
             dlgAlert.setMessage("Preencha todos os Campos");
             dlgAlert.create().show();
@@ -161,5 +154,16 @@ public class FilhoCadastroActivity extends AppCompatActivity {
             });
         }
 
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, day);
+        dataDeNascimento = DateFormat.getDateInstance().format(c.getTime());
+
+        btnDataNascimento.setText(dataDeNascimento);
     }
 }
