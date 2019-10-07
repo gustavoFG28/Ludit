@@ -73,13 +73,17 @@ public class LoginActivity extends AppCompatActivity {
 
                     editor.commit();
 
-                    Intent i = new Intent(LoginActivity.this, FilhoActivity.class);
+                    Intent i = new Intent(LoginActivity.this, PerfilActivity.class);
                     startActivity(i);
                 }
 
                 @Override
                 public void onFailure(Call<List<Usuario>> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG ).show();
+                    dlgAlert.setMessage("Erro ao Logar, Email ou Senha não existentes");
+                    edtSenha.setText("");
+                    edtLogin.setText("");
+                    dlgAlert.create().show();
+                    return;
                 }
             });
         }

@@ -66,6 +66,14 @@ rota.get("/habilidades/:email/:nome", (requisicao, resposta) =>{
 }) 
 
 
+rota.post("/getUser/:email", (requisicao, resposta) =>{
+	const senha = requisicao.body.senha;
+	console.log(senha, requisicao.params.email);
+    execSQL(`select * from L_Usuario where email = '${requisicao.params.email}' and senha = '${senha}'))`, resposta);	
+}) 
+
+
+
 rota.post("/habilidades/:email/:nome/:habilidade/:pontos", (requisicao, resposta)=>{
 	execSQL("insereHabilidade_sp '"+ requisicao.params.email +"', '" + requisicao.params.nome +"', '"+ requisicao.params.habilidade +"', "+ requisicao.params.pontos, resposta);
 })
