@@ -24,7 +24,7 @@ public class FilhoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filho);
 
-        mostrarGrafico(); //https://github.com/AnyChart/AnyChart-Android
+        //mostrarGrafico(); //https://github.com/AnyChart/AnyChart-Android
     }
 
     @Override
@@ -49,8 +49,8 @@ public class FilhoActivity extends AppCompatActivity {
 
         grafico.data(data);
 
-        AnyChartView anyChartView = (AnyChartView) findViewById(R.id.graficoFilho);
-        anyChartView.setChart(grafico);
+        /*AnyChartView anyChartView = (AnyChartView) findViewById(R.id.graficoFilho);
+        anyChartView.setChart(grafico);*/
     }
 
 }

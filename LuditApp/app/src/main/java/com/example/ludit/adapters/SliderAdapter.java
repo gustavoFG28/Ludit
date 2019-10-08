@@ -1,4 +1,4 @@
-package com.example.ludit;
+package com.example.ludit.adapters;
 
 
 import android.content.Context;
@@ -46,7 +46,6 @@ public class SliderAdapter extends PagerAdapter {
         LinearLayout layoutSlide = view.findViewById(R.id.slideLinearLayout);
         ImageView imageView = (ImageView)view.findViewById(R.id.slideImage);
 
-        layoutSlide.setBackgroundColor(R.drawable.background_gradient);
         imageView.setImageResource(imagens[position]);
         container.addView(view);
 

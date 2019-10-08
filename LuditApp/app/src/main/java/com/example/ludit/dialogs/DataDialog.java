@@ -1,4 +1,4 @@
-package com.example.ludit;
+package com.example.ludit.dialogs;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

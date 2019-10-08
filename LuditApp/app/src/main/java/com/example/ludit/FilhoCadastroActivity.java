@@ -18,9 +18,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.ludit.dialogs.DataDialog;
 import com.example.ludit.ui.filho.Filho;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -82,12 +82,11 @@ public class FilhoCadastroActivity extends AppCompatActivity implements DatePick
     private void abrirDialog () {
         AlertDialog.Builder builder = new AlertDialog.Builder(FilhoCadastroActivity.this);
         View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_lista_imagens, null);
-        int img = R.drawable.xvbfxb;
         final List<Integer> array = new ArrayList<>();
-        array.add(img);
-        array.add(img);
-        array.add(img);
-        array.add(img);
+        array.add(R.drawable.foto_up);
+        array.add(R.drawable.foto_rex);
+        array.add(R.drawable.foto_dodo);
+        array.add(R.drawable.foto_finn);
 
 
         ListView lvDialogImagens = dialogView.findViewById(R.id.dialogListImagens);
