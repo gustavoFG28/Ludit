@@ -17,7 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ludit.ui.filho.Filho;
+import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -75,7 +77,6 @@ public class PerfilActivity extends AppCompatActivity {
             }
         });
 
-
         btnAlteraNome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,15 +84,12 @@ public class PerfilActivity extends AppCompatActivity {
             }
         });
 
-
         btnAlteraSenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 modalSenha();
             }
         });
-
-
 
         lista_filhos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -148,9 +146,6 @@ public class PerfilActivity extends AppCompatActivity {
                                         SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).edit();
                                         editor.putString("email", edtNovoEmail.getText().toString());
                                         editor.commit();
-
-                                        Intent i = new Intent(PerfilActivity.this, MainActivity.class);
-                                        startActivity(i);
                                     }
 
                                     @Override
@@ -203,14 +198,15 @@ public class PerfilActivity extends AppCompatActivity {
                 } else {
                     final  UserService service = RetrofitConfig.getClient().create(UserService.class);
 
-                    Call<List<Usuario>> user = service.verificaUser(email, edtSenhaConfirmacao.getText().toString());
+                    Call<List<Usuario>> user = service.verificaUser(email, edtSenhaConfirmacao.getText().toString().trim());
 
                     user.enqueue(new Callback<List<Usuario>>() {
                         @Override
                         public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
                             if(response.isSuccessful())
                             {
-                                Call<Void> alt = service.alteraNome(email, edtNovoNome.getText().toString());
+                                String nome = edtNovoNome.getText().toString();
+                                Call<Void> alt = service.alteraNome(email, nome);
                                 alt.enqueue(new Callback<Void>() {
                                     @Override
                                     public void onResponse(Call<Void> call, Response<Void> response) {
@@ -224,9 +220,6 @@ public class PerfilActivity extends AppCompatActivity {
                                         SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).edit();
                                         editor.putString("nome", edtNovoNome.getText().toString());
                                         editor.commit();
-
-                                        Intent i = new Intent(PerfilActivity.this, MainActivity.class);
-                                        startActivity(i);
                                     }
 
                                     @Override
@@ -303,9 +296,6 @@ public class PerfilActivity extends AppCompatActivity {
                                         SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).edit();
                                         editor.putString("email", edtSenha.getText().toString());
                                         editor.commit();
-
-                                        Intent i = new Intent(PerfilActivity.this, MainActivity.class);
-                                        startActivity(i);
                                     }
 
                                     @Override

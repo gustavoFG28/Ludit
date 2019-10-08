@@ -11,6 +11,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
+import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -31,6 +32,7 @@ public interface UserService {
     @DELETE("excluiConta/{email}")
     Call<Void> excluirConta(@Path("email") String email);
 
+    @Headers({"Content-Type: application/json"})
     @PATCH ("alteraNome/{email}")
     Call<Void> alteraNome(@Path("email") String email, @Body String novoNome);
 

@@ -12,10 +12,11 @@ sql.connect(conexaoStr)
    .catch(erro => console.log(erro));
 
 // configurando o body parser para pegar POSTS mais tarde   
-app.use(bodyParser.urlencoded({ limit: '500gb', extended: true}));
-app.use(bodyParser.json({ limit: '500gb', extended: true}));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json({strict: false}));
 //acrescentando informacoes de cabecalho para suportar o CORS
 app.use(function(req, res, next) {
+  res.setHeader('Content-Type', 'application/json');
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PATCH, DELETE");
@@ -71,16 +72,15 @@ rota.post("/getUser/:email", (requisicao, resposta) =>{
     execSQL(`select * from L_Usuario where email = '${requisicao.params.email}' and senha = '${senha}'`, resposta);	
 }) 
 
-
-
 rota.post("/habilidades/:email/:nome/:habilidade/:pontos", (requisicao, resposta)=>{
 	execSQL("insereHabilidade_sp '"+ requisicao.params.email +"', '" + requisicao.params.nome +"', '"+ requisicao.params.habilidade +"', "+ requisicao.params.pontos, resposta);
 })
 
 rota.patch("/alteraNome/:email", (requisicao, resposta) =>{
 	const email = requisicao.params.email;
-	const novoNome = requisicao.body.novoNome;
-    execSQL(`update L_Usuario set nome='${novoNome}' where email='${email}'`, resposta);
+	const nome = requisicao.body.nome;
+	console.log(nome);
+	execSQL(`update L_Usuario set nome='${nome}' where email='${email}'`, resposta);
 })
 
 rota.patch("/alteraEmail/:email", (requisicao, resposta) =>{
