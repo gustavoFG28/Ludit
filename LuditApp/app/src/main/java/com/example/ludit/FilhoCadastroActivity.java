@@ -80,7 +80,7 @@ public class FilhoCadastroActivity extends AppCompatActivity implements DatePick
 
 
     private void abrirDialog () {
-        AlertDialog.Builder builder = new AlertDialog.Builder(FilhoCadastroActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(FilhoCadastroActivity.this,  R.style.Theme_MaterialComponents_DayNight_Dialog_Alert);
         View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_lista_imagens, null);
         final List<Integer> array = new ArrayList<>();
         array.add(R.drawable.foto_up);
