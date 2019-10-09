@@ -30,7 +30,7 @@ public class FilhoAdapter extends ArrayAdapter {
         Filho qualAluno = lista.get(position);
 
         if(viewAtual == null)
-            viewAtual = LayoutInflater.from(cnt).inflate(R.layout.layout_dialog_lista_imagens, null);
+            viewAtual = LayoutInflater.from(cnt).inflate(R.layout.layout_dialog_lista_filhos, null);
 
         TextView tvNome = viewAtual.findViewById(R.id.tvNomeFilho);
         ImageView image = viewAtual.findViewById(R.id.imgFilho);

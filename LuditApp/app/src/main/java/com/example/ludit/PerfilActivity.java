@@ -33,10 +33,13 @@ public class PerfilActivity extends AppCompatActivity {
 
 
     Button btnAlteraSenha, btnAlteraNome,btnAlteraEmail, btnExcluirConta;
+    EditText edtAlterar, edtSenhaConfirmacao;
     TextView tvEmail, tvNome;
     ListView lista_filhos;
     SharedPreferences sharedPreferences;
-
+    AlertDialog.Builder builder;
+    AlertDialog dialog;
+    UserService service;
     String email, nome;
 
     @Override
@@ -58,8 +61,12 @@ public class PerfilActivity extends AppCompatActivity {
         email = sharedPreferences.getString("email", null);
         nome = sharedPreferences.getString("nome", null);
 
+        construirDialog();
+
         tvEmail.setText(email);
         tvNome.setText(nome);
+
+        service = RetrofitConfig.getClient().create(UserService.class);
 
         construirLista();
 
@@ -99,31 +106,29 @@ public class PerfilActivity extends AppCompatActivity {
         });
     }
 
-    public  void modalEmail() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(PerfilActivity.this);
+    public void construirDialog() {
+        builder =  new AlertDialog.Builder(PerfilActivity.this);
         View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_update, null);
-        final EditText edtNovoEmail, edtSenhaConfirmacao;
-        edtNovoEmail = (EditText)dialogView.findViewById(R.id.edtAlterar);
-        edtNovoEmail.setHint("Novo Email");
-        edtSenhaConfirmacao = (EditText)dialogView.findViewById(R.id.edtSenha);
-
         builder.setView(dialogView);
+        edtAlterar = (EditText)dialogView.findViewById(R.id.edtAlterar);
+        edtSenhaConfirmacao = (EditText)dialogView.findViewById(R.id.edtSenha);
         builder.setNegativeButton("CANCELAR", null);
+    }
+
+    public  void modalEmail() {
+        edtAlterar.setHint("Novo Email");
 
         builder.setPositiveButton("ALTERAR EMAIL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                final AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(PerfilActivity.this);
-                dlgAlert.setTitle("LUDIT - Erro ao Alterar Email");
-                dlgAlert.setPositiveButton("OK", null);
+                builder.setTitle("LUDIT - Erro ao Alterar Email");
+                builder.setPositiveButton("OK", null);
 
-                if(edtSenhaConfirmacao.getText().toString() == null || edtNovoEmail.getText().toString() == null)
+                if(edtSenhaConfirmacao.getText().toString() == null || edtAlterar.getText().toString() == null)
                 {
-                    dlgAlert.setMessage("Preencha todos os Campos");
-                    dlgAlert.create().show();
-                }else {
-                    final UserService service = RetrofitConfig.getClient().create(UserService.class);
-
+                    builder.setMessage("Preencha todos os Campos");
+                    builder.create().show();
+                } else {
                     Call<List<Usuario>> user = service.verificaUser(email, edtSenhaConfirmacao.getText().toString());
 
                     user.enqueue(new Callback<List<Usuario>>() {
@@ -131,20 +136,22 @@ public class PerfilActivity extends AppCompatActivity {
                         public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
                             if(response.isSuccessful())
                             {
-                                Call<Void> alt = service.alteraEmail(email, edtNovoEmail.getText().toString());
+                                final String novoEmail =  edtAlterar.getText().toString();
+                                Call<Void> alt = service.alteraEmail(email,novoEmail);
 
                                 alt.enqueue(new Callback<Void>() {
                                     @Override
                                     public void onResponse(Call<Void> call, Response<Void> response) {
                                         if (!response.isSuccessful()) {
 
-                                            dlgAlert.setMessage("Erro mudar nome, verifique os dados");
-                                            dlgAlert.create().show();
+                                            builder.setMessage("Erro mudar nome, verifique os dados");
+                                            builder.create().show();
                                             return;
                                         }
 
                                         SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).edit();
-                                        editor.putString("email", edtNovoEmail.getText().toString());
+                                        editor.putString("email",novoEmail);
+                                        tvEmail.setText(novoEmail);
                                         editor.commit();
                                     }
 
@@ -158,46 +165,34 @@ public class PerfilActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<List<Usuario>> call, Throwable t) {
-                            dlgAlert.setMessage("Senha Inválida");
-                            edtNovoEmail.setText("");
+                            builder.setMessage("Senha Inválida");
+                            edtAlterar.setText("");
                             edtSenhaConfirmacao.setText("");
-                            dlgAlert.create().show();
+                            builder.create().show();
                         }
                     });
                 }
             }
         });
 
-        final AlertDialog dialog = builder.create();
-        dialog.setTitle("Alteração de Email da Conta");
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
+        dialog.setTitle("Alteração de Email da Conta");
         dialog.show();
     }
     public  void modalNome() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(PerfilActivity.this);
-        View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_update, null);
-        final EditText edtNovoNome, edtSenhaConfirmacao;
-        edtNovoNome = (EditText) dialogView.findViewById(R.id.edtAlterar);
-        edtNovoNome.setHint("Novo Nome");
-        edtSenhaConfirmacao = (EditText) dialogView.findViewById(R.id.edtSenha);
-
-        builder.setView(dialogView);
-        builder.setNegativeButton("CANCELAR", null);
+        edtAlterar.setHint("Novo Nome");
 
         builder.setPositiveButton("ALTERAR NOME", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                final AlertDialog.Builder dlgAlert = new AlertDialog.Builder(PerfilActivity.this);
-                dlgAlert.setTitle("LUDIT - Erro ao Alterar Nome");
-                dlgAlert.setPositiveButton("OK", null);
+                builder.setTitle("LUDIT - Erro ao Alterar Nome");
+                builder.setPositiveButton("OK", null);
 
-                if (edtSenhaConfirmacao.getText().toString() == null || edtNovoNome.getText().toString() == null) {
-                    dlgAlert.setMessage("Preencha todos os Campos");
-                    dlgAlert.create().show();
+                if (edtSenhaConfirmacao.getText().toString() == null || edtAlterar.getText().toString() == null) {
+                    builder.setMessage("Preencha todos os Campos");
+                    builder.create().show();
                 } else {
-                    final  UserService service = RetrofitConfig.getClient().create(UserService.class);
-
                     Call<List<Usuario>> user = service.verificaUser(email, edtSenhaConfirmacao.getText().toString().trim());
 
                     user.enqueue(new Callback<List<Usuario>>() {
@@ -205,20 +200,20 @@ public class PerfilActivity extends AppCompatActivity {
                         public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
                             if(response.isSuccessful())
                             {
-                                String nome = edtNovoNome.getText().toString();
+                                final String nome = edtAlterar.getText().toString();
                                 Call<Void> alt = service.alteraNome(email, nome);
                                 alt.enqueue(new Callback<Void>() {
                                     @Override
                                     public void onResponse(Call<Void> call, Response<Void> response) {
                                         if (!response.isSuccessful()) {
-
-                                            dlgAlert.setMessage("Erro ao mudar nome, verifique os dados");
-                                            dlgAlert.create().show();
+                                            builder.setMessage("Erro ao mudar nome, verifique os dados");
+                                            builder.create().show();
                                             return;
                                         }
 
                                         SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).edit();
-                                        editor.putString("nome", edtNovoNome.getText().toString());
+                                        editor.putString("nome", nome);
+                                        tvNome.setText(nome);
                                         editor.commit();
                                     }
 
@@ -232,70 +227,52 @@ public class PerfilActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<List<Usuario>> call, Throwable t) {
-                            dlgAlert.setMessage(t.getMessage());
-                            //dlgAlert.setMessage("Senha Inválida");
-                            edtNovoNome.setText("");
+                            builder.setMessage("Senha Inválida");
+                            edtAlterar.setText("");
                             edtSenhaConfirmacao.setText("");
-                            dlgAlert.create().show();
+                            builder.create().show();
                         }
                     });
                 }
             }
         });
 
-        final AlertDialog dialog = builder.create();
-        dialog.setTitle("Alteração de Nome da Conta");
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
+        dialog.setTitle("Alteração de Nome da Conta");
         dialog.show();
     }
     public  void modalSenha() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(PerfilActivity.this);
-        View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_update, null);
-        final EditText edtSenha, edtSenhaConfirmacao;
-        edtSenha = (EditText)dialogView.findViewById(R.id.edtAlterar);
-        edtSenha.setHint("Nova Senha");
-        edtSenhaConfirmacao = (EditText)dialogView.findViewById(R.id.edtSenha);
-
-        builder.setView(dialogView);
-        builder.setNegativeButton("CANCELAR", null);
+        edtAlterar.setHint("Nova Senha");
 
         builder.setPositiveButton("ALTERAR SENHA", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                final AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(PerfilActivity.this);
-                dlgAlert.setTitle("LUDIT - Erro ao Alterar Senha");
-                dlgAlert.setPositiveButton("OK", null);
+                builder.setTitle("LUDIT - Erro ao Alterar Senha");
+                builder.setPositiveButton("OK", null);
 
-                if(edtSenhaConfirmacao.getText().toString() == null || edtSenha.getText().toString() == null)
+                if(edtSenhaConfirmacao.getText().toString() == null || edtAlterar.getText().toString() == null)
                 {
-                    dlgAlert.setMessage("Preencha todos os Campos");
-                    dlgAlert.create().show();
+                    builder.setMessage("Preencha todos os Campos");
+                    builder.create().show();
                 }else
                 {
-                    final  UserService service = RetrofitConfig.getClient().create(UserService.class);
-
-                    Call<List<Usuario>> user = service.verificaUser(email, edtSenhaConfirmacao.getText().toString());
+                    Call<List<Usuario>> user = service.verificaUser(email, edtAlterar.getText().toString());
 
                     user.enqueue(new Callback<List<Usuario>>() {
                         @Override
                         public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
                             if(response.isSuccessful())
                             {
-                                Call<Void> alt = service.alteraSenha(email, edtSenha.getText().toString());
+                                Call<Void> alt = service.alteraSenha(email, edtAlterar.getText().toString());
                                 alt.enqueue(new Callback<Void>() {
                                     @Override
                                     public void onResponse(Call<Void> call, Response<Void> response) {
                                         if(!response.isSuccessful()){
-
-                                            dlgAlert.setMessage("Erro ao mudar Senha, verifique os dados");
-                                            dlgAlert.create().show();
+                                            builder.setMessage("Erro ao mudar Senha, verifique os dados");
+                                            builder.create().show();
                                             return;
                                         }
-
-                                        SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).edit();
-                                        editor.putString("email", edtSenha.getText().toString());
-                                        editor.commit();
                                     }
 
                                     @Override
@@ -308,46 +285,35 @@ public class PerfilActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<List<Usuario>> call, Throwable t) {
-                            dlgAlert.setMessage("Senha Antiga Inválida");
-                            edtSenha.setText("");
+                            builder.setMessage("Senha Antiga Inválida");
+                            edtAlterar.setText("");
                             edtSenhaConfirmacao.setText("");
-                            dlgAlert.create().show();
+                            builder.create().show();
                         }
                     });
                 }
             }
         });
 
-        final AlertDialog dialog = builder.create();
-        dialog.setTitle("Alteração de Senha da Conta");
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
+        dialog.setTitle("Alteração de Senha da Conta");
         dialog.show();
     }
     public  void excluirConta() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(PerfilActivity.this);
-        View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_update, null);
-        final EditText edtEmail, edtSenhaConfirmacao;
-        edtSenhaConfirmacao = (EditText)dialogView.findViewById(R.id.edtSenha);
-
-        builder.setView(dialogView);
-        builder.setNegativeButton("CANCELAR", null);
+        edtAlterar.setVisibility(View.INVISIBLE);
 
         builder.setPositiveButton("EXCLUIR CONTA", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                final AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(PerfilActivity.this);
-                dlgAlert.setTitle("LUDIT - Erro ao Excluir Conta");
-                dlgAlert.setPositiveButton("OK", null);
+                builder.setTitle("LUDIT - Erro ao Excluir Conta");
+                builder.setPositiveButton("OK", null);
 
-                if(edtSenhaConfirmacao.getText().toString() == null)
-                {
-                    dlgAlert.setMessage("Preencha todos os Campos");
-                    dlgAlert.create().show();
+                if(edtSenhaConfirmacao.getText().toString() == null) {
+                    builder.setMessage("Preencha todos os Campos");
+                    builder.create().show();
                 }else
                 {
-                    final  UserService service = RetrofitConfig.getClient().create(UserService.class);
-
                     Call<List<Usuario>> user = service.verificaUser(email, edtSenhaConfirmacao.getText().toString());
 
                     user.enqueue(new Callback<List<Usuario>>() {
@@ -355,13 +321,13 @@ public class PerfilActivity extends AppCompatActivity {
                         public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
                             if(response.isSuccessful()) {
                                 Call<Void> exc = service.excluirConta(email);
+
                                 exc.enqueue(new Callback<Void>() {
                                     @Override
                                     public void onResponse(Call<Void> call, Response<Void> response) {
                                         if(!response.isSuccessful()){
-
-                                            dlgAlert.setMessage("Erro ao mudar Excluir, verifique os dados");
-                                            dlgAlert.create().show();
+                                            builder.setMessage("Erro ao Excluir, verifique os dados");
+                                            builder.create().show();
                                             return;
                                         }
 
@@ -384,19 +350,18 @@ public class PerfilActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<List<Usuario>> call, Throwable t) {
-                            dlgAlert.setMessage("Senha Inválida");
+                            builder.setMessage("Senha Inválida");
                             edtSenhaConfirmacao.setText("");
-                            dlgAlert.create().show();
+                            builder.create().show();
                         }
                     });
                 }
             }
         });
 
-        final AlertDialog dialog = builder.create();
-        dialog.setTitle("Exclusão de Conta");
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
+        dialog.setTitle("Exclusão de Conta");
         dialog.show();
     }
     public  void  construirLista() {

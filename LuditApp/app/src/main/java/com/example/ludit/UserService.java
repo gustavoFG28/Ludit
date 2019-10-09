@@ -32,9 +32,8 @@ public interface UserService {
     @DELETE("excluiConta/{email}")
     Call<Void> excluirConta(@Path("email") String email);
 
-    @Headers({"Content-Type: application/json"})
     @PATCH ("alteraNome/{email}")
-    Call<Void> alteraNome(@Path("email") String email, @Body String novoNome);
+    Call<Void> alteraNome(@Path("email") String email, @Body String nome);
 
     @PATCH ("alteraEmail/{email}")
     Call<Void> alteraEmail(@Path("email") String email, @Body String novoEmail);
