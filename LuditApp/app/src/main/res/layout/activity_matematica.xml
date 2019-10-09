@@ -16,15 +16,18 @@
         android:layout_margin="20dp"
         />
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnAzul"
                 android:background="@android:color/holo_blue_dark"
@@ -32,24 +35,36 @@
                 android:text="RESULTADO"/>
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnVermelho" />
+                android:id="@+id/btnVermelho"
+                android:textSize="24dp"
+                android:background="@android:color/holo_red_dark"
+                android:text="RESULTADO" />
 
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:textSize="24dp"
+                android:background="@android:color/holo_green_dark"
+                android:text="RESULTADO"
                 android:id="@+id/btnVerde"/>
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:textSize="24dp"
+                android:background="#FFFF00"
+                android:text="RESULTADO"
                 android:id="@+id/btnAmarelo"/>
         </LinearLayout>
     </LinearLayout>
