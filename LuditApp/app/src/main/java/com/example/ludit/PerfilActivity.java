@@ -2,7 +2,6 @@ package com.example.ludit;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,12 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ludit.ui.filho.Filho;
-import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -370,7 +364,7 @@ public class PerfilActivity extends AppCompatActivity {
                                         editor.putString("nome", null);
                                         editor.commit();
 
-                                        Intent i = new Intent(PerfilActivity.this, MainActivity.class);
+                                        Intent i = new Intent(PerfilActivity.this, AtividadesActivity.class);
                                         startActivity(i);
                                     }
 

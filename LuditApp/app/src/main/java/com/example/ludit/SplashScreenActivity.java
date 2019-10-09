@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.ludit.R;
-
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -25,7 +23,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void Iniciar() {
-        Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+        Intent intent = new Intent(SplashScreenActivity.this, AtividadesActivity.class);
         startActivity(intent);
         finish();
     }
