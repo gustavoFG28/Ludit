@@ -7,16 +7,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.example.ludit.R;
-
-public class MainActivity extends AppCompatActivity {
+public class AtividadesActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_atividades);
 
         sharedPreferences = getPreferences(MODE_PRIVATE);
         if(sharedPreferences.contains("email"))
@@ -29,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void trocarPagina(Class<?> qualActivity)
     {
-        Intent i = new Intent(MainActivity.this, qualActivity);
+        Intent i = new Intent(AtividadesActivity.this, qualActivity);
         startActivity(i);
     }
 
