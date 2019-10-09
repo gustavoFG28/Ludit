@@ -8,6 +8,18 @@
     android:background="#fff"
     tools:context=".AtividadesActivity">
 
+    <TextView
+        android:id="@+id/tvTituloAtividades"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Atividades"
+        android:textColor="#fff"
+        android:textSize="36dp"
+        android:background="@drawable/design_cabecario_geral"
+        android:gravity="center"
+        android:padding="10dp"
+        />
+
 <ScrollView
     android:layout_width="fill_parent"
     android:layout_height="match_parent">

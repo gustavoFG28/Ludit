@@ -7,24 +7,16 @@
     android:background="#fff"
     tools:context=".MusicaActivity">
 
-    <Toolbar
-        android:id="@+id/menu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_gradient">
-
-    </Toolbar>
     <TextView
         android:id="@+id/tvTituloMusicas"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:text="Músicas"
         android:textColor="#fff"
         android:textSize="36dp"
-        android:background="@drawable/design_cabecario"
+        android:background="@drawable/design_cabecario_geral"
         android:gravity="center"
         android:padding="10dp"
-        android:layout_below="@+id/menu"
         />
     <ScrollView
         android:layout_width="match_parent"
