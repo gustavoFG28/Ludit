@@ -24,7 +24,7 @@ public class FilhoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filho);
 
-        //mostrarGrafico(); //https://github.com/AnyChart/AnyChart-Android
+
     }
 
     @Override
@@ -39,18 +39,6 @@ public class FilhoActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void mostrarGrafico(){
-        Cartesian grafico = AnyChart.column();
 
-        List<DataEntry> data = new ArrayList<>();
-        data.add(new ValueDataEntry("John", 10000));
-        data.add(new ValueDataEntry("Jake", 12000));
-        data.add(new ValueDataEntry("Peter", 18000));
-
-        grafico.data(data);
-
-        /*AnyChartView anyChartView = (AnyChartView) findViewById(R.id.graficoFilho);
-        anyChartView.setChart(grafico);*/
-    }
 
 }
