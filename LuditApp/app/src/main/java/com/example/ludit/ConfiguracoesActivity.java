@@ -110,8 +110,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                 builder.setTitle("LUDIT - Erro ao Alterar Email");
                 builder.setPositiveButton("OK", null);
 
-                if(edtSenhaConfirmacao.getText().toString() == null || edtAlterar.getText().toString() == null)
-                {
+                if(edtSenhaConfirmacao.getText().toString() == null || edtAlterar.getText().toString() == null) {
                     builder.setMessage("Preencha todos os Campos");
                     builder.create().show();
                 } else {

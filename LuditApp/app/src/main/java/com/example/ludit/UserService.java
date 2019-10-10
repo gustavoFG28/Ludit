@@ -43,4 +43,7 @@ public interface UserService {
 
     @POST("getUser/{email}")
     Call<List<Usuario>> verificaUser(@Path("email") String email, @Body String senha);
+
+    @POST("habilidades/{email}/{nome}/{habilidade}/{pontos}")
+    Call<List<Filho>> skill(@Path("email") String email, @Path("nome") String nome, @Path("habilidade") String hab, @Path("pontos") Float pontos);
 }
