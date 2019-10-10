@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ludit.adapters.FilhoAdapter;
 import com.example.ludit.ui.filho.Filho;
 
 import java.util.List;
@@ -28,7 +29,6 @@ public class ConfiguracoesActivity extends AppCompatActivity {
 
     Button btnAlteraSenha, btnAlteraNome,btnAlteraEmail, btnExcluirConta;
     EditText edtAlterar, edtSenhaConfirmacao;
-    ListView lista_filhos;
     SharedPreferences sharedPreferences;
     AlertDialog.Builder builder;
     AlertDialog dialog;
@@ -45,7 +45,6 @@ public class ConfiguracoesActivity extends AppCompatActivity {
         btnAlteraSenha =(Button)findViewById(R.id.btnAlteraSenha);
         btnExcluirConta = (Button) findViewById(R.id.btnDeletar);
 
-        lista_filhos = (ListView) findViewById(R.id.lista_filhos);
 
         sharedPreferences = getApplicationContext().getSharedPreferences("minhaShared",MODE_PRIVATE);
 
@@ -81,13 +80,6 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 modalSenha();
-            }
-        });
-
-        lista_filhos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
             }
         });
     }
@@ -348,26 +340,5 @@ public class ConfiguracoesActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public  void  construirLista() {
-        UserService service = RetrofitConfig.getClient().create(UserService.class);
 
-        Call<List<Filho>> call = service.buscarFilhos(email);
-
-        call.enqueue(new Callback<List<Filho>>() {
-            @Override
-            public void onResponse(Call<List<Filho>> call, Response<List<Filho>> response) {
-                if(!response.isSuccessful()){
-                        return;
-                }
-
-                FilhoAdapter lista = new FilhoAdapter(ConfiguracoesActivity.this, response.body());
-                lista_filhos.setAdapter(lista);
-            }
-
-                @Override
-                public void onFailure(Call<List<Filho>> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG ).show();
-                }
-            });
-    }
 }

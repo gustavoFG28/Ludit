@@ -72,8 +72,9 @@ public class LoginActivity extends AppCompatActivity {
 
                     editor.commit();
 
-                    Intent i = new Intent(LoginActivity.this, ConfiguracoesActivity.class);
+                    Intent i = new Intent(LoginActivity.this, PerfilActivity.class);
                     startActivity(i);
+                    finish();
                 }
 
                 @Override
@@ -86,6 +87,11 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }
 

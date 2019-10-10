@@ -25,4 +25,23 @@
         app:tabIndicatorHeight="0dp">
     </com.google.android.material.tabs.TabLayout>
 
+    <Button
+        android:id="@+id/btnVoltarSlider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"
+        android:text="Voltar"
+        android:textColor="#fff"/>
+
+    <Button
+        android:id="@+id/btnAvancarSlider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"
+        android:text="Próximo"
+        android:layout_alignParentEnd="true"
+        android:textColor="#fff"/>
+
 </RelativeLayout>

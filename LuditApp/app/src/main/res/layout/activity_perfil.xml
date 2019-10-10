@@ -7,6 +7,7 @@
     tools:context=".PerfilActivity">
 
     <LinearLayout
+        android:layout_alignParentTop="true"
         android:id="@+id/llPerfil"
         android:layout_width="match_parent"
         android:orientation="vertical"
@@ -25,11 +26,14 @@
             android:padding="10dp"
             />
 
-        <ListView
-            android:id="@+id/lista_filhos"
+        <GridView
+            android:id="@+id/grid_filhos"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/tvTituloPerfil"></ListView>
+            android:layout_below="@+id/tvTituloPerfil"
+            android:numColumns="2">
+
+        </GridView>
     </LinearLayout>
 
     <Button
