@@ -1,5 +1,6 @@
 package com.example.ludit;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -14,7 +15,8 @@ public class MatematicaActivity extends AppCompatActivity {
     TextView tvVisor;
     Button btnAzul, btnVermelho, btnAmarelo, btnVerde;
     Button[] btns = new Button[4];
-    int pontosMat, botaoCerto, qtd;
+    AlertDialog dialog;
+    int pontosMat, botaoCerto, qtd, max = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +34,7 @@ public class MatematicaActivity extends AppCompatActivity {
         btns[2] = btnVermelho;
         btns[3] = btnVerde;
 
-        construirConta();
+        descobrirDificuldade();
 
         btnVermelho.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +76,7 @@ public class MatematicaActivity extends AppCompatActivity {
             construirConta();
         }else
         {
-            //mostrarResultado e jogar pontos no BD
+            tvVisor.setText(pontosMat + " ");
         }
     }
 
@@ -82,19 +84,52 @@ public class MatematicaActivity extends AppCompatActivity {
        if(btns[botaoCerto].getId() == id)
            pontosMat++;
        else
-           pontosMat--;
+           if(pontosMat > 0)
+                pontosMat--;
         return  false;
+    }
+
+    public  void  descobrirDificuldade() {
+        AlertDialog.Builder builder =  new AlertDialog.Builder(MatematicaActivity.this);
+        View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_dificuldade, null);
+        builder.setView(dialogView);
+        dialog = builder.create();
+        ((Button)dialogView.findViewById(R.id.btnFacil)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                max = 5;
+                dialog.dismiss();
+                construirConta();
+            }
+        });
+
+        ((Button)dialogView.findViewById(R.id.btnDificil)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                max = 10;
+                dialog.dismiss();
+                construirConta();
+            }
+        });
+
+
+        dialog.setTitle("Escolha da Dificuldade");
+        dialog.show();
     }
 
     public void construirConta(){
         Random random = new Random();
-        int result = 0;
+        int result = 0, n1 = -1, n2 = -1;
 
-        int n1 = random.nextInt(11);
-        int n2 = random.nextInt(11);
+        if(max > 0)
+        {
+            n1 = random.nextInt(max + 1);
+            n2 = random.nextInt(max + 1);
+        }
+
 
         int sinal = random.nextInt(2);
-        botaoCerto = random.nextInt(5);
+        botaoCerto = random.nextInt(4);
 
         int v;
 
@@ -108,8 +143,8 @@ public class MatematicaActivity extends AppCompatActivity {
         }
 
         for(int i = 0; i < btns.length; i++)
-            if(botaoCerto != i)
-                while ((v =random.nextInt(21)) != result)
+            if(botaoCerto != i && max > 0)
+                while ((v =random.nextInt(2*max)) != result)
                 {
                     btns[i].setText(v + " ");
                     break;
@@ -117,6 +152,4 @@ public class MatematicaActivity extends AppCompatActivity {
             else
                 btns[i].setText(result + " ");
     }
-
-
 }

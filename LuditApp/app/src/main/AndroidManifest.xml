@@ -14,10 +14,10 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".PontuacaoActivity"></activity>
         <activity android:name=".PerfilActivity" />
-        <activity android:name=".MatematicaActivity" />
+        <activity android:name=".MenuActivity" />
         <activity android:name=".FilhoActivity" />
         <activity android:name=".ConfiguracoesActivity" />
-        <activity android:name=".MenuActivity">
+        <activity android:name=".MatematicaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

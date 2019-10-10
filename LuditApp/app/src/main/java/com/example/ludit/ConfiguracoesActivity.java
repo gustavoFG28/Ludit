@@ -56,8 +56,6 @@ public class ConfiguracoesActivity extends AppCompatActivity {
 
         service = RetrofitConfig.getClient().create(UserService.class);
 
-
-
         btnAlteraEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
