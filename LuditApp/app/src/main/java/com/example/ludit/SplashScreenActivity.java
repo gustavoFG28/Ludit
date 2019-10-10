@@ -3,6 +3,7 @@ package com.example.ludit;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -23,8 +24,18 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void Iniciar() {
-        Intent intent = new Intent(SplashScreenActivity.this, AtividadesActivity.class);
-        startActivity(intent);
+
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE);
+        if(sharedPreferences.contains("email"))
+            trocarPagina(PerfilActivity.class);
+        else
+            trocarPagina(SliderActivity.class);
+    }
+
+    private void trocarPagina(Class<?> qualActivity)
+    {
+        Intent i = new Intent(SplashScreenActivity.this, qualActivity);
+        startActivity(i);
         finish();
     }
 }
