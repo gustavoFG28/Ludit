@@ -12,26 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/FullScreen"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PontuacaoActivity"></activity>
+        <activity android:name=".MatematicaActivity"></activity>
+        <activity android:name=".PontuacaoActivity" />
         <activity android:name=".PerfilActivity" />
-        <activity android:name=".MenuActivity" >
-
-        </activity>
+        <activity android:name=".MenuActivity" />
         <activity android:name=".FilhoActivity" />
         <activity android:name=".ConfiguracoesActivity" />
-        <activity android:name=".MatematicaActivity">
-
-        </activity>
-        <activity android:name=".SliderActivity" />
-        <activity android:name=".LoginActivity"
-            android:noHistory="true"/>
-        <activity android:name=".SplashScreenActivity" >
+        <activity android:name=".GeniusActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SliderActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SplashScreenActivity" />
         <activity android:name=".MusicaActivity" />
         <activity android:name=".CadastroActivity" />
         <activity android:name=".FilhoCadastroActivity" />

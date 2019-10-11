@@ -74,7 +74,9 @@ rota.post("/getUser/:email", (requisicao, resposta) =>{
 }) 
 
 rota.post("/habilidades/:email/:nome/:habilidade/:pontos", (requisicao, resposta)=>{
-	execSQL("insereHabilidade_sp '"+ requisicao.params.email +"', '" + requisicao.params.nome +"', '"+ requisicao.params.habilidade +"', "+ requisicao.params.pontos, resposta);
+	console.log(requisicao.params.pontos);
+	execSQL("insereHabilidade_sp '"+ requisicao.params.email +"', '" + requisicao.params.nome +"', '"+ requisicao.params.habilidade 
+			+"', "+ requisicao.params.pontos, resposta);
 })
 
 rota.patch("/alteraNome/:email", (requisicao, resposta) =>{

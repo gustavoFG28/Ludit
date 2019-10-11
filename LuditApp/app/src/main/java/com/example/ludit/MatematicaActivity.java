@@ -3,20 +3,31 @@ package com.example.ludit;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.ludit.ui.filho.Filho;
+
+import java.util.List;
 import java.util.Random;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MatematicaActivity extends AppCompatActivity {
     TextView tvVisor;
     Button btnAzul, btnVermelho, btnAmarelo, btnVerde;
     Button[] btns = new Button[4];
-    AlertDialog dialog;
+
     int pontosMat, botaoCerto, qtd, max = 0;
+    SharedPreferences preferences;
+    String email, nomeFilho;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,62 +45,83 @@ public class MatematicaActivity extends AppCompatActivity {
         btns[2] = btnVermelho;
         btns[3] = btnVerde;
 
+        preferences = getApplicationContext().getSharedPreferences("minhaShared",MODE_PRIVATE);
+
+        email = preferences.getString("email", null);
+        nomeFilho = preferences.getString("nomeFilho", null);
+
+        email  = "lucas@gmail.com";
+        nomeFilho = "Henrique";
+
         descobrirDificuldade();
 
-        btnVermelho.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                verResult(btnVermelho.getId());
-                atualizarTela();
-            }
-        });
-
-        btnVerde.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                verResult(btnVerde.getId());
-                atualizarTela();
-            }
-        });
-
-        btnAzul.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                verResult(btnAzul.getId());
-                atualizarTela();
-            }
-        });
-
-        btnAmarelo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                verResult(btnAmarelo.getId());
-                atualizarTela();
-            }
-        });
-    }
-
-    public  void   atualizarTela(){
-        if(qtd < 10)
+        for(int i = 0; i< btns.length; i++)
         {
-            qtd++;
-            construirConta();
-        }else
-        {
-            tvVisor.setText(pontosMat + " ");
+            final int id = i;
+            btns[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    verResult(btns[id].getId());
+                    atualizarTela();
+                }
+            });
         }
     }
 
-    public boolean verResult(int id){
-       if(btns[botaoCerto].getId() == id)
+    public  void   atualizarTela(){
+        if(qtd < 10) {
+            qtd++;
+            construirConta();
+        }else {
+            float pontoFinal = 0.0f;
+
+            if(pontosMat >= 0 && pontosMat <=2) pontoFinal = -0.05f;
+            else if(pontosMat == 4 || pontosMat == 5) pontoFinal = 0.05f;
+            else if(pontosMat  >= 6 || pontosMat <=8) pontoFinal = 0.1f;
+            else if(pontosMat  == 9 || pontosMat == 10) pontoFinal = 0.15f;
+
+            UserService service =  RetrofitConfig.getClient().create(UserService.class);
+
+            Call<List<Filho>> ponto = service.skill(email,nomeFilho,"mat", pontoFinal);
+
+            ponto.enqueue(new Callback<List<Filho>>() {
+                @Override
+                public void onResponse(Call<List<Filho>> call, Response<List<Filho>> response) { }
+
+                @Override
+                public void onFailure(Call<List<Filho>> call, Throwable t) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MatematicaActivity.this);
+
+                    AlertDialog alerta;
+
+                    builder.setTitle("Erro com a pontuação");
+
+                    builder.setMessage("Não foi possível enviar sua pontuação");
+
+                    builder.setNegativeButton("OK", null);
+
+                    alerta = builder.create();
+
+                    alerta.show();
+                }
+            });
+
+            tvVisor.setText("Parabéns, sua pontuação foi de "+pontosMat + " ");
+        }
+    }
+
+    public void verResult(int id){
+       if(btns[botaoCerto].getId() == id) {
            pontosMat++;
-       else
-           if(pontosMat > 0)
-                pontosMat--;
-        return  false;
+           //animação feliz
+       }
+       else if(pontosMat > 0) {
+               //animacao triste
+           }
     }
 
     public  void  descobrirDificuldade() {
+        final AlertDialog dialog;
         AlertDialog.Builder builder =  new AlertDialog.Builder(MatematicaActivity.this);
         View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_dificuldade, null);
         builder.setView(dialogView);
