@@ -8,7 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.GridView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ludit.MenuActivity;
@@ -18,6 +19,7 @@ import com.example.ludit.webservice.Filho;
 import com.example.ludit.webservice.RetrofitConfig;
 import com.example.ludit.webservice.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,8 +28,11 @@ import retrofit2.Response;
 
 public class PerfilActivity extends AppCompatActivity {
 
-    Button btnConfiguracoes, btnSair;
-    GridView listaFilhos;
+    TextView tvTituloPerfil;
+    Button btnConfiguracoes, btnSair, btnAdicionar;
+    ListView listaFilhos;
+
+    ArrayList<Filho> filhos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +41,16 @@ public class PerfilActivity extends AppCompatActivity {
 
         btnSair = findViewById(R.id.btnSair);
         btnConfiguracoes = findViewById(R.id.btnConfiguracoes);
-        listaFilhos = findViewById(R.id.grid_filhos);
+        btnAdicionar = findViewById(R.id.btnAdicionar);
+
+        tvTituloPerfil = findViewById(R.id.tvTituloPerfil);
+        tvTituloPerfil.setText("Bem vindo(a),\n" + getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).getString("nome", ""));
 
         btnSair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).edit();
-                editor.putString("email", null);
-                editor.putString("nome", null);
+                editor.clear();
                 editor.commit();
 
                 Intent i = new Intent(PerfilActivity.this, MenuActivity.class);
@@ -52,20 +59,43 @@ public class PerfilActivity extends AppCompatActivity {
             }
         });
 
-        listaFilhos = findViewById(R.id.grid_filhos);
-        construirLista();
-
-        listaFilhos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        btnConfiguracoes.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+            public void onClick(View view) {
+                Intent i = new Intent(PerfilActivity.this, ConfiguracoesActivity.class);
+                startActivity(i);
             }
         });
 
+        btnAdicionar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(PerfilActivity.this, FilhoCadastroActivity.class);
+                startActivity(i);
+            }
+        });
+
+        listaFilhos = findViewById(R.id.lista_filhos);
+        listaFilhos.setDivider(null);
+        construirLista();
+
+        listaFilhos.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("filhoShared", MODE_PRIVATE).edit();
+                editor.putString("nome", filhos.get(position).getNome());
+                editor.putString("imagem", filhos.get(position).getImgPerfil());
+                editor.commit();
+
+                Intent i = new Intent(PerfilActivity.this, FilhoActivity.class);
+                startActivity(i);
+            }});
     }
 
-    public  void  construirLista() {
+    public void construirLista() {
         UserService service = RetrofitConfig.getClient().create(UserService.class);
+
 
         Call<List<Filho>> call = service.buscarFilhos(getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).getString("email", ""));
 
@@ -76,8 +106,9 @@ public class PerfilActivity extends AppCompatActivity {
                     return;
                 }
 
-                FilhoAdapter lista = new FilhoAdapter(PerfilActivity.this, response.body()){};
-                listaFilhos.setAdapter(lista);
+                filhos = (ArrayList<Filho>) response.body();
+                FilhoAdapter listaAdapter = new FilhoAdapter(PerfilActivity.this, response.body()){};
+                listaFilhos.setAdapter(listaAdapter);
             }
 
             @Override

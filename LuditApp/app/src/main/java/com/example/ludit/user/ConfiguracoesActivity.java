@@ -90,22 +90,28 @@ public class ConfiguracoesActivity extends AppCompatActivity {
         builder.setView(dialogView);
         edtAlterar = (EditText)dialogView.findViewById(R.id.edtAlterar);
         edtSenhaConfirmacao = (EditText)dialogView.findViewById(R.id.edtSenha);
-        builder.setNegativeButton("CANCELAR", null);
+        builder.setNegativeButton("CANCELAR", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialog.dismiss();
+            }
+        });
+        builder.setCancelable(true);
     }
 
     public  void modalEmail() {
         edtAlterar.setHint("Novo Email");
+        builder.setTitle("Alteração de Email da Conta");
 
         builder.setPositiveButton("ALTERAR EMAIL", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(final DialogInterface dialog, int which) {
                 builder.setTitle("LUDIT - Erro ao Alterar Email");
                 builder.setPositiveButton("OK", null);
 
-                if(edtSenhaConfirmacao.getText().toString() == null || edtAlterar.getText().toString() == null) {
-                    builder.setMessage("Preencha todos os Campos");
-                    builder.create().show();
-                } else {
+                if(edtSenhaConfirmacao.getText().toString().equals("") || edtAlterar.getText().toString().equals(""))
+                    Toast.makeText(getApplicationContext(), "Preencha todos os Campos", Toast.LENGTH_LONG).show();
+                else {
                     Call<List<Usuario>> user = service.verificaUser(email, edtSenhaConfirmacao.getText().toString());
 
                     user.enqueue(new Callback<List<Usuario>>() {
@@ -119,13 +125,6 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                                 alt.enqueue(new Callback<Void>() {
                                     @Override
                                     public void onResponse(Call<Void> call, Response<Void> response) {
-                                        if (!response.isSuccessful()) {
-
-                                            builder.setMessage("Erro mudar nome, verifique os dados");
-                                            builder.create().show();
-                                            return;
-                                        }
-
                                         SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).edit();
                                         editor.putString("email",novoEmail);
                                         editor.commit();
@@ -133,7 +132,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
 
                                     @Override
                                     public void onFailure(Call<Void> call, Throwable t) {
-                                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(),"Erro ao alterar o email", Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }
@@ -141,24 +140,22 @@ public class ConfiguracoesActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<List<Usuario>> call, Throwable t) {
-                            builder.setMessage("Senha Inválida");
+                            Toast.makeText(getApplicationContext(), "Senhas incorretas", Toast.LENGTH_LONG).show();
                             edtAlterar.setText("");
                             edtSenhaConfirmacao.setText("");
-                            builder.create().show();
                         }
                     });
                 }
             }
         });
 
-        dialog.setCancelable(true);
-        dialog.setCanceledOnTouchOutside(true);
-        dialog.setTitle("Alteração de Email da Conta");
+        if(dialog == null)
+            dialog = builder.create();
         dialog.show();
     }
     public  void modalNome() {
         edtAlterar.setHint("Novo Nome");
-
+        builder.setTitle("Alteração de Nome da Conta");
         builder.setPositiveButton("ALTERAR NOME", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -212,14 +209,12 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             }
         });
 
-        dialog.setCancelable(true);
-        dialog.setCanceledOnTouchOutside(true);
-        dialog.setTitle("Alteração de Nome da Conta");
+
         dialog.show();
     }
     public  void modalSenha() {
         edtAlterar.setHint("Nova Senha");
-
+        dialog.setTitle("Alteração de Senha da Conta");
         builder.setPositiveButton("ALTERAR SENHA", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -270,14 +265,11 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             }
         });
 
-        dialog.setCancelable(true);
-        dialog.setCanceledOnTouchOutside(true);
-        dialog.setTitle("Alteração de Senha da Conta");
         dialog.show();
     }
     public  void excluirConta() {
         edtAlterar.setVisibility(View.INVISIBLE);
-
+        dialog.setTitle("Exclusão de Conta");
         builder.setPositiveButton("EXCLUIR CONTA", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -307,8 +299,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                                         }
 
                                         SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).edit();
-                                        editor.putString("email", null);
-                                        editor.putString("nome", null);
+                                        editor.clear();
                                         editor.commit();
 
                                         Intent i = new Intent(ConfiguracoesActivity.this, MenuActivity.class);
@@ -334,9 +325,6 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             }
         });
 
-        dialog.setCancelable(true);
-        dialog.setCanceledOnTouchOutside(true);
-        dialog.setTitle("Exclusão de Conta");
         dialog.show();
     }
 

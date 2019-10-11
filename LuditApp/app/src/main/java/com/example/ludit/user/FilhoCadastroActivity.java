@@ -35,6 +35,7 @@ import retrofit2.Response;
 
 public class FilhoCadastroActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
+    int qualImage = R.drawable.foto_dodo;
     String dataDeNascimento;
     EditText edtNome,edtDeficiencia,edtTexto;
     Button btnDataNascimento;
@@ -51,6 +52,7 @@ public class FilhoCadastroActivity extends AppCompatActivity implements DatePick
         final String email = sharedPreferences.getString("email", null);
 
         imgPerfilFilho = findViewById(R.id.imgPerfilFilho);
+        imgPerfilFilho.setBackgroundResource(R.drawable.foto_dodo);
         edtNome = (EditText) findViewById(R.id.edNomeFilho);
         edtDeficiencia = (EditText) findViewById(R.id.edDeficiencia);
         edtTexto = (EditText) findViewById(R.id.edTexto);
@@ -92,7 +94,6 @@ public class FilhoCadastroActivity extends AppCompatActivity implements DatePick
         array.add(R.drawable.foto_dodo);
         array.add(R.drawable.foto_finn);
 
-
         ListView lvDialogImagens = dialogView.findViewById(R.id.dialogListImagens);
         ListaImagensAdapter adapter = new ListaImagensAdapter(FilhoCadastroActivity.this, array);
         lvDialogImagens.setAdapter(adapter);
@@ -109,6 +110,7 @@ public class FilhoCadastroActivity extends AppCompatActivity implements DatePick
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
+                     qualImage = array.get(position);
                     imgPerfilFilho.setBackground(ResourcesCompat.getDrawable(getResources(), array.get(position), null));
                     dialog.dismiss();
             }});
@@ -125,7 +127,7 @@ public class FilhoCadastroActivity extends AppCompatActivity implements DatePick
 
         UserService service = RetrofitConfig.getClient().create(UserService.class);
 
-        Filho filho = new Filho(dataDeNascimento, edtTexto.getText().toString(), "null", edtNome.getText().toString(), edtDeficiencia.getText().toString());
+        Filho filho = new Filho(dataDeNascimento, edtTexto.getText().toString(), qualImage + "", edtNome.getText().toString(), edtDeficiencia.getText().toString());
         if(edtTexto.getText().toString() == null || edtDeficiencia.getText().toString() == null || edtNome.getText().toString() == null || dataDeNascimento == null)
         {
             dlgAlert.setMessage("Preencha todos os Campos");
@@ -143,13 +145,7 @@ public class FilhoCadastroActivity extends AppCompatActivity implements DatePick
                         dlgAlert.create().show();
                         return;
                     }
-
-                    SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).edit();
-                    editor.putString("nomeFilho", response.body().get(0).getNome());
-                    editor.commit();
-
-                    Intent i = new Intent(FilhoCadastroActivity.this, FilhoActivity.class);
-                    startActivity(i);
+                    finish();
                 }
 
                 @Override
