@@ -50,7 +50,7 @@ public class MatematicaActivity extends AppCompatActivity {
         email = preferences.getString("email", null);
         nomeFilho = preferences.getString("nomeFilho", null);
 
-        email  = "lucas@gmail.com";
+        email  = "sasa";
         nomeFilho = "Henrique";
 
         descobrirDificuldade();
@@ -69,7 +69,7 @@ public class MatematicaActivity extends AppCompatActivity {
     }
 
     public  void   atualizarTela(){
-        if(qtd < 10) {
+        if(qtd < 9) {
             qtd++;
             construirConta();
         }else {
