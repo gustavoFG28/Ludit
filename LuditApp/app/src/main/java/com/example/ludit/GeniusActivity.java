@@ -28,7 +28,8 @@ public class GeniusActivity extends AppCompatActivity {
     Button[] btns = new Button[4];
     int[] sequencia;
     int[] cores = new int[8];
-    int pontosGenius, qtd, max, click;
+    int qtd, max, click;
+    float pontosGenius;
     SharedPreferences preferences;
     String email, nomeFilho;
 
@@ -59,7 +60,7 @@ public class GeniusActivity extends AppCompatActivity {
         email = preferences.getString("email", null);
         nomeFilho = preferences.getString("nomeFilho", null);
 
-        email  = "lucas@gmail.com";
+        email  = "sasa";
         nomeFilho = "Henrique";
         descobrirDificuldade();
 
@@ -72,7 +73,6 @@ public class GeniusActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     verResult(id);
-                    atualizarTela();
                 }
             });
         }
@@ -122,7 +122,7 @@ public class GeniusActivity extends AppCompatActivity {
 
                 btns[qual].setBackgroundColor(cores[qual]);
 
-                btns[qual].animate().setDuration(4000).withEndAction(new Runnable() {
+                btns[qual].animate().setDuration(1500).withEndAction(new Runnable() {
                     @Override
                     public void run() {
                         btns[qual].setBackgroundColor(cores[qual + 4]);
@@ -135,11 +135,13 @@ public class GeniusActivity extends AppCompatActivity {
             public void run() {
                 for(int i = 0; i <= qtd; i++) {
                     try {
-                        Thread.sleep(3000);
+                        Message msg = new Message();
+                        msg.arg1 = i;
+                        Thread.sleep(2000);
+                        h.sendMessage(msg);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    h.sendEmptyMessage(i);
                 }
             }
         };
@@ -150,16 +152,18 @@ public class GeniusActivity extends AppCompatActivity {
     public void  atualizarTela() {
         if(qtd < max) {
             qtd++;
+            if(max == 5)
+                pontosGenius++;
+            else
+                pontosGenius += 0.5f;
             construirGenius();
         }else{
-            Toast toast = Toast.makeText(this, pontosGenius, Toast.LENGTH_LONG);
-            toast.show();
-            /*float pontoFinal = 0.0f;
+            float pontoFinal = 0.0f;
 
-            if(pontosGenius >= 0 && pontosGenius <=2) pontoFinal = -0.05f;
-            else if(pontosGenius == 4 || pontosGenius == 5) pontoFinal = 0.05f;
-            else if(pontosGenius  >= 6 || pontosGenius <=8) pontoFinal = 0.1f;
-            else if(pontosGenius  == 9 || pontosGenius == 10) pontoFinal = 0.15f;
+            if(pontosGenius == 0) pontoFinal = -0.05f;
+            else if(pontosGenius == 1) pontoFinal = 0f;
+            else if(pontosGenius == 3|| pontosGenius == 2) pontoFinal = 0.05f;
+            else if(pontosGenius == 4 || pontosGenius == 5) pontoFinal = 0.1f;
 
             UserService service =  RetrofitConfig.getClient().create(UserService.class);
 
@@ -167,7 +171,21 @@ public class GeniusActivity extends AppCompatActivity {
 
             ponto.enqueue(new Callback<List<Filho>>() {
                 @Override
-                public void onResponse(Call<List<Filho>> call, Response<List<Filho>> response) { }
+                public void onResponse(Call<List<Filho>> call, Response<List<Filho>> response) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(GeniusActivity.this);
+
+                    AlertDialog alerta;
+
+                    builder.setTitle("Sua pontuação foi de "+ pontosGenius);
+
+                    builder.setMessage("PARABÉNS, DEU CERTO");
+
+                    builder.setNegativeButton("OK", null);
+
+                    alerta = builder.create();
+
+                    alerta.show();
+                }
 
                 @Override
                 public void onFailure(Call<List<Filho>> call, Throwable t) {
@@ -185,19 +203,41 @@ public class GeniusActivity extends AppCompatActivity {
 
                     alerta.show();
                 }
-            });*/
-
+            });
         }
     }
 
     public void  verResult(int id) {
+
+        final Handler h = new Handler() {
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                final int q = msg.arg1;
+
+                btns[q].setBackgroundColor(cores[q]);
+
+                btns[q].animate().setDuration(400).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        btns[q].setBackgroundColor(cores[q + 4]);
+                    }
+                }).start();
+            }
+        };
+
+        Message msg = new Message();
+        msg.arg1 = id;
+        h.sendMessage(msg);
+
         if(sequencia[click] == id && click <= qtd) {
             click++;
-        }else if(click > qtd) {
-            qtd++;
-            construirGenius();
-        }else {
-            qtd = max;
         }
+        else if(sequencia[click] != id){
+            qtd = max;
+            atualizarTela();
+        }
+
+        if(click > qtd)
+            atualizarTela();
     }
 }

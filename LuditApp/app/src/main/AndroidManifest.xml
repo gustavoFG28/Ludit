@@ -12,13 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/FullScreen"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MatematicaActivity"></activity>
+        <activity android:name=".GeniusActivity"></activity>
+        <activity android:name=".FormasActivity" />
+        <activity android:name=".MatematicaActivity" />
         <activity android:name=".PontuacaoActivity" />
         <activity android:name=".PerfilActivity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".FilhoActivity" />
         <activity android:name=".ConfiguracoesActivity" />
-        <activity android:name=".GeniusActivity">
+        <activity android:name=".ReciclagemActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
