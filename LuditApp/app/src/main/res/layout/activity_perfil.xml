@@ -6,13 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".PerfilActivity">
 
-    <LinearLayout
-        android:layout_alignParentTop="true"
-        android:id="@+id/llPerfil"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btnConfiguracoes">
+
 
         <TextView
             android:id="@+id/tvTituloPerfil"
@@ -26,15 +20,27 @@
             android:padding="10dp"
             />
 
-        <GridView
-            android:id="@+id/grid_filhos"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/tvTituloPerfil"
-            android:numColumns="2">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_below="@+id/tvTituloPerfil"
+        android:layout_marginTop="0dp">
 
-        </GridView>
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/lista_filhos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTituloPerfil">
+
+            </ListView>
+        </LinearLayout>
+    </ScrollView>
+
 
     <Button
         android:id="@+id/btnConfiguracoes"
@@ -44,6 +50,17 @@
         android:layout_alignParentBottom="true"
         android:drawableLeft="@drawable/ic_settings_white_24dp"
         android:paddingLeft="12dp"
+        />
+
+    <Button
+        android:id="@+id/btnAdicionar"
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:drawableStart="@drawable/ic_add_white_24dp"
+        android:background="@drawable/desgin_bubble_right_top"
+        android:paddingLeft="12dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
         />
 
     <Button

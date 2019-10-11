@@ -1,8 +1,6 @@
 package com.example.ludit.adapters;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +11,6 @@ import android.widget.TextView;
 import com.example.ludit.R;
 import com.example.ludit.ui.filho.Filho;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class FilhoAdapter extends ArrayAdapter {
@@ -32,7 +29,7 @@ public class FilhoAdapter extends ArrayAdapter {
         Filho qualAluno = lista.get(position);
 
         if(viewAtual == null)
-            viewAtual = LayoutInflater.from(cnt).inflate(R.layout.layout_dialog_grid_filhos, null);
+            viewAtual = LayoutInflater.from(cnt).inflate(R.layout.layout_dialog_lista_filhos, null);
 
         TextView tvNome = viewAtual.findViewById(R.id.tvNomeFilho);
         ImageView image = viewAtual.findViewById(R.id.imgFilho);
