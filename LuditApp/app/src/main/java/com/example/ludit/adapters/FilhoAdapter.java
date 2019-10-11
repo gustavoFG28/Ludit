@@ -1,8 +1,6 @@
 package com.example.ludit.adapters;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ludit.R;
-import com.example.ludit.ui.filho.Filho;
+import com.example.ludit.webservice.Filho;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class FilhoAdapter extends ArrayAdapter {

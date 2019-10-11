@@ -1,4 +1,4 @@
-package com.example.ludit;
+package com.example.ludit.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.ludit.R;
 
 import java.util.List;
 

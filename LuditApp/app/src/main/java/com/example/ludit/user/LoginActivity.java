@@ -1,4 +1,4 @@
-package com.example.ludit;
+package com.example.ludit.user;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +9,12 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.ludit.R;
+import com.example.ludit.webservice.RetrofitConfig;
+import com.example.ludit.webservice.UserLogin;
+import com.example.ludit.webservice.UserService;
+import com.example.ludit.webservice.Usuario;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.ludit;
+package com.example.ludit.user;
 
 
 import androidx.appcompat.app.AlertDialog;
@@ -18,8 +18,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.ludit.R;
+import com.example.ludit.adapters.ListaImagensAdapter;
 import com.example.ludit.dialogs.DataDialog;
-import com.example.ludit.ui.filho.Filho;
+import com.example.ludit.webservice.Filho;
+import com.example.ludit.webservice.RetrofitConfig;
+import com.example.ludit.webservice.UserService;
 
 import java.util.ArrayList;
 import java.util.Calendar;

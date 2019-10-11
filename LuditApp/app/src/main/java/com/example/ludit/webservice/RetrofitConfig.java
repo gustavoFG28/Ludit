@@ -1,4 +1,4 @@
-package com.example.ludit;
+package com.example.ludit.webservice;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

@@ -1,4 +1,4 @@
-package com.example.ludit;
+package com.example.ludit.user;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,11 +12,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.ludit.R;
+import com.example.ludit.webservice.RetrofitConfig;
+import com.example.ludit.webservice.UserService;
+import com.example.ludit.webservice.Usuario;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;

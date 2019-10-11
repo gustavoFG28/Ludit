@@ -1,4 +1,4 @@
-package com.example.ludit;
+package com.example.ludit.games;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,7 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.ludit.ui.filho.Filho;
+import com.example.ludit.R;
+import com.example.ludit.webservice.RetrofitConfig;
+import com.example.ludit.webservice.UserService;
+import com.example.ludit.webservice.Filho;
 
 import java.util.List;
 import java.util.Random;
@@ -21,13 +24,14 @@ import retrofit2.Response;
 public class FormasActivity extends AppCompatActivity {
     ImageView img;
     int[] imagens = {};
+    int[] respostas = {};
 
     int btnCerto, pontosForma, qtd;
     Button btnAzul, btnVermelho, btnAmarelo, btnVerde;
     Button[] btns = new Button[4];
 
     SharedPreferences preferences;
-    String nomeFilho, email;
+    String nomeFilho, email, jogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

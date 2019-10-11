@@ -1,4 +1,4 @@
-package com.example.ludit;
+package com.example.ludit.user;
 
 
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Cartesian;
+import com.example.ludit.R;
 
 import java.util.ArrayList;
 import java.util.List;

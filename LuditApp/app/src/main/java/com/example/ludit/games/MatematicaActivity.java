@@ -1,4 +1,4 @@
-package com.example.ludit;
+package com.example.ludit.games;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,11 +7,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.ludit.ui.filho.Filho;
+import com.example.ludit.R;
+import com.example.ludit.webservice.RetrofitConfig;
+import com.example.ludit.webservice.UserService;
+import com.example.ludit.webservice.Filho;
 
 import java.util.List;
 import java.util.Random;

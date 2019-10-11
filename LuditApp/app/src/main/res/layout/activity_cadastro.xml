@@ -6,7 +6,7 @@
     android:theme="@style/FullScreen"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context=".CadastroActivity">
+    tools:context=".user.CadastroActivity">
 
     <ImageView
         android:layout_width="120dp"
