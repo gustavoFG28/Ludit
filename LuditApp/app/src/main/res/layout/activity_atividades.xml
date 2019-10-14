@@ -6,7 +6,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="#fff"
-    tools:context=".AtividadesActivity">
+    tools:context=".atividades.AtividadesActivity">
 
     <TextView
         android:id="@+id/tvTituloAtividades"

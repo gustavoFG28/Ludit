@@ -1,4 +1,4 @@
-package com.example.ludit;
+package com.example.ludit.atividades;
 
 
 import androidx.appcompat.app.AppCompatActivity;

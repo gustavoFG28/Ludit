@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.ludit.MenuActivity;
 import com.example.ludit.R;
 import com.example.ludit.webservice.RetrofitConfig;
 import com.example.ludit.webservice.UserService;

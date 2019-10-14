@@ -1,4 +1,4 @@
-package com.example.ludit;
+package com.example.ludit.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,8 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.ludit.user.CadastroActivity;
-import com.example.ludit.user.LoginActivity;
+import com.example.ludit.R;
 
 public class MenuActivity extends AppCompatActivity {
 
