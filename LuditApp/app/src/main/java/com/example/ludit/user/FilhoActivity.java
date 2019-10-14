@@ -19,12 +19,9 @@ import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Cartesian;
-<<<<<<< HEAD:LuditApp/app/src/main/java/com/example/ludit/user/FilhoActivity.java
-import com.example.ludit.R;
-=======
-import com.example.ludit.ui.filho.Filho;
->>>>>>> 01a4a8c3166d7d3df3e68bed4acdc39b35b8450f:LuditApp/app/src/main/java/com/example/ludit/FilhoActivity.java
 
+import com.example.ludit.AtividadesActivity;
+import com.example.ludit.R;
 import java.util.ArrayList;
 import java.util.List;
 

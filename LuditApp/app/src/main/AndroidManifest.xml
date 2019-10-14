@@ -3,6 +3,8 @@
     package="com.example.ludit">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/FullScreen"
         android:usesCleartextTraffic="true">
-        <activity android:name=".games.ReciclagemActivity"></activity>
+        <activity android:name=".PinguimActivity"></activity>
+        <activity android:name=".games.MatematicaActivity" />
+        <activity android:name=".games.ReciclagemActivity" />
         <activity android:name=".games.FormasActivity" />
         <activity android:name=".games.GeniusActivity" />
         <activity android:name=".user.PontuacaoActivity" />
@@ -20,7 +24,7 @@
         <activity android:name=".MenuActivity" />
         <activity android:name=".user.FilhoActivity" />
         <activity android:name=".user.ConfiguracoesActivity" />
-        <activity android:name=".games.MatematicaActivity">
+        <activity android:name=".bluetooth.TesteBluetooth">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
