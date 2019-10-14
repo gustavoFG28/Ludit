@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/FullScreen"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PinguimActivity"></activity>
+        <activity android:name=".bluetooth.TesteBluetooth"></activity>
         <activity android:name=".games.MatematicaActivity" />
         <activity android:name=".games.ReciclagemActivity" />
         <activity android:name=".games.FormasActivity" />
@@ -24,7 +24,8 @@
         <activity android:name=".MenuActivity" />
         <activity android:name=".user.FilhoActivity" />
         <activity android:name=".user.ConfiguracoesActivity" />
-        <activity android:name=".bluetooth.TesteBluetooth">
+        <activity android:name=".games.PinguimActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
