@@ -23,7 +23,7 @@ public class AtividadesActivity extends AppCompatActivity {
         btnVideos = findViewById(R.id.btnVideos);
         btnLivros = findViewById(R.id.btnLivros);
 
-        btnJogos.setOnClickListener(new View.OnClickListener() {
+        /*btnJogos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(AtividadesActivity.this, MusicaActivity.class);
@@ -54,7 +54,7 @@ public class AtividadesActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
+*/
 
     }
 }
