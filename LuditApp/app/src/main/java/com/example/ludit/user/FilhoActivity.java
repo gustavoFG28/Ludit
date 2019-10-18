@@ -14,16 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.anychart.AnyChart;
-import com.anychart.AnyChartView;
-import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.dataentry.ValueDataEntry;
-import com.anychart.charts.Cartesian;
-
-import com.example.ludit.AtividadesActivity;
+import com.example.ludit.atividades.AtividadesActivity;
 import com.example.ludit.R;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FilhoActivity extends AppCompatActivity {
 

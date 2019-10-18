@@ -30,7 +30,6 @@ public class FormasActivity extends AppCompatActivity {
     Button btnAzul, btnVermelho, btnAmarelo, btnVerde;
     Button[] btns = new Button[4];
 
-    SharedPreferences preferences;
     String nomeFilho, email, jogo;
 
     @Override
@@ -50,13 +49,9 @@ public class FormasActivity extends AppCompatActivity {
         btns[2] = btnVermelho;
         btns[3] = btnVerde;
 
-        preferences = getApplicationContext().getSharedPreferences("minhaShared",MODE_PRIVATE);
+        email = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).getString("email", "");
+        nomeFilho = getApplicationContext().getSharedPreferences("filhoShared", MODE_PRIVATE).getString("nome", "");
 
-        email = preferences.getString("email", null);
-        nomeFilho = preferences.getString("nomeFilho", null);
-
-        email  = "sasa";
-        nomeFilho = "Henrique";
 
         construirJogo();
 
