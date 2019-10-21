@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -21,29 +22,32 @@ import java.util.Timer;
 
 public class PinguimActivity extends AppCompatActivity {
     LinearLayout linearLayout;
-    Button btnCima, btnBaixo;
+    Button btnCima;
+    SharedPreferences preferences;
+    String email, nomeFilho;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pinguim);
+
+        preferences = getApplicationContext().getSharedPreferences("minhaShared",MODE_PRIVATE);
+
+        email = preferences.getString("email", null);
+        nomeFilho = preferences.getString("nomeFilho", null);
+
+        email  = "sasa";
+        nomeFilho = "Henrique";
+
         linearLayout = (LinearLayout) findViewById(R.id.linear);
-        final MyView view = new MyView(this, 50);
+        final MyView view = new MyView(this, 50, nomeFilho, email);
         linearLayout.addView(view);
 
-        btnBaixo = (Button) findViewById(R.id.btnAbaixa);
         btnCima = (Button) findViewById(R.id.btnPula);
 
         btnCima.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                view.mexerPinguim(-50);
-            }
-        });
-
-        btnBaixo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                view.mexerPinguim(50);
+                view.mexerPinguim(-100);
             }
         });
     }

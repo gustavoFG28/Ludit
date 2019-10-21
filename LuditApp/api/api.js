@@ -113,7 +113,6 @@ rota.delete("/excluiConta/:email", (requisicao, resposta)=>{
 	execSQL(`delete from L_Usuario where email='${email}'`, resposta);
 })
 
-
 rota.get("/buscarFilhos/:email", (requisicao, resposta)=>{
 	const email = requisicao.params.email;
 	execSQL(`select * from L_Filho where idPai in (select id from L_Usuario where email = '${email}')`, resposta);
