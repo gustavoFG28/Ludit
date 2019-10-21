@@ -1,4 +1,4 @@
-package com.example.ludit;
+package com.example.ludit.atividades;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.ludit.R;
 
 public class AtividadesActivity extends AppCompatActivity {
 
@@ -23,10 +25,10 @@ public class AtividadesActivity extends AppCompatActivity {
         btnVideos = findViewById(R.id.btnVideos);
         btnLivros = findViewById(R.id.btnLivros);
 
-        /*btnJogos.setOnClickListener(new View.OnClickListener() {
+        btnJogos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(AtividadesActivity.this, MusicaActivity.class);
+                Intent i = new Intent(AtividadesActivity.this, JogosActivity.class);
                 startActivity(i);
             }
         });
@@ -42,7 +44,7 @@ public class AtividadesActivity extends AppCompatActivity {
         btnVideos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(AtividadesActivity.this, MusicaActivity.class);
+                Intent i = new Intent(AtividadesActivity.this, VideosActivity.class);
                 startActivity(i);
             }
         });
@@ -50,11 +52,9 @@ public class AtividadesActivity extends AppCompatActivity {
         btnLivros.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(AtividadesActivity.this, MusicaActivity.class);
+                Intent i = new Intent(AtividadesActivity.this, LivrosActivity.class);
                 startActivity(i);
             }
         });
-*/
-
     }
 }

@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.ludit.PinguimActivity;
+import com.example.ludit.games.PinguimActivity;
 import com.example.ludit.R;
 import com.example.ludit.adapters.ListaImagensAdapter;
 import com.example.ludit.games.FormasActivity;

@@ -38,7 +38,7 @@
         <activity android:name=".SplashScreenActivity" />
         <activity android:name=".user.CadastroActivity" />
         <activity android:name=".user.FilhoCadastroActivity" />
-        <activity android:name=".AtividadesActivity" />
+        <activity android:name=".atividades.AtividadesActivity" />
     </application>
 
 </manifest>
