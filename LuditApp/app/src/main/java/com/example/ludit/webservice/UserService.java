@@ -40,4 +40,7 @@ public interface UserService {
 
     @POST("habilidades/{email}/{nome}/{habilidade}/{pontos}")
     Call<List<Filho>> skill(@Path("email") String email, @Path("nome") String nome, @Path("habilidade") String hab, @Path("pontos") Float pontos);
+
+    @GET("habilidades/{email}/{nome}")
+    Call<List<Habilidade>> skill(@Path("email") String email, @Path("nome") String nome);
 }

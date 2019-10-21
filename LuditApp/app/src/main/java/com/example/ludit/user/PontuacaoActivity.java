@@ -2,6 +2,7 @@ package com.example.ludit.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.anychart.AnyChart;
@@ -10,6 +11,8 @@ import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Cartesian;
 import com.example.ludit.R;
+import com.example.ludit.webservice.RetrofitConfig;
+import com.example.ludit.webservice.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,7 @@ public class PontuacaoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pontuacao);
+        Intent i = getIntent();
         //mostrarGrafico(); //https://github.com/AnyChart/AnyChart-Android
     }
 
