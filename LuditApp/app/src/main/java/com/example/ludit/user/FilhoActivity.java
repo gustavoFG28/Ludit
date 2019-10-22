@@ -52,6 +52,7 @@ public class FilhoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(FilhoActivity.this, PontuacaoActivity.class);
+                i.putExtra("nomeFilho",tvNomeFilho.getText());
                 startActivity(i);
             }
         });
