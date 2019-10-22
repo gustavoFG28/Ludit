@@ -42,5 +42,5 @@ public interface UserService {
     Call<List<Filho>> skill(@Path("email") String email, @Path("nome") String nome, @Path("habilidade") String hab, @Path("pontos") Float pontos);
 
     @GET("habilidades/{email}/{nome}")
-    Call<List<Habilidade>> skill(@Path("email") String email, @Path("nome") String nome);
+    Call<List<Habilidade>> habilidades(@Path("email") String email, @Path("nome") String nome);
 }
