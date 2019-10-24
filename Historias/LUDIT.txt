@@ -129,13 +129,13 @@ HISTÓRIAS:
 
 * A Lebre e a Tartaruga:
 
-1) Na floresta do ludit morava uma lebre que era a mais rápida de todos os animais do lugar.
+1) Na floresta do ludit morava uma lebre que era a mais rápida de todos os animais do lugar. -ok
 
-2) Também vivia lá uma tartaruga. Um dia a lebre, para zoar a tartaruga, a desafiou para uma corrida.
+2) Também vivia lá uma tartaruga. Um dia a lebre, para zoar a tartaruga, a desafiou para uma corrida. - ok
 
-3) A tartaruga aceitou o desafio e elas combinaram que iriam correr até o rio.
+3) A tartaruga aceitou o desafio e elas combinaram que iriam correr até o rio. - ok 
 
-4) Todos os animais se reuniram para a grande competição, nenhum acreditava que a tartaruga poderia ganhar da lebre mais rápida da floresta. Todos os animais riam da coitada.
+4) Todos os animais se reuniram para a grande competição, nenhum acreditava que a tartaruga poderia ganhar da lebre mais rápida da floresta. - ok
 
 5) A lebre começou a corrida na árvore encantada da floresta, enquanto a tartaruga começou quase que no meio do caminho.
 
