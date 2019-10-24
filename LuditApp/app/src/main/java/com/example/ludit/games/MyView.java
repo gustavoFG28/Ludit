@@ -18,7 +18,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.example.ludit.R;
 import com.example.ludit.atividades.AtividadesActivity;
-import com.example.ludit.atividades.JogosActivity;
 import com.example.ludit.webservice.Filho;
 import com.example.ludit.webservice.RetrofitConfig;
 import com.example.ludit.webservice.UserService;
