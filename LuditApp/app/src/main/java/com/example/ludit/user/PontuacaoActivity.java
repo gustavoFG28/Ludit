@@ -1,4 +1,4 @@
-package com.example.ludit.user;
+﻿package com.example.ludit.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -82,7 +82,11 @@ public class PontuacaoActivity extends AppCompatActivity {
 
             }
         }
-        grafico.data(data);
+	Column column = grafico.column(data);
+
+	grafico.title("Progresso");
+	grafico.xAxis(0).title("Habilidade");
+	grafico.yAxis(0).title("Porcentagem");
 
         AnyChartView anyChartView = (AnyChartView) findViewById(R.id.graficoFilho);
         anyChartView.setChart(grafico);
