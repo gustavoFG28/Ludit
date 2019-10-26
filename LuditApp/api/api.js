@@ -13,10 +13,11 @@ sql.connect(conexaoStr)
 
 // configurando o body parser para pegar POSTS mais tarde   
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json({strict: false}));
+app.use(bodyParser.json({strict: false, extended: false}));
+app.use(express.json());
 //acrescentando informacoes de cabecalho para suportar o CORS
 app.use(function(req, res, next) {
-  res.setHeader('Content-Type', 'application/json');
+  res.header('Content-Type', 'application/json');
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PATCH, DELETE");
@@ -73,25 +74,25 @@ rota.post("/getUser/:email", (requisicao, resposta) =>{
 }) 
 
 rota.post("/habilidades/:email/:nome/:habilidade/:pontos", (requisicao, resposta)=>{
-	execSQL("insereHabilidade_sp '"+ requisicao.params.email +"', '" + requisicao.params.nome +"', '"+ requisicao.params.habilidade +"', "+ requisicao.params.pontos, resposta);
+	execSQL("insereHabilidade_sp '"+ requisicao.params.email +"', '" + requisicao.params.nome +"', '"+ requisicao.params.habilidade 
+			+"', "+ requisicao.params.pontos, resposta);
 })
 
 rota.patch("/alteraNome/:email", (requisicao, resposta) =>{
 	const email = requisicao.params.email;
-	const nome = requisicao.body.nome;
-	console.log(nome);
+	const nome = requisicao.body;
 	execSQL(`update L_Usuario set nome='${nome}' where email='${email}'`, resposta);
 })
 
 rota.patch("/alteraEmail/:email", (requisicao, resposta) =>{
 	const email = requisicao.params.email;
-	const novoEmail = requisicao.body.novoEmail;
+	const novoEmail = requisicao.body;
     execSQL(`update L_Usuario set email='${novoEmail}' where email='${email}'`, resposta);
 })
 
 rota.patch("/alteraSenha/:email", (requisicao, resposta) =>{
 	const email = requisicao.params.email;
-	const novaSenha = requisicao.body.novaSenha;
+	const novaSenha = requisicao.body;
     execSQL(`update L_Usuario set senha='${novaSenha}' where email='${email}'`, resposta);
 })
 /*
@@ -112,8 +113,7 @@ rota.delete("/excluiConta/:email", (requisicao, resposta)=>{
 	execSQL(`delete from L_Usuario where email='${email}'`, resposta);
 })
 
-
 rota.get("/buscarFilhos/:email", (requisicao, resposta)=>{
 	const email = requisicao.params.email;
-	execSQL(`select * from L_Filho where email='${email}'`, resposta);
+	execSQL(`select * from L_Filho where idPai in (select id from L_Usuario where email = '${email}')`, resposta);
 })

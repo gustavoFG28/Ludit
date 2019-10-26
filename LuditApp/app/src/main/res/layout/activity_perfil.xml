@@ -1,78 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".PerfilActivity">
+    tools:context=".user.PerfilActivity">
 
-    <LinearLayout
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvNomeUser"
-        android:textSize="24dp"
-        android:text="Nome:"
-        android:layout_margin="24dp"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Alterar Nome"
-        android:id="@+id/btnAlteraNome"
-        android:textSize="24dp"
-        android:layout_margin="24dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvEmailUser"
-            android:textSize="24dp"
-            android:text="Email:"
-            android:layout_margin="24dp"/>
+            android:id="@+id/tvTituloPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:text="Bem vindo(a),\nPaulo"
+            android:textColor="#fff"
+            android:textSize="36dp"
+            android:background="@drawable/design_cabecario_geral"
+            android:gravity="center"
+            android:padding="10dp"
+            />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alterar Email"
-            android:id="@+id/btnAlteraEmail"
-            android:textSize="24dp"
-            android:layout_margin="24dp"/>
-    </LinearLayout>
-    <Button
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24dp"
-        android:layout_gravity="center"
-        android:layout_margin="24dp"
-        android:text="Alterar Senha"
-        android:id="@+id/btnAlteraSenha"/>
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_below="@+id/tvTituloPerfil"
+        android:layout_marginTop="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/lista_filhos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTituloPerfil">
+
+            </ListView>
+        </LinearLayout>
+    </ScrollView>
+
+
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnDeletar"
-        android:textSize="24dp"
-        android:layout_gravity="center"
-        android:layout_margin="24dp"
-        android:text="Excluir Conta"
+        android:id="@+id/btnConfiguracoes"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/button_option_menu_left"
+        android:layout_alignParentBottom="true"
+        android:drawableLeft="@drawable/ic_settings_white_24dp"
+        android:paddingLeft="12dp"
         />
 
+    <Button
+        android:id="@+id/btnAdicionar"
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:drawableStart="@drawable/ic_add_white_24dp"
+        android:background="@drawable/desgin_bubble_right_top"
+        android:paddingLeft="12dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        />
 
-    <ListView
-        android:id="@+id/lista_filhos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+    <Button
+        android:id="@+id/btnSair"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/button_option_menu_right"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:drawableRight="@drawable/ic_exit_to_app_white_24dp"
+        android:paddingRight="12dp"
+        />
 
-</LinearLayout>
+</RelativeLayout>

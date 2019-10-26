@@ -33,7 +33,7 @@ id int identity primary key not null,
 idFilho int not null 
 constraint FK_FILHO foreign key (idFilho) references L_Filho(id),
 nome varchar(30) not null,
-porcentagem decimal not null 
+porcentagem float not null 
 constraint CHK_PORCENTAGEM check(porcentagem >= 0 and porcentagem <=1)
 )
 

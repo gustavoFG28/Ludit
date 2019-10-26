@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#fff"
+    tools:context=".atividades.AtividadesActivity">
+
+    <TextView
+        android:id="@+id/tvTituloAtividades"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Atividades"
+        android:textColor="#fff"
+        android:textSize="36dp"
+        android:background="@drawable/design_cabecario_geral"
+        android:gravity="center"
+        android:padding="10dp"
+        />
+
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnJogos"
+            android:layout_below="@+id/btnAtividades"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginHorizontal="60dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/button_gradient_white"
+            android:text="Jogos"
+            android:textColor="@color/endColorGradient"
+            android:textSize="24dp"
+            android:textAlignment="center"
+            android:drawableLeft="@drawable/ic_videogame_asset_white_24dp"
+            android:paddingLeft="20dp"/>
+        <Button
+            android:id="@+id/btnMusicas"
+            android:layout_below="@+id/btnAtividades"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginHorizontal="60dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/button_gradient_white"
+            android:text="Músicas"
+            android:textColor="@color/endColorGradient"
+            android:textSize="24dp"
+            android:textAlignment="center"
+            android:drawableLeft="@drawable/ic_library_music_white_24dp"
+            android:paddingLeft="20dp"/>
+        <Button
+            android:id="@+id/btnLivros"
+            android:layout_below="@+id/btnAtividades"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginHorizontal="60dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/button_gradient_white"
+            android:text="Livros"
+            android:textColor="@color/endColorGradient"
+            android:textSize="24dp"
+            android:textAlignment="center"
+            android:drawableLeft="@drawable/ic_book_white_24dp"
+            android:paddingLeft="20dp"/>
+        <Button
+            android:id="@+id/btnVideos"
+            android:layout_below="@+id/btnAtividades"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginHorizontal="60dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/button_gradient_white"
+            android:text="Vídeos"
+            android:textColor="@color/endColorGradient"
+            android:textSize="24dp"
+            android:textAlignment="center"
+            android:drawableLeft="@drawable/ic_ondemand_video_black_24dp"
+            android:paddingLeft="20dp"/>
+    </LinearLayout>
+
+</ScrollView>
+</LinearLayout>

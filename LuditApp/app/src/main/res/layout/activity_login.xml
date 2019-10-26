@@ -1,37 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     android:orientation="vertical"
-    android:background="#323232"
-    tools:context=".LoginActivity">
+    tools:context=".user.LoginActivity">
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/desgin_bubble_right_top"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        />
 
-    <EditText
-        android:id="@+id/edLogin"
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:background="@drawable/design_bubble_left_bottom"
+        android:layout_alignParentBottom="true"/>
+
+    <TextView
+        android:id="@+id/tvTituloLogin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="24dp"
-        android:hint="Email ou Nome de Usuário"
-        android:textSize="24dp" />
+        android:layout_height="171dp"
+        android:text="Login"
+        android:textSize="36dp"
+        android:padding="20dp"
+        android:textColor="#fff"
+        android:background="@drawable/design_cabecario_login" />
 
-    <EditText
-        android:id="@+id/edSenha"
+    <LinearLayout
+        android:id="@+id/llLogin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_margin="24dp"
-        android:hint="Senha"/>
+        android:layout_height="265dp"
+        android:layout_below="@+id/tvTituloLogin"
+        android:layout_marginHorizontal="40dp"
+        android:background="@drawable/design_form"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:hint="Email ou Nome de Usuário"
+            android:textSize="24dp" />
+
+        <EditText
+            android:id="@+id/edSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:layout_marginLeft="24dp"
+            android:hint="Senha"
+            android:textSize="24dp" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/btnLogar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
-        android:text="Logar"
-        />
+        android:textColor="#fff"
+        android:textSize="24dp"
+        android:text="Entrar"
+        android:background="@drawable/button_gradient"
+        android:layout_below="@+id/llLogin"/>
 
-</LinearLayout>
+</RelativeLayout>
