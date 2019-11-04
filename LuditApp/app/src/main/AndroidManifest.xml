@@ -17,6 +17,13 @@
         <activity android:name=".bluetooth.TesteBluetooth">
 
         </activity>
+        <activity android:name=".atividades.VideosActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".games.MatematicaActivity" />
         <activity android:name=".games.ReciclagemActivity" />
         <activity android:name=".games.FormasActivity" />
@@ -27,11 +34,7 @@
         <activity android:name=".user.ConfiguracoesActivity" />
         <activity android:name=".games.PinguimActivity"
             android:screenOrientation="landscape">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".SliderActivity" />
         <activity android:name=".user.LoginActivity" />
