@@ -18,4 +18,15 @@ public class RetrofitConfig {
         }
         return retrofit;
     }
+
+    public static Retrofit getAtividade(String url) {
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(url)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .build();
+        }
+        return retrofit;
+    }
 }

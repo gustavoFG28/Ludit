@@ -1,16 +1,17 @@
-﻿package com.example.ludit.user;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.ludit.user;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Cartesian;
+import com.anychart.core.cartesian.series.Column;
 import com.example.ludit.R;
 import com.example.ludit.webservice.Habilidade;
 import com.example.ludit.webservice.RetrofitConfig;
@@ -65,11 +66,11 @@ public class PontuacaoActivity extends AppCompatActivity {
             switch (habilidade.getNome())
             {
                 case "mat":
-                    data.add(new ValueDataEntry("Matemática", habilidade.getPorcentagem()*100));
+                    data.add(new ValueDataEntry("Matem�tica", habilidade.getPorcentagem()*100));
                     break;
 
                 case "mem":
-                    data.add(new ValueDataEntry("Memória", habilidade.getPorcentagem()*100));
+                    data.add(new ValueDataEntry("Mem�ria", habilidade.getPorcentagem()*100));
                     break;
 
                 case "ref":
@@ -82,7 +83,9 @@ public class PontuacaoActivity extends AppCompatActivity {
 
             }
         }
-	Column column = grafico.column(data);
+
+
+        Column column = grafico.column(data);
 
 	grafico.title("Progresso");
 	grafico.xAxis(0).title("Habilidade");
