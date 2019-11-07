@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import com.example.ludit.R;
 import com.example.ludit.atividades.Video;
+import com.example.ludit.atividades.VideosActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.List;
@@ -26,7 +29,7 @@ public class ListaVideosAdapter extends ArrayAdapter {
 
 
     @Override
-    public View getView(int position, View viewAtual, ViewGroup parent) {
+    public View getView(final int position, View viewAtual, ViewGroup parent) {
 
         if(viewAtual == null)
             viewAtual = LayoutInflater.from(context).inflate(R.layout.layout_videos, null);
@@ -34,9 +37,21 @@ public class ListaVideosAdapter extends ArrayAdapter {
         YouTubePlayerView youTubePlayerView = viewAtual.findViewById(R.id.player);
         TextView textView = viewAtual.findViewById(R.id.playerTitulo);
 
+        youTubePlayerView.initialize(VideosActivity.API_KEY, new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                if(!b)
+                {
+                    youTubePlayer.loadVideo(lista.get(position).getId());
+                    youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
+                }
+            }
 
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
 
-
+            }
+        });
         return  viewAtual;
     }
 }

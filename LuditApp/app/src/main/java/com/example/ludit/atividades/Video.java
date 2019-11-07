@@ -1,5 +1,7 @@
 package com.example.ludit.atividades;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Video {
 
     public Video(String id, String titulo, String url) {
@@ -8,8 +10,14 @@ public class Video {
         this.url = url;
     }
 
+    @SerializedName("videoId")
     String id;
+
+    @SerializedName("title")
     String titulo;
+
+    @SerializedName("url")
+    String url;
 
     public String getId() {
         return id;
@@ -35,7 +43,7 @@ public class Video {
         this.url = url;
     }
 
-    String url;
+
 
 
 }
