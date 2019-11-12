@@ -46,11 +46,30 @@ public class SongActivity extends AppCompatActivity {
         SongAdapter adapter = new SongAdapter(getApplicationContext(), musicasArray);
 
         lvLista.setAdapter(adapter);
-        
+
         lvLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                /*
+                 WebView video;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_video_playere);
+
+        video = findViewById(R.id.player);
+        Intent i =  getIntent();
+        String id = i.getStringExtra("id");
+
+        String link = "<iframe width='100%' height='100%' allow='autoplay; fullscreen' src='https://www.youtube.com/embed/" +  id + "'></iframe>";
+
+        video.loadData(link, "text/html", "utf-8");
+        video.getSettings().setJavaScriptEnabled(true);
+        video.setWebChromeClient(new WebChromeClient());
+    }
+                */
             }
         });
     }

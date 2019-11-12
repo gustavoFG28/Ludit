@@ -15,7 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/FullScreen"
         android:usesCleartextTraffic="true">
+<<<<<<< HEAD
         <activity android:name=".SongActivity">
+=======
+        <activity android:name=".atividades.VideoPlayer"></activity>
+        <activity android:name=".bluetooth.TesteBluetooth"></activity>
+        <activity android:name=".atividades.VideosActivity">
+>>>>>>> e116746870ba7b6b322647446610d23490e5ae80
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,7 +40,11 @@
         <activity android:name=".user.ConfiguracoesActivity" />
         <activity
             android:name=".games.PinguimActivity"
+<<<<<<< HEAD
             android:screenOrientation="landscape"/>
+=======
+            android:screenOrientation="landscape"></activity>
+>>>>>>> e116746870ba7b6b322647446610d23490e5ae80
         <activity android:name=".SliderActivity" />
         <activity android:name=".user.LoginActivity" />
         <activity android:name=".SplashScreenActivity" />
