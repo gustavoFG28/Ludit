@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/FullScreen"
         android:usesCleartextTraffic="true">
-        <activity android:name=".atividades.VideoPlayer"></activity>
+        <activity android:name=".atividades.VideoPlayer"
+            android:screenOrientation="landscape"
+            ></activity>
         <activity android:name=".bluetooth.TesteBluetooth"></activity>
         <activity android:name=".atividades.VideosActivity">
             <intent-filter>

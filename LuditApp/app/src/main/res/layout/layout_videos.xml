@@ -20,5 +20,6 @@
         android:layout_gravity="center"
         android:textSize="24dp"
         android:textColor="@color/endColorGradient"
+        android:gravity="center"
         />
 </LinearLayout>
