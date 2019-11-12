@@ -35,5 +35,4 @@ dependencies {
 
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
     implementation 'com.google.apis:google-api-services-youtube:v3-rev162-1.21.0'
-    implementation project(path: ':Youtube')
 }

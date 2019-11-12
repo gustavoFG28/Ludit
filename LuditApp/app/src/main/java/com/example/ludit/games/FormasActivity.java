@@ -80,6 +80,7 @@ public class FormasActivity extends AppCompatActivity {
             pontosForma++;
         atualizar();
     }
+
     public  void  atualizar(){
         if(qtd < 9) {
             qtd++;
