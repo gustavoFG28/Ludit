@@ -93,6 +93,10 @@ public class PontuacaoActivity extends AppCompatActivity {
                         data.add(new ValueDataEntry("Reciclagem", habilidade.getPorcentagem() * 100));
                         break;
 
+                    case "rac":
+                        data.add(new ValueDataEntry("Raciocinio", habilidade.getPorcentagem() * 100));
+                        break;
+
                 }
             }
         }
@@ -100,7 +104,7 @@ public class PontuacaoActivity extends AppCompatActivity {
         data.add(new ValueDataEntry("Memoria", 0));
         data.add(new ValueDataEntry("Reflexo", 0));
         data.add(new ValueDataEntry("Reciclagem", 0));
-
+        data.add(new ValueDataEntry("Raciocinio", 0));
 
         Column column = grafico.column(data);
 
@@ -110,6 +114,5 @@ public class PontuacaoActivity extends AppCompatActivity {
 
         AnyChartView anyChartView = (AnyChartView) findViewById(R.id.graficoFilho);
         anyChartView.setChart(grafico);
-
     }
 }

@@ -68,13 +68,13 @@ public class FormasActivity extends AppCompatActivity {
         email = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).getString("email", "");
         nomeFilho = getApplicationContext().getSharedPreferences("filhoShared", MODE_PRIVATE).getString("nome", "");
 
-        int[] imagens = new int[qtdFormas];
-        int[] respostas = new int[qtdFormas];
+        imagens = new int[qtdFormas];
+        respostas = new int[qtdFormas];
 
         for(int i = 0; i< imagens.length; i++)
         {
-            imagens[i] = Integer.parseInt("R.drawable.per_"+i);
-            respostas[i] = Integer.parseInt("R.drawable.res_"+i);
+            imagens[i] = getResources().getIdentifier("per_"+(i+1), "drawable", getPackageName());
+            respostas[i] = getResources().getIdentifier("res_"+(i+1), "drawable", getPackageName());
         }
 
         construirJogo();
@@ -105,7 +105,7 @@ public class FormasActivity extends AppCompatActivity {
             if(btnCerto != i)
                 while ((v =random.nextInt(qtdFormas)) != val)
                 {
-                    btns[i].setBackground( ContextCompat.getDrawable(FormasActivity.this, respostas[val]));
+                    btns[i].setBackground( ContextCompat.getDrawable(FormasActivity.this, respostas[v]));
                     break;
                 }
             else
@@ -131,7 +131,7 @@ public class FormasActivity extends AppCompatActivity {
 
             UserService service =  RetrofitConfig.getClient().create(UserService.class);
 
-            Call<List<Filho>> ponto = service.skill(email,nomeFilho,"rec", pontoFinal);
+            Call<List<Filho>> ponto = service.skill(email,nomeFilho,"rac", pontoFinal);
 
             ponto.enqueue(new Callback<List<Filho>>() {
                 @Override
