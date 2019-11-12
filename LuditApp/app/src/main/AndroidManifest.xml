@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -14,17 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/FullScreen"
         android:usesCleartextTraffic="true">
-        <activity android:name=".bluetooth.TesteBluetooth">
-
-        </activity>
-        <activity android:name=".atividades.VideosActivity">
+        <activity android:name=".SongActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".games.MatematicaActivity" />
+        <activity android:name=".bluetooth.TesteBluetooth"/>
+        <activity android:name=".atividades.VideosActivity"/>
+        <activity android:name=".games.MatematicaActivity"/>
         <activity android:name=".games.ReciclagemActivity" />
         <activity android:name=".games.FormasActivity" />
         <activity android:name=".games.GeniusActivity" />
@@ -32,10 +32,9 @@
         <activity android:name=".user.PerfilActivity" />
         <activity android:name=".user.FilhoActivity" />
         <activity android:name=".user.ConfiguracoesActivity" />
-        <activity android:name=".games.PinguimActivity"
-            android:screenOrientation="landscape">
-
-        </activity>
+        <activity
+            android:name=".games.PinguimActivity"
+            android:screenOrientation="landscape"/>
         <activity android:name=".SliderActivity" />
         <activity android:name=".user.LoginActivity" />
         <activity android:name=".SplashScreenActivity" />
