@@ -52,6 +52,8 @@ public class PontuacaoActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG ).show();
             }
         });
+
+        mostrarGrafico();
     }
 
 
@@ -61,37 +63,42 @@ public class PontuacaoActivity extends AppCompatActivity {
 
         List<DataEntry> data = new ArrayList<>();
 
-        for(Habilidade habilidade : habilidades)
-        {
-            switch (habilidade.getNome())
-            {
-                case "mat":
-                    data.add(new ValueDataEntry("Matem�tica", habilidade.getPorcentagem()*100));
-                    break;
+        if(habilidades != null) {
+            for (Habilidade habilidade : habilidades) {
+                switch (habilidade.getNome()) {
+                    case "mat":
+                        data.add(new ValueDataEntry("Matematica", habilidade.getPorcentagem() * 100));
+                        break;
 
-                case "mem":
-                    data.add(new ValueDataEntry("Mem�ria", habilidade.getPorcentagem()*100));
-                    break;
+                    case "mem":
+                        data.add(new ValueDataEntry("Memoria", habilidade.getPorcentagem() * 100));
+                        break;
 
-                case "ref":
-                    data.add(new ValueDataEntry("Reflexo", habilidade.getPorcentagem()*100));
-                    break;
+                    case "ref":
+                        data.add(new ValueDataEntry("Reflexo", habilidade.getPorcentagem() * 100));
+                        break;
 
-                case "rec":
-                    data.add(new ValueDataEntry("Reciclagem", habilidade.getPorcentagem()*100));
-                    break;
+                    case "rec":
+                        data.add(new ValueDataEntry("Reciclagem", habilidade.getPorcentagem() * 100));
+                        break;
 
+                }
             }
         }
+        data.add(new ValueDataEntry("Matematica", 0));
+        data.add(new ValueDataEntry("Memoria", 0));
+        data.add(new ValueDataEntry("Reflexo", 0));
+        data.add(new ValueDataEntry("Reciclagem", 0));
 
 
         Column column = grafico.column(data);
 
-	grafico.title("Progresso");
-	grafico.xAxis(0).title("Habilidade");
-	grafico.yAxis(0).title("Porcentagem");
+	    grafico.title("Progresso");
+	    grafico.xAxis(0).title("Habilidade");
+	    grafico.yAxis(0).title("Porcentagem(%)");
 
         AnyChartView anyChartView = (AnyChartView) findViewById(R.id.graficoFilho);
         anyChartView.setChart(grafico);
+
     }
 }

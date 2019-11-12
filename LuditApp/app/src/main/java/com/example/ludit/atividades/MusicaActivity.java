@@ -1,22 +1,16 @@
 package com.example.ludit.atividades;
 
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.ludit.R;
 import com.example.ludit.adapters.ListaImagensAdapter;
-import com.example.ludit.games.FormasActivity;
-import com.example.ludit.games.GeniusActivity;
-import com.example.ludit.games.MatematicaActivity;
-import com.example.ludit.games.ReciclagemActivity;
 
 import java.util.ArrayList;
 import java.util.List;

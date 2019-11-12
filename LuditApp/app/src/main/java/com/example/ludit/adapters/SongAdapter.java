@@ -32,26 +32,13 @@ public class SongAdapter extends ArrayAdapter {
     public View getView(final int position, View viewAtual, ViewGroup parent) {
 
         if(viewAtual == null)
-            viewAtual = LayoutInflater.from(context).inflate(R.layout.layout_videos, null);
+            viewAtual = LayoutInflater.from(context).inflate(R.layout.layout_lista_song, null);
 
-        YouTubePlayerView youTubePlayerView = viewAtual.findViewById(R.id.player);
-        TextView textView = viewAtual.findViewById(R.id.playerTitulo);
+        Video qualMusica = lista.get(position);
+        TextView textView = viewAtual.findViewById(R.id.song_title);
 
-        youTubePlayerView.initialize(VideosActivity.API_KEY, new YouTubePlayer.OnInitializedListener() {
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                if(!b)
-                {
-                    youTubePlayer.loadVideo(lista.get(position).getId());
-                    youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
-                }
-            }
+       textView.setText(qualMusica.getTitulo());
 
-            @Override
-            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-
-            }
-        });
         return  viewAtual;
     }
 }

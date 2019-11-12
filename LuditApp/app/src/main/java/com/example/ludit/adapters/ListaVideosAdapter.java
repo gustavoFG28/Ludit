@@ -1,57 +1,43 @@
 package com.example.ludit.adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ludit.R;
 import com.example.ludit.atividades.Video;
-import com.example.ludit.atividades.VideosActivity;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.List;
 
 public class ListaVideosAdapter extends ArrayAdapter {
 
+    private int layout;
     private Context context;
-    private List<Video> lista = null;
+    private List<Video> videos = null;
 
-    public ListaVideosAdapter(Context context, List<Video> lista) {
-        super(context, 0 , lista);
+    public ListaVideosAdapter(Context context,  List<Video> listaImagens) {
+        super(context,0 , listaImagens);
         this.context = context;
-        this.lista = lista;
+        this.videos = listaImagens;
     }
 
-
     @Override
-    public View getView(final int position, View viewAtual, ViewGroup parent) {
+    public View getView(int position, View viewAtual, ViewGroup parent) {
 
         if(viewAtual == null)
             viewAtual = LayoutInflater.from(context).inflate(R.layout.layout_videos, null);
 
-        YouTubePlayerView youTubePlayerView = viewAtual.findViewById(R.id.player);
-        TextView textView = viewAtual.findViewById(R.id.playerTitulo);
+        Video qualVideo = videos.get(position);
+        ImageView img = viewAtual.findViewById(R.id.imgVideo);
 
-        youTubePlayerView.initialize(VideosActivity.API_KEY, new YouTubePlayer.OnInitializedListener() {
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                if(!b)
-                {
-                    youTubePlayer.loadVideo(lista.get(position).getId());
-                    youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
-                }
-            }
+        img.setImageURI(Uri.parse((qualVideo.getUrl())));
+        TextView txt = viewAtual.findViewById(R.id.playerTitulo);
 
-            @Override
-            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-
-            }
-        });
         return  viewAtual;
     }
 }
