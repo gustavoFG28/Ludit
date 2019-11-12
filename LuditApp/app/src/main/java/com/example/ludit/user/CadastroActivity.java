@@ -1,8 +1,5 @@
 package com.example.ludit.user;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ludit.R;
 import com.example.ludit.webservice.RetrofitConfig;
@@ -32,7 +32,16 @@ public class CadastroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE
+                        // Set the content to appear under the system bars so that the
+                        // content doesn't resize when the system bars hide and show.
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        // Hide the nav bar and status bar
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
         edtNome = (EditText) findViewById(R.id.edNome);
         edtEmail = (EditText) findViewById(R.id.edEmail);
         edtConSenha = (EditText) findViewById(R.id.edConfimarSenha);
@@ -91,8 +100,9 @@ public class CadastroActivity extends AppCompatActivity {
                     editor.putString("nome", response.body().get(0).getNome());
                     editor.commit();
 
-                    Intent i = new Intent(CadastroActivity.this, FilhoCadastroActivity.class);
+                    Intent i = new Intent(CadastroActivity.this, PerfilActivity.class);
                     startActivity(i);
+                    finish();
                 }
 
                 @Override

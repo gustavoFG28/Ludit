@@ -48,7 +48,7 @@
             android:fontFamily="@font/fredoka"
             android:hint="Nome"
             android:inputType="textNoSuggestions"
-            android:textColor="#fff"
+            android:textColor="@color/startColorGradient"
             android:textSize="24dp" />
 
         <EditText
@@ -60,7 +60,7 @@
             android:fontFamily="@font/fredoka"
             android:hint="Deficiência"
             android:inputType="textNoSuggestions"
-            android:textColor="#fff"
+            android:textColor="@color/startColorGradient"
             android:textSize="24dp" />
 
         <EditText
@@ -72,7 +72,7 @@
             android:fontFamily="@font/fredoka"
             android:hint="Observações"
             android:inputType="textNoSuggestions"
-            android:textColor="#fff"
+            android:textColor="@color/startColorGradient"
             android:textSize="24dp" />
 
         <Button

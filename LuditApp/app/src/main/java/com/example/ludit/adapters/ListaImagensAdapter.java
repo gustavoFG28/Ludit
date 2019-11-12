@@ -13,27 +13,25 @@ import java.util.List;
 
 public class ListaImagensAdapter extends ArrayAdapter {
 
-    private int layout;
     private Context context;
     private List<Integer> imagens = null;
 
     public ListaImagensAdapter(Context context,  List<Integer> listaImagens) {
         super(context,0 , listaImagens);
         this.context = context;
-        this.layout = layout;
+        this.imagens = listaImagens;
     }
 
     @Override
     public View getView(int position, View viewAtual, ViewGroup parent) {
 
         if(viewAtual == null)
-            viewAtual = LayoutInflater.from(context).inflate(R.layout.layout_dialog_lista_imagens, null);
+            viewAtual = LayoutInflater.from(context).inflate(R.layout.layout_dialog_item_perfil, null);
 
-       int qualImg = imagens.get(position);
+        int qualImg = imagens.get(position);
         ImageView img = viewAtual.findViewById(R.id.opcaoImg);
 
         img.setImageResource(qualImg);
-
 
         return  viewAtual;
     }
