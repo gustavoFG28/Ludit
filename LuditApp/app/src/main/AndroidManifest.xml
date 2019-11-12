@@ -14,9 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/FullScreen"
         android:usesCleartextTraffic="true">
-        <activity android:name=".bluetooth.TesteBluetooth">
-
-        </activity>
+        <activity android:name=".atividades.VideoPlayer"></activity>
+        <activity android:name=".bluetooth.TesteBluetooth"></activity>
         <activity android:name=".atividades.VideosActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,10 +31,9 @@
         <activity android:name=".user.PerfilActivity" />
         <activity android:name=".user.FilhoActivity" />
         <activity android:name=".user.ConfiguracoesActivity" />
-        <activity android:name=".games.PinguimActivity"
-            android:screenOrientation="landscape">
-
-        </activity>
+        <activity
+            android:name=".games.PinguimActivity"
+            android:screenOrientation="landscape"></activity>
         <activity android:name=".SliderActivity" />
         <activity android:name=".user.LoginActivity" />
         <activity android:name=".SplashScreenActivity" />
