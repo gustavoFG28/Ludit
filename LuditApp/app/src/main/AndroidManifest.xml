@@ -18,16 +18,16 @@
             android:screenOrientation="landscape"
             ></activity>
         <activity android:name=".bluetooth.TesteBluetooth"></activity>
-        <activity android:name=".atividades.VideosActivity">
+        <activity android:name=".atividades.VideosActivity"/>
+        <activity android:name=".games.MatematicaActivity" />
+        <activity android:name=".games.ReciclagemActivity" />
+        <activity android:name=".games.FormasActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".games.MatematicaActivity" />
-        <activity android:name=".games.ReciclagemActivity" />
-        <activity android:name=".games.FormasActivity" />
         <activity android:name=".games.GeniusActivity" />
         <activity android:name=".user.PontuacaoActivity" />
         <activity android:name=".user.PerfilActivity" />

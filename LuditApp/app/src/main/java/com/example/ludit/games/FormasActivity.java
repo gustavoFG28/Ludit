@@ -2,8 +2,10 @@ package com.example.ludit.games;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,8 +25,9 @@ import retrofit2.Response;
 
 public class FormasActivity extends AppCompatActivity {
     ImageView img;
-    int[] imagens = {};
-    int[] respostas = {};
+    final int qtdFormas = 48;
+    int[] imagens;
+    int[] respostas;
 
     int btnCerto, pontosForma, qtd;
     Button btnAzul, btnVermelho, btnAmarelo, btnVerde;
@@ -52,6 +55,14 @@ public class FormasActivity extends AppCompatActivity {
         email = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).getString("email", "");
         nomeFilho = getApplicationContext().getSharedPreferences("filhoShared", MODE_PRIVATE).getString("nome", "");
 
+        int[] imagens = new int[qtdFormas];
+        int[] respostas = new int[qtdFormas];
+
+        for(int i = 0; i< imagens.length; i++)
+        {
+            imagens[i] = Integer.parseInt("R.drawable.per_"+i);
+            respostas[i] = Integer.parseInt("R.drawable.res_"+i);
+        }
 
         construirJogo();
 
@@ -69,11 +80,23 @@ public class FormasActivity extends AppCompatActivity {
 
     public  void  construirJogo() {
         Random random = new Random();
-        int val = random.nextInt(imagens.length);
+        int val = random.nextInt(qtdFormas);
 
         img.setImageResource(imagens[val]);
 
-        //colocar imagens nos botões
+        btnCerto = random.nextInt(4);
+
+        int v;
+
+        for(int i = 0; i < btns.length; i++)
+            if(btnCerto != i)
+                while ((v =random.nextInt(qtdFormas)) != val)
+                {
+                    btns[i].setBackground( ContextCompat.getDrawable(FormasActivity.this, respostas[val]));
+                    break;
+                }
+            else
+                btns[i].setBackground( ContextCompat.getDrawable(FormasActivity.this, respostas[val]));
     }
     public  void  verResult(int id) {
         if(id == btnCerto)

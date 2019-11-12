@@ -160,7 +160,6 @@ public class MatematicaActivity extends AppCompatActivity {
             n2 = random.nextInt(max + 1);
         }
 
-
         int sinal = random.nextInt(2);
         botaoCerto = random.nextInt(4);
 

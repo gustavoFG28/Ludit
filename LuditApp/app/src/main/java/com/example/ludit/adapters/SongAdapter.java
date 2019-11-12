@@ -9,10 +9,6 @@ import android.widget.TextView;
 
 import com.example.ludit.R;
 import com.example.ludit.atividades.Video;
-import com.example.ludit.atividades.VideosActivity;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.List;
 
