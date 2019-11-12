@@ -15,21 +15,20 @@
         android:supportsRtl="true"
         android:theme="@style/FullScreen"
         android:usesCleartextTraffic="true">
-<<<<<<< HEAD
-        <activity android:name=".SongActivity">
-=======
-        <activity android:name=".atividades.VideoPlayer"></activity>
-        <activity android:name=".bluetooth.TesteBluetooth"></activity>
-        <activity android:name=".atividades.VideosActivity">
->>>>>>> e116746870ba7b6b322647446610d23490e5ae80
+
+        <activity android:name=".atividades.SongActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".bluetooth.TesteBluetooth"/>
-        <activity android:name=".atividades.VideosActivity"/>
+
+        <activity android:name=".atividades.VideoPlayer"></activity>
+        <activity android:name=".bluetooth.TesteBluetooth"></activity>
+        <activity android:name=".atividades.VideosActivity">
+
+        </activity>
         <activity android:name=".games.MatematicaActivity"/>
         <activity android:name=".games.ReciclagemActivity" />
         <activity android:name=".games.FormasActivity" />
@@ -40,17 +39,13 @@
         <activity android:name=".user.ConfiguracoesActivity" />
         <activity
             android:name=".games.PinguimActivity"
-<<<<<<< HEAD
             android:screenOrientation="landscape"/>
-=======
-            android:screenOrientation="landscape"></activity>
->>>>>>> e116746870ba7b6b322647446610d23490e5ae80
         <activity android:name=".SliderActivity" />
         <activity android:name=".user.LoginActivity" />
         <activity android:name=".SplashScreenActivity" />
         <activity android:name=".user.CadastroActivity" />
         <activity android:name=".user.FilhoCadastroActivity" />
         <activity android:name=".atividades.AtividadesActivity" />
-    </application>
 
+    </application>
 </manifest>

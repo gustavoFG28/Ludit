@@ -56,8 +56,6 @@ public class VideosActivity extends AppCompatActivity {
                 i.putExtra("id", videos.get(position).getId());
                 startActivity(i);
             }});
-
-
     }
 
 
