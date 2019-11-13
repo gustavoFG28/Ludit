@@ -3,6 +3,7 @@ package com.example.ludit.user;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -240,55 +241,52 @@ public class ConfiguracoesActivity extends AppCompatActivity {
     }
 
     public void modalSenha() {
-        edtAlterar.setText("");
-        edtSenhaConfirmacao.setText("");
         edtAlterar.setHint("Nova Senha");
         edtAlterar.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        dialog.setTitle("Alteração de Senha da Conta");
+     //   edtAlterar.setTypeface(Typeface.createFromFile("font/fredoka.ttf"));
+
+        edtAlterar.setText("");
+        edtSenhaConfirmacao.setText("");
+
+        builder.setTitle("Alteração de Senha da Conta");
+
         builder.setPositiveButton("ALTERAR SENHA", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(final DialogInterface dialog, int which) {
                 builder.setTitle("LUDIT - Erro ao Alterar Senha");
                 builder.setPositiveButton("OK", null);
 
-                if(edtSenhaConfirmacao.getText().toString() == null || edtAlterar.getText().toString() == null)
-                {
-                    builder.setMessage("Preencha todos os Campos");
-                    builder.create().show();
-                }else
-                {
-                    Call<List<Usuario>> user = service.verificaUser(email, edtAlterar.getText().toString());
+                if(edtSenhaConfirmacao.getText().toString().equals("") || edtAlterar.getText().toString().equals(""))
+                    Toast.makeText(getApplicationContext(), "Preencha todos os Campos", Toast.LENGTH_LONG).show();
+                else if(edtSenhaConfirmacao.getText().toString().equals(edtAlterar.getText().toString()))
+                    Toast.makeText(getApplicationContext(), "Não é possível alterar senha pela antiga", Toast.LENGTH_LONG).show();
+                else {
+                    Call<List<Usuario>> user = service.verificaUser(email, edtSenhaConfirmacao.getText().toString());
 
                     user.enqueue(new Callback<List<Usuario>>() {
                         @Override
                         public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
                             if(response.isSuccessful())
                             {
-                                Call<Void> alt = service.alteraSenha(email, edtAlterar.getText().toString());
+                                final String novaSenha =  edtAlterar.getText().toString();
+                                Call<Void> alt = service.alteraSenha(email,novaSenha);
+
                                 alt.enqueue(new Callback<Void>() {
                                     @Override
-                                    public void onResponse(Call<Void> call, Response<Void> response) {
-                                        if(!response.isSuccessful()){
-                                            builder.setMessage("Erro ao mudar Senha, verifique os dados");
-                                            builder.create().show();
-                                            return;
-                                        }
-                                    }
+                                    public void onResponse(Call<Void> call, Response<Void> response) {}
 
                                     @Override
                                     public void onFailure(Call<Void> call, Throwable t) {
-                                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG ).show();
+                                        Toast.makeText(getApplicationContext(),"Erro ao alterar o email", Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }
                         }
-
                         @Override
                         public void onFailure(Call<List<Usuario>> call, Throwable t) {
-                            builder.setMessage("Senha Antiga Inválida");
+                            Toast.makeText(getApplicationContext(), "Senha antiga incorreta", Toast.LENGTH_LONG).show();
                             edtAlterar.setText("");
                             edtSenhaConfirmacao.setText("");
-                            builder.create().show();
                         }
                     });
                 }
