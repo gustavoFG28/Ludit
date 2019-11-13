@@ -29,7 +29,7 @@ import retrofit2.Response;
 
 public class FormasActivity extends AppCompatActivity {
     ImageView img;
-    final int qtdFormas = 48;
+    final int qtdFormas = 24;
     int[] imagens;
     int[] respostas;
 
@@ -85,7 +85,7 @@ public class FormasActivity extends AppCompatActivity {
             btns[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    verResult(btns[id].getId());
+                    verResult(id);
                 }
             });
         }
@@ -111,6 +111,7 @@ public class FormasActivity extends AppCompatActivity {
             else
                 btns[i].setBackground( ContextCompat.getDrawable(FormasActivity.this, respostas[val]));
     }
+
     public  void  verResult(int id) {
         if(id == btnCerto)
             pontosForma++;

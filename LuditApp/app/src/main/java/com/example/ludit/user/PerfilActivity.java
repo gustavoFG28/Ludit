@@ -39,20 +39,17 @@ public class PerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
-                        // Set the content to appear under the system bars so that the
-                        // content doesn't resize when the system bars hide and show.
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
         btnSair = findViewById(R.id.btnSair);
         btnConfiguracoes = findViewById(R.id.btnConfiguracoes);
         btnAdicionar = findViewById(R.id.btnAdicionar);
 
         tvTituloPerfil = findViewById(R.id.tvTituloPerfil);
-        tvTituloPerfil.setText("Bem vindo(a),\n" + getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).getString("nome", ""));
 
         btnSair.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +123,14 @@ public class PerfilActivity extends AppCompatActivity {
         });
     }
 
+    public  void  construir(){
+        tvTituloPerfil.setText("Bem vindo(a),\n" + getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).getString("nome", ""));
+    }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        construirLista();
+        construir();
+    }
 }

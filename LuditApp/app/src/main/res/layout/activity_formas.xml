@@ -61,5 +61,4 @@
                 android:id="@+id/btnAmarelo"/>
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>
