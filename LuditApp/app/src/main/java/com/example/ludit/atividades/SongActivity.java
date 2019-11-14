@@ -6,6 +6,7 @@ import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -40,16 +41,15 @@ public class SongActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_atividade_selecionada);
+
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
-                        // Set the content to appear under the system bars so that the
-                        // content doesn't resize when the system bars hide and show.
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
         lvLista = findViewById(R.id.lista);
         ((TextView)findViewById(R.id.tvTitulo)).setText("Músicas");
 
@@ -69,23 +69,6 @@ public class SongActivity extends AppCompatActivity {
 
                 AlertDialog dialog = builder.create();
 
-                /*DisplayMetrics displayMetrics = new DisplayMetrics();
-                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-                int displayWidth = displayMetrics.widthPixels;
-                int displayHeight = displayMetrics.heightPixels;
-
-                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-                layoutParams.copyFrom(dialog.getWindow().getAttributes());
-
-                int dialogWindowWidth = (int) (displayWidth * 0.8f);
-                int dialogWindowHeight = (int) (displayHeight * 0.7f);
-
-                layoutParams.width = dialogWindowWidth;
-                layoutParams.height = dialogWindowHeight;
-
-                dialog.getWindow().setAttributes(layoutParams);*/
-
                 dialogView.setMinimumHeight(700);
 
                 WebView reprodutor = (WebView)dialogView.findViewById(R.id.wb_ver);
@@ -101,6 +84,13 @@ public class SongActivity extends AppCompatActivity {
 
                 dialog.setTitle(musicaSelecionada.getTitulo());
                 dialog.show();
+            }
+        });
+
+        ((Button)findViewById(R.id.btnSair)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -120,32 +110,28 @@ public class SongActivity extends AppCompatActivity {
         }).build();
 
 
-
         try {
             YouTube.PlaylistItems.List request = yt.playlistItems().list("snippet");
 
-            request.setPlaylistId(playlistId);
-
-            request.setFields("items(snippet/title,snippet/resourceId/videoId),nextPageToken");
-
-            request.setKey(API_KEY);
+            request.setPlaylistId(playlistId).setFields("items(snippet/title,snippet/resourceId/videoId),nextPageToken").setKey(API_KEY);
 
             String nextToken = "";
 
             do {
                 request.setPageToken(nextToken);
-                PlaylistItemListResponse playlistItemResult = request.execute();
 
+                PlaylistItemListResponse playlistItemResult = request.execute();
 
                 for(int i = 0; i<playlistItemResult.getItems().size(); i++)
                 {
                     List<PlaylistItem> playlistItems = playlistItemResult.getItems();
                     PlaylistItemSnippet snippet = playlistItems.get(i).getSnippet();
-                    Video video = new Video(snippet.getResourceId().getVideoId(), snippet.getTitle(), null);
-                    musicas.add(video);
+                    Video musica = new Video(snippet.getResourceId().getVideoId(), snippet.getTitle(), null);
+                    musicas.add(musica);
                 }
 
                 nextToken = playlistItemResult.getNextPageToken();
+
             } while (nextToken != null);
         }
         catch (IOException e)

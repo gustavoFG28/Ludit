@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,10 +29,7 @@ import java.util.List;
 public class VideosActivity extends AppCompatActivity {
 
     ListView lista;
-    String videoId;
-    String url = "http://www.googleapis.com/";
 
-    public static final String params = "?part=snippet&maxResults=50";
     public static final String API_KEY = "AIzaSyAZ_TLsDPOQy4w4GZysdXjq83j-P4nFcEM";
     public final String playlistId = "PLjf0D1j3KgIGa9tBFne55fKZ1_uErgM0i";
 
@@ -41,14 +39,12 @@ public class VideosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_atividade_selecionada);
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
-                        // Set the content to appear under the system bars so that the
-                        // content doesn't resize when the system bars hide and show.
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
         ((TextView)findViewById(R.id.tvTitulo)).setText("Vídeos");
         lista = findViewById(R.id.lista);
         final List<Video> videos = getVideos();
@@ -65,6 +61,13 @@ public class VideosActivity extends AppCompatActivity {
                 i.putExtra("id", videos.get(position).getId());
                 startActivity(i);
             }});
+
+        ((Button)findViewById(R.id.btnSair)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 

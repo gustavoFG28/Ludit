@@ -86,6 +86,13 @@ public class FilhoCadastroActivity extends AppCompatActivity implements DatePick
                 dataDialog.show(getSupportFragmentManager(), "Selecione a data de nascimento");
             }
         });
+
+        ((Button)findViewById(R.id.btnSair)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void abrirDialog ()

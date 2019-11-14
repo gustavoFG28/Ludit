@@ -61,6 +61,15 @@
         android:drawableLeft="@drawable/ic_star_white_24dp"
         android:paddingLeft="20dp"/>
 
+    <Button
+        android:id="@+id/btnSair"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentEnd="true"
 
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_option_menu_right"
+        android:drawableRight="@drawable/ic_exit_to_app_white_24dp"
+        android:paddingRight="12dp" />
 
 </RelativeLayout>
