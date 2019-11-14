@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,62 +11,74 @@
         android:id="@+id/tvTituloConfiguracoes"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="Configurações"
-        android:textColor="#fff"
-        android:textSize="36dp"
         android:background="@drawable/design_cabecario_geral"
         android:gravity="center"
         android:padding="10dp"
-        />
+        android:text="Configurações"
+        android:textColor="#fff"
+        android:textSize="36dp" />
 
-        <Button
-            android:id="@+id/btnAlteraNome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alterar Nome"
-            android:textSize="24dp"
-            android:layout_gravity="center"
-            android:layout_margin="24dp"
-            android:background="@drawable/button_gradient"
-            android:padding="20dp"
-            android:textColor="#fff"
-            />
+    <Button
+        android:layout_below="@+id/tvTituloConfiguracoes"
+        android:layout_centerInParent="true"
+        android:id="@+id/btnAlteraNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:background="@drawable/button_gradient"
+        android:padding="20dp"
+        android:text="Alterar Nome"
+        android:textColor="#fff"
+        android:textSize="24dp" />
 
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alterar Email"
-            android:id="@+id/btnAlteraEmail"
-            android:textSize="24dp"
-            android:layout_gravity="center"
-            android:layout_margin="24dp"
-            android:background="@drawable/button_gradient"
-            android:padding="20dp"
-            android:textColor="#fff"/>
+    <Button
+        android:layout_below="@+id/btnAlteraNome"
+        android:layout_centerInParent="true"
+        android:id="@+id/btnAlteraEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:background="@drawable/button_gradient"
+        android:padding="20dp"
+        android:text="Alterar Email"
+        android:textColor="#fff"
+        android:textSize="24dp" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alterar Senha"
-            android:id="@+id/btnAlteraSenha"
-            android:textSize="24dp"
-            android:layout_gravity="center"
-            android:layout_margin="24dp"
-            android:background="@drawable/button_gradient"
-            android:padding="20dp"
-            android:textColor="#fff"/>
+    <Button
+        android:layout_below="@+id/btnAlteraEmail"
+        android:layout_centerInParent="true"
+        android:id="@+id/btnAlteraSenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:background="@drawable/button_gradient"
+        android:padding="20dp"
+        android:text="Alterar Senha"
+        android:textColor="#fff"
+        android:textSize="24dp" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnDeletar"
-            android:text="Excluir Conta"
-            android:textSize="24dp"
-            android:layout_gravity="center"
-            android:layout_margin="24dp"
-            android:background="@drawable/button_gradient"
-            android:padding="20dp"
-            android:textColor="#fff"
-            />
-</LinearLayout>
+    <Button
+        android:layout_below="@+id/btnAlteraSenha"
+        android:layout_centerInParent="true"
+        android:id="@+id/btnDeletar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:background="@drawable/button_gradient"
+        android:padding="20dp"
+        android:text="Excluir Conta"
+        android:textColor="#fff"
+        android:textSize="24dp" />
+
+    <Button
+        android:id="@+id/btnSair"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_option_menu_right"
+        android:drawableRight="@drawable/ic_exit_to_app_white_24dp"
+        android:paddingRight="12dp" />
+
+</RelativeLayout>

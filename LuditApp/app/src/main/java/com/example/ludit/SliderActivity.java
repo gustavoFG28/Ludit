@@ -21,27 +21,30 @@ public class SliderActivity extends AppCompatActivity {
     private Button btnBack, btnNext;
     int qualPagina = 0;
     private int[] imagens = {R.drawable.slider_videos, R.drawable.slider_musica, R.drawable.slider_livros, R.drawable.slider_jogos};
-
+    private String titulo[] = {"Vídeos", "Músicas", "Histórias", "Jogos"};
+    private String descricao[] = {"Vídeos direto do youtube, selecionados para você",
+                                  "Músicas muito divertidas para te fazer mexer o esqueleto",
+                                  "Histórias animadas com muito amor e dedicação",
+                                  "Jogos super legais para aprender enquanto se diverte"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slider);
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
-                        // Set the content to appear under the system bars so that the
-                        // content doesn't resize when the system bars hide and show.
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         btnBack = findViewById(R.id.btnVoltarSlider);
         btnBack.setVisibility(View.INVISIBLE);
         btnNext = findViewById(R.id.btnAvancarSlider);
-        sliderAdapter = new SliderAdapter(this, imagens, R.layout.imagens_slider);
+
+        sliderAdapter = new SliderAdapter(this, imagens, R.layout.imagens_slider, titulo, descricao);
         viewPager.setAdapter(sliderAdapter);
         viewPager.addOnPageChangeListener(viewListener);
         tabLayout.setupWithViewPager(viewPager, true);

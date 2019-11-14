@@ -47,14 +47,12 @@ public class FilhoCadastroActivity extends AppCompatActivity implements DatePick
         setContentView(R.layout.activity_filho_cadastro);
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
-                        // Set the content to appear under the system bars so that the
-                        // content doesn't resize when the system bars hide and show.
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
         sharedPreferences = getApplicationContext().getSharedPreferences("minhaShared",MODE_PRIVATE);
 
         final String email = sharedPreferences.getString("email", null);
@@ -86,6 +84,13 @@ public class FilhoCadastroActivity extends AppCompatActivity implements DatePick
             public void onClick(View view) {
                 DataDialog dataDialog = new DataDialog();
                 dataDialog.show(getSupportFragmentManager(), "Selecione a data de nascimento");
+            }
+        });
+
+        ((Button)findViewById(R.id.btnSair)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -129,7 +134,6 @@ public class FilhoCadastroActivity extends AppCompatActivity implements DatePick
         dlgAlert.setTitle("LUDIT - Erro no Cadastro do Filho");
         dlgAlert.setPositiveButton("OK", null);
         dlgAlert.setCancelable(true);
-
 
         UserService service = RetrofitConfig.getClient().create(UserService.class);
 
