@@ -18,7 +18,13 @@
         <activity android:name=".user.MenuActivity" />
         <activity android:name=".atividades.VideoPlayer"
             android:screenOrientation="landscape" />
-        <activity android:name=".atividades.JogosActivity"/>
+        <activity android:name=".atividades.JogosActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".bluetooth.TesteBluetooth" />
         <activity android:name=".atividades.VideosActivity" />
         <activity android:name=".games.MatematicaActivity" />
@@ -35,11 +41,7 @@
 
         </activity>
         <activity android:name=".SliderActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".user.LoginActivity" />
         <activity android:name=".SplashScreenActivity"></activity>

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ludit.R;
+import com.example.ludit.adapters.JogosAdapter;
 import com.example.ludit.adapters.ListaImagensAdapter;
 import com.example.ludit.games.FormasActivity;
 import com.example.ludit.games.GeniusActivity;
@@ -19,11 +20,17 @@ import com.example.ludit.games.PinguimActivity;
 import com.example.ludit.games.ReciclagemActivity;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class JogosActivity extends AppCompatActivity {
 
     ListView lvLista;
+    List<Integer> imagens = new LinkedList<Integer>();
+
+
+    String[] titulos ={"Jogo das Formas", "Genius", "Jogo da Reciclagem", "Bola de Neve", "Jogo dos Números"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,18 +42,17 @@ public class JogosActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
         ((TextView)findViewById(R.id.tvTitulo)).setText("Jogos");
         lvLista = findViewById(R.id.lista);
 
-        List<Integer> imagens = new ArrayList<Integer>();
+        imagens.add(R.drawable.xvbfxb); //Formas
+        imagens.add( R.drawable.xvbfxb); //Genius
+        imagens.add(R.drawable.xvbfxb); //Reciclagem
+        imagens.add( R.drawable.xvbfxb); //Pinguim
+        imagens.add(R.drawable.xvbfxb); //Matemática
 
-        imagens.add(R.drawable.xvbfxb);
-        imagens.add(R.drawable.xvbfxb);
-        imagens.add(R.drawable.xvbfxb);
-        imagens.add(R.drawable.xvbfxb);
-        imagens.add(R.drawable.xvbfxb);
-
-        ListaImagensAdapter listaImagensAdapter = new ListaImagensAdapter(getApplicationContext(), imagens);
+        JogosAdapter listaImagensAdapter = new JogosAdapter(getApplicationContext(), imagens, titulos);
         lvLista.setAdapter(listaImagensAdapter);
 
         lvLista.setOnItemClickListener(new AdapterView.OnItemClickListener(){
