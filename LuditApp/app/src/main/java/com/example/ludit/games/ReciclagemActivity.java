@@ -52,7 +52,7 @@ public class ReciclagemActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
         img = (ImageView) findViewById(R.id.imgLixo);
 
-        btnAmarelo = (Button) findViewById(R.id.btnAmarelo);
+       /* btnAmarelo = (Button) findViewById(R.id.btnAmarelo);
         btnAzul = (Button) findViewById(R.id.btnAzul);
         btnVerde = (Button) findViewById(R.id.btnVerde);
         btnVermelho = (Button) findViewById(R.id.btnVermelho);
@@ -81,7 +81,7 @@ public class ReciclagemActivity extends AppCompatActivity {
                     verResult(btns[id].getId());
                 }
             });
-        }
+        }*/
     }
 
     public  void  construirJogo() {

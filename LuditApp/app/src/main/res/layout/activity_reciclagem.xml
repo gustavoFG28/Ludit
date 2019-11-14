@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".games.ReciclagemActivity">
 
+
     <ImageView
-        android:layout_weight="2"
-        android:id="@+id/imgLixo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="20dp"
+        android:id="@+id/imgFundo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/fundo_reciclavel"
         />
-    <LinearLayout
+
+    <ImageView
+        android:id="@+id/imgLixo"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/metal_2"
+        android:layout_gravity="center"/>
+
+
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_weight="2"
         android:layout_height="match_parent"
@@ -62,6 +71,6 @@
                 android:background="@drawable/lixo_amarelo"
                 android:id="@+id/btnAmarelo"/>
         </LinearLayout>
-    </LinearLayout>
+    </LinearLayout>-->
 
-</LinearLayout>
+</RelativeLayout>
