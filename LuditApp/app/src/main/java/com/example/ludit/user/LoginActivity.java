@@ -50,6 +50,12 @@ public class LoginActivity extends AppCompatActivity {
                 logar();
             }
         });
+        ((Button)findViewById(R.id.btnSair)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public  void  logar()   {
