@@ -40,7 +40,7 @@ void loop() {
   
   if(estadoBtnR == HIGH)
   {
-    bluetooth.print("R\n");
+    bluetooth.print("RR\n");
     Serial.write("botao R pressionado");
     delay(300);
     return;
@@ -48,7 +48,7 @@ void loop() {
   
   if(estadoBtnG == HIGH)
   {
-    bluetooth.print("G\n");
+    bluetooth.print("GG\n");
     Serial.write("botao G pressionado");
     delay(300);
     return;
@@ -56,7 +56,7 @@ void loop() {
   
   if(estadoBtnB == HIGH)
   {
-    bluetooth.print("B\n");
+    bluetooth.print("BB\n");
     Serial.write("botao B pressionado");
     delay(300);
     return;
@@ -64,7 +64,7 @@ void loop() {
   
   if(estadoBtnY == HIGH)
   {
-    bluetooth.print("Y\n");
+    bluetooth.print("YY\n");
     Serial.write("botao Y pressionado");
     delay(300);
     return;

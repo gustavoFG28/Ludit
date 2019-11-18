@@ -1,8 +1,11 @@
 package com.example.ludit.atividades;
 
 import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -22,12 +25,14 @@ import com.example.ludit.games.MatematicaActivity;
 import com.example.ludit.games.PinguimActivity;
 import com.example.ludit.games.ReciclagemActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class JogosActivity extends AppCompatActivity {
 
+    static Context context;
     ListView lvLista;
     List<Integer> imagens = new LinkedList<Integer>();
     ConnectionThread connect;
@@ -39,7 +44,9 @@ public class JogosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_atividade_selecionada);
 
+        context = this;
         iniciarBluetooth();
+
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -77,7 +84,7 @@ public class JogosActivity extends AppCompatActivity {
                 }
 
                 Intent i = new Intent(JogosActivity.this, qual);
-                i.putExtra("ConnectionThread", connect);
+                i.putExtra("ConnectionThread", (Serializable)connect);
                 startActivity(i);
             }});
 
@@ -127,4 +134,29 @@ public class JogosActivity extends AppCompatActivity {
             }
         }
     }
+
+    public static Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+
+            /* Esse método é invocado na Activity principal
+                sempre que a thread de conexão Bluetooth recebe
+                uma mensagem.
+             */
+            Bundle bundle = msg.getData();
+            byte[] data = bundle.getByteArray("data");
+            String dataString= new String(data);
+
+            /* Aqui ocorre a decisão de ação, baseada na string
+                recebida. Caso a string corresponda à uma das
+                mensagens de status de conexão (iniciadas com --),
+                atualizamos o status da conexão conforme o código.
+             */
+            if(dataString.equals("erro"))
+                Toast.makeText(context,"Ocorreu um erro durante a conexão", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(context,dataString, Toast.LENGTH_SHORT).show();
+
+        }
+    };
 }

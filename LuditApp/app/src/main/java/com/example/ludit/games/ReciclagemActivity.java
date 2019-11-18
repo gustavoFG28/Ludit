@@ -39,9 +39,6 @@ public class ReciclagemActivity extends AppCompatActivity {
     ConnectionThread thread;
     private Handler handler;
 
-    Button btnAzul, btnVermelho, btnAmarelo, btnVerde;
-    Button[] btns = new Button[4];
-
     SharedPreferences preferences;
     String nomeFilho, email;
 
@@ -79,36 +76,6 @@ public class ReciclagemActivity extends AppCompatActivity {
         };
 
         thread.setHandler(handler);
-       /* btnAmarelo = (Button) findViewById(R.id.btnAmarelo);
-        btnAzul = (Button) findViewById(R.id.btnAzul);
-        btnVerde = (Button) findViewById(R.id.btnVerde);
-        btnVermelho = (Button) findViewById(R.id.btnVermelho);
-
-        btns[0] = btnAmarelo;
-        btns[1] = btnAzul;
-        btns[2] = btnVermelho;
-        btns[3] = btnVerde;
-
-        preferences = getApplicationContext().getSharedPreferences("minhaShared",MODE_PRIVATE);
-
-        email = preferences.getString("email", null);
-        nomeFilho = preferences.getString("nomeFilho", null);
-
-        email  = "sasa";
-        nomeFilho = "Henrique";
-
-        construirJogo();
-
-        for(int i = 0; i< btns.length; i++)
-        {
-            final int id = i;
-            btns[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    verResult(btns[id].getId());
-                }
-            });
-        }*/
     }
 
     public  void  construirJogo() {

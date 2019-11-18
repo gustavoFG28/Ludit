@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.example.ludit.atividades.JogosActivity;
 import com.example.ludit.games.FormasActivity;
 import com.example.ludit.games.GeniusActivity;
 import com.example.ludit.games.MatematicaActivity;
@@ -98,9 +99,15 @@ public class ConnectionThread extends Thread implements Serializable {
 
                 /*  Caso ocorra alguma exceção, exibe o stack trace para debug.
                     Envia um código para a Activity principal, informando que
-                a conexão falhou.
+                    a conexão falhou.
                  */
                 e.printStackTrace();
+
+                Message message = new Message();
+                Bundle bundle = new Bundle();
+                bundle.putByteArray("data", "Erro".getBytes());
+                message.setData(bundle);
+                JogosActivity.handler.sendMessage(message);
                 //toMainActivity("---N".getBytes());
             }
 
@@ -136,9 +143,10 @@ public class ConnectionThread extends Thread implements Serializable {
 
                 /*  Caso ocorra alguma exceção, exibe o stack trace para debug.
                     Envia um código para a Activity principal, informando que
-                a conexão falhou.
+                    a conexão falhou.
                  */
                 e.printStackTrace();
+
                 //toMainActivity("---N".getBytes());
             }
 
@@ -205,7 +213,7 @@ public class ConnectionThread extends Thread implements Serializable {
 
                 /*  Caso ocorra alguma exceção, exibe o stack trace para debug.
                     Envia um código para a Activity principal, informando que
-                a conexão falhou.
+                    a conexão falhou.
                  */
                 e.printStackTrace();
                 //toMainActivity("---N".getBytes());
@@ -220,14 +228,17 @@ public class ConnectionThread extends Thread implements Serializable {
     antes de ser enviado.*/
     private void toActivity(byte[] data) {
 
-        if(handler != null) {
-            Message message = new Message();
-            Bundle bundle = new Bundle();
-            bundle.putByteArray("data", data);
-            message.setData(bundle);
+        Message message = new Message();
+        Bundle bundle = new Bundle();
+        bundle.putByteArray("data", data);
+        message.setData(bundle);
 
+        if(handler != null) {
             handler.sendMessage(message);
         }
+        else
+            JogosActivity.handler.sendMessage(message);
+
     }
 
     /*  Método utilizado pela Activity principal para transmitir uma mensagem ao
