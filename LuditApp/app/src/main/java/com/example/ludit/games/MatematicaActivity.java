@@ -2,6 +2,8 @@ package com.example.ludit.games;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -193,4 +195,15 @@ public class MatematicaActivity extends AppCompatActivity {
             else
                 btns[i].setText(result + " ");
     }
+
+    public static Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+
+            Bundle bundle = msg.getData();
+            byte[] data = bundle.getByteArray("data");
+            String dataString= new String(data);
+
+        }
+    };
 }

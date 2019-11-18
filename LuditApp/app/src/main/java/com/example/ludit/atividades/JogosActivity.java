@@ -1,5 +1,6 @@
 package com.example.ludit.atividades;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,12 +8,14 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ludit.R;
 import com.example.ludit.adapters.JogosAdapter;
 import com.example.ludit.adapters.ListaImagensAdapter;
+import com.example.ludit.bluetooth.ConnectionThread;
 import com.example.ludit.games.FormasActivity;
 import com.example.ludit.games.GeniusActivity;
 import com.example.ludit.games.MatematicaActivity;
@@ -27,7 +30,7 @@ public class JogosActivity extends AppCompatActivity {
 
     ListView lvLista;
     List<Integer> imagens = new LinkedList<Integer>();
-
+    ConnectionThread connect;
 
     String[] titulos ={"Jogo das Formas", "Genius", "Jogo da Reciclagem", "Bola de Neve", "Jogo dos Números"};
 
@@ -35,6 +38,8 @@ public class JogosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_atividade_selecionada);
+
+        iniciarBluetooth();
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -72,6 +77,7 @@ public class JogosActivity extends AppCompatActivity {
                 }
 
                 Intent i = new Intent(JogosActivity.this, qual);
+                i.putExtra("ConnectionThread", connect);
                 startActivity(i);
             }});
 
@@ -81,5 +87,44 @@ public class JogosActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void iniciarBluetooth()
+    {
+        /*  Teste rápido. O hardware Bluetooth do dispositivo Android
+            está funcionando ou está bugado de forma misteriosa?
+            Será que existe, pelo menos? Provavelmente existe.
+         */
+        BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (btAdapter == null) {
+            Toast.makeText(this,"Que pena! Hardware Bluetooth não está funcionando", Toast.LENGTH_SHORT).show();
+        } else {
+
+         /* A chamada do seguinte método liga o Bluetooth no dispositivo Android
+            sem pedido de autorização do usuário. É altamente não recomendado no
+            Android Developers, mas, para simplificar este app, que é um demo,
+            faremos isso. Na prática, em um app que vai ser usado por outras
+            pessoas, não faça isso.
+         */
+            if(!btAdapter.isEnabled()) {
+                Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableIntent, 3);
+            }
+
+         /* Definição da thread de conexão como cliente.
+            Aqui, você deve incluir o endereço MAC do seu módulo Bluetooth.
+            O app iniciará e vai automaticamente buscar por esse endereço.
+            Caso não encontre, dirá que houve um erro de conexão.
+         */
+            connect = new ConnectionThread("98:D3:31:FD:40:2A");
+            connect.start();
+
+            /* Um descanso rápido, para evitar bugs esquisitos.*/
+            try {
+                Thread.sleep(1000);
+            } catch (Exception E) {
+                E.printStackTrace();
+            }
+        }
     }
 }
