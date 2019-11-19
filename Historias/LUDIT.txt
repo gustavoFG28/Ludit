@@ -126,11 +126,9 @@ HISTÓRIAS:
 
 8) Quando a tartaruga estava quase chegando no rio a lebre acordou e saiu correndo até a linha de chegada. - ok
 
-9) Quando estava muito perto do fim. - ok
+9) Quando estava muito perto do fim, a  tartaruga tropeçou e rolou estrada abaixo. A tartaruga rolou tão rápido que chegou antes da lebre até a linha de chegada e ganhou a corrida.
 
-10)A  tartaruga tropeçou e rolou estrada abaixo. A tartaruga rolou tão rápido que chegou antes da lebre até a linha de chegada e ganhou a corrida.
-
-11) A lebre ficou com muita vergonha e voltou correndo até sua toca. - ok
+10) A lebre ficou com muita vergonha e voltou correndo até sua toca. - ok
 
 
 * Patinho Feio:

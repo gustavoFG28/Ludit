@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
@@ -27,8 +28,8 @@ import retrofit2.Response;
 
 
 public class MyView extends View {
-    public Paint p, outerPaint;
-    private Bitmap bitmap;
+    public Paint p;
+    private Bitmap bitmap, fundo;
     Context cnt;
     int i, pontos, min;
     private static final int RADIUS = 46;
@@ -51,12 +52,9 @@ public class MyView extends View {
         cnt = context;
         i = 0;
 
+        fundo = BitmapFactory.decodeResource(context.getResources(), R.drawable.fundo_pinguim);
         bitmap = BitmapFactory.decodeResource(context.getResources(),
-                R.drawable.botao_abaixar);
-
-        outerPaint = new Paint();
-        outerPaint.setStyle(Paint.Style.FILL);
-        outerPaint.setColor(Color.parseColor("#90caf9"));
+                R.drawable.pinguim);
     }
 
     @Override
@@ -102,8 +100,8 @@ public class MyView extends View {
             perdeu();
         else
         {
-            c.drawPaint(outerPaint);
-            c.drawBitmap(bitmap, pinguimX, pinguimY, null);
+            c.drawBitmap(fundo,null, new RectF(0, 0, getWidth(), getHeight()), null);
+            c.drawBitmap(bitmap, null, new RectF(pinguimX, pinguimY, (float) (getWidth() * 0.2), (float) (getHeight() * 0.2)), null);
             c.drawCircle(centerX, centerY, RADIUS, p);
             postInvalidateDelayed(200);
         }
