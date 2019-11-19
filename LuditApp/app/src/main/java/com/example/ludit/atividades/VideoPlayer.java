@@ -43,7 +43,6 @@ public class VideoPlayer extends AppCompatActivity{
         video.loadData(link, "text/html", "utf-8");
 
 
-
     }
 
     private class WebClient extends WebViewClient

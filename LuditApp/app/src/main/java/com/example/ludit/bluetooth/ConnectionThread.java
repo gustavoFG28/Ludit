@@ -4,17 +4,28 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
+
+import com.example.ludit.atividades.JogosActivity;
+import com.example.ludit.games.FormasActivity;
+import com.example.ludit.games.GeniusActivity;
+import com.example.ludit.games.MatematicaActivity;
+import com.example.ludit.games.PinguimActivity;
+import com.example.ludit.games.ReciclagemActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.UUID;
 
-public class ConnectionThread extends Thread{
+public class ConnectionThread extends Thread implements Serializable {
 
+    Handler handler;
     BluetoothSocket btSocket = null;
     BluetoothServerSocket btServerSocket = null;
     InputStream input = null;
@@ -32,12 +43,18 @@ public class ConnectionThread extends Thread{
         this.server = true;
     }
 
+    public void setHandler(Handler handler)
+    {
+        this.handler = handler;
+    }
+
     /*  Este construtor prepara o dispositivo para atuar como cliente.
         Tem como argumento uma string contendo o endereço MAC do dispositivo
     Bluetooth para o qual deve ser solicitada uma conexão.
      */
     public ConnectionThread(String btDevAddress) {
 
+        this.handler = null;
         this.server = false;
         this.btDevAddress = btDevAddress;
     }
@@ -82,9 +99,15 @@ public class ConnectionThread extends Thread{
 
                 /*  Caso ocorra alguma exceção, exibe o stack trace para debug.
                     Envia um código para a Activity principal, informando que
-                a conexão falhou.
+                    a conexão falhou.
                  */
                 e.printStackTrace();
+
+                Message message = new Message();
+                Bundle bundle = new Bundle();
+                bundle.putByteArray("data", "Erro".getBytes());
+                message.setData(bundle);
+                JogosActivity.handler.sendMessage(message);
                 //toMainActivity("---N".getBytes());
             }
 
@@ -120,9 +143,10 @@ public class ConnectionThread extends Thread{
 
                 /*  Caso ocorra alguma exceção, exibe o stack trace para debug.
                     Envia um código para a Activity principal, informando que
-                a conexão falhou.
+                    a conexão falhou.
                  */
                 e.printStackTrace();
+
                 //toMainActivity("---N".getBytes());
             }
 
@@ -181,7 +205,7 @@ public class ConnectionThread extends Thread{
 
                     /*  A mensagem recebida é enviada para a Activity principal.
                      */
-                    toMainActivity(Arrays.copyOfRange(buffer, 0, bytesRead-1));
+                    toActivity(Arrays.copyOfRange(buffer, 0, bytesRead-1));
 
                 }
 
@@ -189,7 +213,7 @@ public class ConnectionThread extends Thread{
 
                 /*  Caso ocorra alguma exceção, exibe o stack trace para debug.
                     Envia um código para a Activity principal, informando que
-                a conexão falhou.
+                    a conexão falhou.
                  */
                 e.printStackTrace();
                 //toMainActivity("---N".getBytes());
@@ -202,13 +226,19 @@ public class ConnectionThread extends Thread{
     /*  Utiliza um handler para enviar um byte array à Activity principal.
         O byte array é encapsulado em um Bundle e posteriormente em uma Message
     antes de ser enviado.*/
-    private void toMainActivity(byte[] data) {
+    private void toActivity(byte[] data) {
 
         Message message = new Message();
         Bundle bundle = new Bundle();
         bundle.putByteArray("data", data);
         message.setData(bundle);
-        BluetoothActivity.handler.sendMessage(message);
+
+        if(handler != null) {
+            handler.sendMessage(message);
+        }
+        else
+            JogosActivity.handler.sendMessage(message);
+
     }
 
     /*  Método utilizado pela Activity principal para transmitir uma mensagem ao
@@ -231,7 +261,7 @@ public class ConnectionThread extends Thread{
 
             /*  Envia à Activity principal um código de erro durante a conexão.
              */
-            toMainActivity("---N".getBytes());
+            toActivity("---N".getBytes());
         }
     }
 

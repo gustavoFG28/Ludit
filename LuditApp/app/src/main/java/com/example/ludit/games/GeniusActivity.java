@@ -250,4 +250,15 @@ public class GeniusActivity extends AppCompatActivity {
         if(click > qtd)
             atualizarTela();
     }
+
+    public static Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+
+            Bundle bundle = msg.getData();
+            byte[] data = bundle.getByteArray("data");
+            String dataString= new String(data);
+
+        }
+    };
 }

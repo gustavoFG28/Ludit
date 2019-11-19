@@ -8,9 +8,12 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,7 +37,7 @@ public class FormasActivity extends AppCompatActivity {
     int[] respostas;
 
     int btnCerto, pontosForma, qtd;
-    Button btnAzul, btnVermelho, btnAmarelo, btnVerde;
+    static Button btnAzul, btnVermelho, btnAmarelo, btnVerde;
     Button[] btns = new Button[4];
 
     String nomeFilho, email, jogo;
@@ -59,6 +62,11 @@ public class FormasActivity extends AppCompatActivity {
         btnAzul = (Button) findViewById(R.id.btnAzul);
         btnVerde = (Button) findViewById(R.id.btnVerde);
         btnVermelho = (Button) findViewById(R.id.btnVermelho);
+
+        btnAmarelo.setEnabled(false);
+        btnAzul.setEnabled(false);
+        btnVerde.setEnabled(false);
+        btnVermelho.setEnabled(false);
 
         btns[0] = btnAmarelo;
         btns[1] = btnAzul;
@@ -167,4 +175,31 @@ public class FormasActivity extends AppCompatActivity {
             });
         }
     }
+
+    public static Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+
+            Bundle bundle = msg.getData();
+            byte[] data = bundle.getByteArray("data");
+            String dataString= new String(data);
+
+            /*btns[0] = btnAmarelo;
+            btns[1] = btnAzul;
+            btns[2] = btnVermelho;
+            btns[3] = btnVerde;*/
+            switch (dataString)
+            {
+                case "Y":
+                    btnAmarelo.callOnClick();
+                case "B":
+                    btnAzul.callOnClick();
+                case "R":
+                    btnVermelho.callOnClick();
+                case "G":
+                    btnVerde.callOnClick();
+            }
+
+        }
+    };
 }

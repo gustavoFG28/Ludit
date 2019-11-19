@@ -1,7 +1,10 @@
 package com.example.ludit.games;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ludit.R;
+import com.example.ludit.bluetooth.ConnectionThread;
 import com.example.ludit.webservice.Filho;
 import com.example.ludit.webservice.RetrofitConfig;
 import com.example.ludit.webservice.UserService;
@@ -22,16 +26,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ReciclagemActivity extends AppCompatActivity {
+
     ImageView img;
 
     int[] imagens = {R.drawable.glass_1, R.drawable.glass_2, R.drawable.glass_3, R.drawable.glass_4,
                     R.drawable.metal_1, R.drawable.metal_2, R.drawable.metal_3,
                     R.drawable.paper_1, R.drawable.paper_2, R.drawable.papel_3,
                     R.drawable.plastic_1, R.drawable.plastic_2, R.drawable.plastic_3};
-    int btnCerto, pontosReciclagem, qtd;
 
-    Button btnAzul, btnVermelho, btnAmarelo, btnVerde;
-    Button[] btns = new Button[4];
+    char btnCerto;
+    int pontosReciclagem, qtd;
+    ConnectionThread thread;
+    private Handler handler;
 
     SharedPreferences preferences;
     String nomeFilho, email;
@@ -52,36 +58,24 @@ public class ReciclagemActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
         img = (ImageView) findViewById(R.id.imgLixo);
 
-       /* btnAmarelo = (Button) findViewById(R.id.btnAmarelo);
-        btnAzul = (Button) findViewById(R.id.btnAzul);
-        btnVerde = (Button) findViewById(R.id.btnVerde);
-        btnVermelho = (Button) findViewById(R.id.btnVermelho);
+        Intent intent = getIntent();
+        thread =(ConnectionThread)intent.getSerializableExtra("ConnectionThread");
 
-        btns[0] = btnAmarelo;
-        btns[1] = btnAzul;
-        btns[2] = btnVermelho;
-        btns[3] = btnVerde;
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
 
-        preferences = getApplicationContext().getSharedPreferences("minhaShared",MODE_PRIVATE);
+                Bundle bundle = msg.getData();
+                byte[] data = bundle.getByteArray("data");
+                String dataString= new String(data);
 
-        email = preferences.getString("email", null);
-        nomeFilho = preferences.getString("nomeFilho", null);
+                if(dataString.equals(btnCerto))
+                    pontosReciclagem++;
+                atualizar();
+            }
+        };
 
-        email  = "sasa";
-        nomeFilho = "Henrique";
-
-        construirJogo();
-
-        for(int i = 0; i< btns.length; i++)
-        {
-            final int id = i;
-            btns[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    verResult(btns[id].getId());
-                }
-            });
-        }*/
+        thread.setHandler(handler);
     }
 
     public  void  construirJogo() {
@@ -91,18 +85,18 @@ public class ReciclagemActivity extends AppCompatActivity {
         img.setImageResource(imagens[val]);
 
         if(val >= 0 && val <= 3)
-            btnCerto = btnVerde.getId();
+            btnCerto = 'G';
         else if(val >= 4 && val <= 6)
-            btnCerto = btnAmarelo.getId();
+            btnCerto = 'Y';
         else  if(val >= 7 && val <= 9)
-            btnCerto = btnAzul.getId();
-        else btnCerto = btnVermelho.getId();
+            btnCerto = 'B';
+        else btnCerto = 'R';
     }
-    public  void  verResult(int id) {
+    /*public void  verResult(char id) {
         if(id == btnCerto)
             pontosReciclagem++;
         atualizar();
-    }
+    }*/
     public  void  atualizar(){
         if(qtd < 9) {
             qtd++;
@@ -152,4 +146,8 @@ public class ReciclagemActivity extends AppCompatActivity {
             });
         }
     }
+
+
+
+
 }
