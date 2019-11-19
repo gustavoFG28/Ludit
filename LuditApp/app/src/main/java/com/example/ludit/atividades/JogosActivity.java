@@ -12,14 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ludit.R;
 import com.example.ludit.adapters.JogosAdapter;
-import com.example.ludit.adapters.ListaImagensAdapter;
 import com.example.ludit.games.FormasActivity;
 import com.example.ludit.games.GeniusActivity;
 import com.example.ludit.games.MatematicaActivity;
 import com.example.ludit.games.PinguimActivity;
 import com.example.ludit.games.ReciclagemActivity;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,11 +44,11 @@ public class JogosActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.tvTitulo)).setText("Jogos");
         lvLista = findViewById(R.id.lista);
 
-        imagens.add(R.drawable.xvbfxb); //Formas
-        imagens.add( R.drawable.xvbfxb); //Genius
-        imagens.add(R.drawable.xvbfxb); //Reciclagem
-        imagens.add( R.drawable.xvbfxb); //Pinguim
-        imagens.add(R.drawable.xvbfxb); //Matemática
+        imagens.add(R.drawable.capa_formas); //Formas
+        imagens.add( R.drawable.capa_genius); //Genius
+        imagens.add(R.drawable.capa_reciclagem); //Reciclagem
+        imagens.add( R.drawable.capa_pinguim); //Pinguim
+        imagens.add(R.drawable.capa_matematica); //Matemática
 
         JogosAdapter listaImagensAdapter = new JogosAdapter(getApplicationContext(), imagens, titulos);
         lvLista.setAdapter(listaImagensAdapter);

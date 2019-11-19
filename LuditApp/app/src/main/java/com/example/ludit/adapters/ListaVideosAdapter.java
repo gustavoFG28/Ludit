@@ -18,6 +18,8 @@ import com.example.ludit.atividades.Video;
 import java.io.InputStream;
 import java.util.List;
 
+import static java.lang.Integer.MAX_VALUE;
+
 public class ListaVideosAdapter extends ArrayAdapter {
 
     private int layout;
@@ -45,7 +47,18 @@ public class ListaVideosAdapter extends ArrayAdapter {
 
 
         TextView txt = viewAtual.findViewById(R.id.playerTitulo);
-        txt.setText(qualVideo.getTitulo());
+
+        int menor = MAX_VALUE;
+
+        String opcoes[] = {"EM PORTUGUÊS", "|", "-"};
+        for(int i = 0; i < opcoes.length; i++)
+        {
+            int index = qualVideo.getTitulo().toUpperCase().indexOf(opcoes[i]);
+            if(index > 0 && index < menor)
+                menor = index;
+        }
+
+        txt.setText(qualVideo.getTitulo().substring(0, menor));
 
         return  viewAtual;
     }
