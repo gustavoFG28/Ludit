@@ -100,6 +100,7 @@ public class BluetoothActivity extends AppCompatActivity {
                     contador.
                  */
                 tvMensagem.setText(dataString);
+                Toast.makeText(context,dataString, Toast.LENGTH_SHORT).show();
             }
         }
     };
