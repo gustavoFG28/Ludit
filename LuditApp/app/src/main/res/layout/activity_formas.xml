@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".games.FormasActivity">
+    tools:context=".games.FormasActivity"
+    android:background="#ecf0f1">
 
 
     <ImageView
