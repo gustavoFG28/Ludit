@@ -17,22 +17,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ludit.R;
 import com.example.ludit.adapters.JogosAdapter;
-<<<<<<< HEAD
-=======
-import com.example.ludit.adapters.ListaImagensAdapter;
+
 import com.example.ludit.bluetooth.ConnectionThread;
->>>>>>> 37fe52c4bac6408f1c435ee1cc0b36be5b365b4a
+
 import com.example.ludit.games.FormasActivity;
 import com.example.ludit.games.GeniusActivity;
 import com.example.ludit.games.MatematicaActivity;
 import com.example.ludit.games.PinguimActivity;
 import com.example.ludit.games.ReciclagemActivity;
 
-<<<<<<< HEAD
-=======
 import java.io.Serializable;
-import java.util.ArrayList;
->>>>>>> 37fe52c4bac6408f1c435ee1cc0b36be5b365b4a
+
 import java.util.LinkedList;
 import java.util.List;
 
