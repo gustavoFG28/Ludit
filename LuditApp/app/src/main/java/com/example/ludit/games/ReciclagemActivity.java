@@ -97,12 +97,6 @@ public class ReciclagemActivity extends AppCompatActivity {
         };
 
         thread.setHandler(handler);
-
-        if(thread.isConnected())
-            Log.d("Conectado? ", "conectado");
-        else
-            Log.d("Conectado? ", "NAO conectado");
-
         construirJogo();
     }
 
@@ -134,6 +128,8 @@ public class ReciclagemActivity extends AppCompatActivity {
             qtd++;
             construirJogo();
         }else {
+
+            thread.cancel();
             float pontoFinal = 0.0f;
 
             if(pontosReciclagem >= 0 && pontosReciclagem <= 2) pontoFinal = -0.05f;
@@ -179,7 +175,9 @@ public class ReciclagemActivity extends AppCompatActivity {
         }
     }
 
-
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        thread.cancel();
+    }
 }

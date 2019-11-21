@@ -53,7 +53,7 @@ public class ConnectionThread extends Thread{
     Bluetooth para o qual deve ser solicitada uma conexão.
      */
     public ConnectionThread(String btDevAddress) {
-
+        this.running = true;
         this.handler = null;
         this.server = false;
         this.btDevAddress = btDevAddress;
@@ -216,6 +216,7 @@ public class ConnectionThread extends Thread{
             }
         }
 
+
     }
 
     /*  Utiliza um handler para enviar um byte array à Activity principal.
@@ -266,14 +267,16 @@ public class ConnectionThread extends Thread{
 
             running = false;
             this.isConnected = false;
-            btServerSocket.close();
+            if(btServerSocket != null)
+                btServerSocket.close();
             btSocket.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        running = false;
+        this.running = false;
         this.isConnected = false;
+        this.interrupt();
     }
 
     public boolean isConnected() {
