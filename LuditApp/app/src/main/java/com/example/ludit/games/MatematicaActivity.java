@@ -138,6 +138,7 @@ public class MatematicaActivity extends AppCompatActivity {
         View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_dificuldade, null);
         builder.setView(dialogView);
         dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
         ((Button)dialogView.findViewById(R.id.btnFacil)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

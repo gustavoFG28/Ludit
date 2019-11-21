@@ -1,5 +1,6 @@
 package com.example.ludit.games;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -59,11 +60,12 @@ public class MyView extends View {
 
     @Override
     protected void onSizeChanged(int w, int h, int oldW, int oldH) {
-        centerX = w / 2;
+        centerX = w/2;
         pinguimX = w/2;
         pinguimY = h /2;
     }
 
+    @SuppressLint("DrawAllocation")
     protected void onDraw(Canvas c) {
         centerY = getHeight()/2;
         centerX += speedX;
@@ -101,7 +103,10 @@ public class MyView extends View {
         else
         {
             c.drawBitmap(fundo,null, new RectF(0, 0, getWidth(), getHeight()), null);
-            c.drawBitmap(bitmap, null, new RectF(pinguimX, pinguimY, (float) (getWidth() * 0.2), (float) (getHeight() * 0.2)), null);
+
+            int largura = Math.round(getWidth() * 20 / 100);
+            int altura =  Math.round(getHeight() * 40 / 100);
+            c.drawBitmap(Bitmap.createScaledBitmap(bitmap, largura, altura, false), pinguimX - largura / 2, pinguimY - altura / 2, null);
             c.drawCircle(centerX, centerY, RADIUS, p);
             postInvalidateDelayed(200);
         }
