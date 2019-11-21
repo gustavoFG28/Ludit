@@ -11,24 +11,32 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.os.Bundle;
+import android.os.Message;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.ludit.R;
 import com.example.ludit.atividades.AtividadesActivity;
+import com.example.ludit.bluetooth.ConnectionThread;
 import com.example.ludit.webservice.Filho;
 import com.example.ludit.webservice.RetrofitConfig;
 import com.example.ludit.webservice.UserService;
 
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
 public class MyView extends View {
+
+    private ConnectionThread thread;
+    private Handler handler;
+
     public Paint p;
     private Bitmap bitmap, fundo;
     Context cnt;
@@ -56,6 +64,34 @@ public class MyView extends View {
         fundo = BitmapFactory.decodeResource(context.getResources(), R.drawable.fundo_pinguim);
         bitmap = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.pinguim);
+
+        thread =  new ConnectionThread("98:D3:31:FD:40:2A");
+        thread.start();
+        /* Um descanso rápido, para evitar bugs esquisitos.*/
+        try {
+            Thread.sleep(1000);
+        } catch (Exception E) {
+            E.printStackTrace();
+        }
+
+        handler = new android.os.Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+
+                Bundle bundle = msg.getData();
+                byte[] data = bundle.getByteArray("data");
+                String dataString= new String(data);
+
+                Log.d("Mensagem: ", dataString.substring(0,1));
+
+                if(dataString.substring(0,1).equals("R")) {
+                    mexerPinguim(-100);
+                    Log.d("Mensagem: ", "pular");
+                }
+            }
+        };
+
+        thread.setHandler(handler);
     }
 
     @Override
@@ -121,6 +157,9 @@ public class MyView extends View {
     }
 
     public void  perdeu() {
+
+        thread.cancel();
+
         float pontoFinal = 0.0f;
 
         if(pontos >= 0 && pontos <=2) pontoFinal = -0.05f;
