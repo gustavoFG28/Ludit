@@ -15,12 +15,11 @@
         />
 
     <ImageView
-        android:id="@+id/imgLixo"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/metal_2"
-        android:layout_gravity="center"/>
+    android:id="@+id/imgLixo"
+    android:layout_width="wrap_content"
+    android:layout_height="100dp"
+    android:layout_margin="20dp"
+    android:layout_gravity="center"/>
 
 
     <!--<LinearLayout

@@ -82,7 +82,6 @@ public class JogosActivity extends AppCompatActivity {
                 }
 
                 Intent i = new Intent(JogosActivity.this, qual);
-                i.putExtra("ConnectionThread", (Serializable)connect);
                 startActivity(i);
             }});
 
@@ -115,46 +114,6 @@ public class JogosActivity extends AppCompatActivity {
                 Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableIntent, 3);
             }
-
-         /* Definição da thread de conexão como cliente.
-            Aqui, você deve incluir o endereço MAC do seu módulo Bluetooth.
-            O app iniciará e vai automaticamente buscar por esse endereço.
-            Caso não encontre, dirá que houve um erro de conexão.
-         */
-            connect = new ConnectionThread("98:D3:31:FD:40:2A");
-            connect.start();
-
-            /* Um descanso rápido, para evitar bugs esquisitos.*/
-            try {
-                Thread.sleep(1000);
-            } catch (Exception E) {
-                E.printStackTrace();
-            }
         }
     }
-
-    public static Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-
-            /* Esse método é invocado na Activity principal
-                sempre que a thread de conexão Bluetooth recebe
-                uma mensagem.
-             */
-            Bundle bundle = msg.getData();
-            byte[] data = bundle.getByteArray("data");
-            String dataString= new String(data);
-
-            /* Aqui ocorre a decisão de ação, baseada na string
-                recebida. Caso a string corresponda à uma das
-                mensagens de status de conexão (iniciadas com --),
-                atualizamos o status da conexão conforme o código.
-             */
-            if(dataString.equals("erro"))
-                Toast.makeText(context,"Ocorreu um erro durante a conexão", Toast.LENGTH_SHORT).show();
-            else
-                Toast.makeText(context,dataString, Toast.LENGTH_SHORT).show();
-
-        }
-    };
 }
