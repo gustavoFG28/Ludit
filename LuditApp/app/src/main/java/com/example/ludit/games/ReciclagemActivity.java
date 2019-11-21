@@ -87,7 +87,7 @@ public class ReciclagemActivity extends AppCompatActivity {
 
                 Log.d("Mensagem: ", dataString.substring(0,1));
 
-                if(dataString.substring(0,1).equals(btnCerto)) {
+                if(dataString.substring(0,1).equals(btnCerto+"")) {
                     pontosReciclagem++;
                     Log.d("Mensagem: ", "Foi ponto");
                 }
@@ -112,6 +112,8 @@ public class ReciclagemActivity extends AppCompatActivity {
         int val = random.nextInt(imagens.length);
 
         img.setImageResource(imagens[val]);
+
+        Log.d("Mensagem: ", "Valor = " + val);
 
         if(val >= 0 && val <= 3)
             btnCerto = 'G';
