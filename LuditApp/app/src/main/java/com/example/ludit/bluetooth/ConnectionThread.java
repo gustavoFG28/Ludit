@@ -23,7 +23,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.UUID;
 
-public class ConnectionThread extends Thread implements Serializable {
+public class ConnectionThread extends Thread{
 
     Handler handler;
     BluetoothSocket btSocket = null;
@@ -91,7 +91,6 @@ public class ConnectionThread extends Thread implements Serializable {
                 servidor pode ser liberado.
                  */
                 if(btSocket != null) {
-
                     btServerSocket.close();
                 }
 
@@ -103,11 +102,7 @@ public class ConnectionThread extends Thread implements Serializable {
                  */
                 e.printStackTrace();
 
-                Message message = new Message();
-                Bundle bundle = new Bundle();
-                bundle.putByteArray("data", "Erro".getBytes());
-                message.setData(bundle);
-                JogosActivity.handler.sendMessage(message);
+                toActivity("Erro".getBytes());
                 //toMainActivity("---N".getBytes());
             }
 
@@ -236,8 +231,6 @@ public class ConnectionThread extends Thread implements Serializable {
         if(handler != null) {
             handler.sendMessage(message);
         }
-        else
-            JogosActivity.handler.sendMessage(message);
 
     }
 
