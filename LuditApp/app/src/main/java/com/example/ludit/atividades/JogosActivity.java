@@ -17,9 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ludit.R;
 import com.example.ludit.adapters.JogosAdapter;
-
 import com.example.ludit.bluetooth.ConnectionThread;
-
 import com.example.ludit.games.FormasActivity;
 import com.example.ludit.games.GeniusActivity;
 import com.example.ludit.games.MatematicaActivity;
@@ -27,7 +25,6 @@ import com.example.ludit.games.PinguimActivity;
 import com.example.ludit.games.ReciclagemActivity;
 
 import java.io.Serializable;
-
 import java.util.LinkedList;
 import java.util.List;
 

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +13,7 @@ import com.example.ludit.R;
 
 public class PinguimActivity extends AppCompatActivity {
     LinearLayout linearLayout;
-    Button btnCima;
+   // Button btnCima;
     SharedPreferences preferences;
     String email, nomeFilho;
     @Override
@@ -43,14 +42,14 @@ public class PinguimActivity extends AppCompatActivity {
         final MyView view = new MyView(this, 50, nomeFilho, email);
         linearLayout.addView(view);
 
-        btnCima = (Button) findViewById(R.id.btnPula);
+        //btnCima = (Button) findViewById(R.id.btnPula);
 
-        btnCima.setOnClickListener(new View.OnClickListener() {
+       /* btnCima.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 view.mexerPinguim(-100);
             }
-        });
+        });*/
     }
 
     public static Handler handler = new Handler() {

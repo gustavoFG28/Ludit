@@ -15,22 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/FullScreen"
         android:usesCleartextTraffic="true">
-<<<<<<< HEAD
         <activity android:name=".bluetooth.BluetoothActivity"/>
-=======
-        <activity android:name=".bluetooth.BluetoothActivity">
-        </activity>
->>>>>>> 37fe52c4bac6408f1c435ee1cc0b36be5b365b4a
         <activity android:name=".atividades.SongActivity" />
         <activity android:name=".user.MenuActivity" />
         <activity
             android:name=".atividades.VideoPlayer"
             android:screenOrientation="landscape" />
         <activity android:name=".atividades.VideosActivity" />
-<<<<<<< HEAD
-        <activity android:name=".games.MatematicaActivity"/>
-        <activity android:name=".atividades.JogosActivity"/>
-=======
         <activity android:name=".atividades.JogosActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,7 +30,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".games.MatematicaActivity" />
->>>>>>> 37fe52c4bac6408f1c435ee1cc0b36be5b365b4a
         <activity android:name=".games.ReciclagemActivity" />
         <activity android:name=".games.FormasActivity"/>
         <activity android:name=".games.GeniusActivity" />
