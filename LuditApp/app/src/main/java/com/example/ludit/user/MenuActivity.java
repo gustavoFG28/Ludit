@@ -27,6 +27,7 @@ public class MenuActivity extends AppCompatActivity {
                         // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
         btnLogar = findViewById(R.id.btnLogarPrincipal);
         btnCadastro = findViewById(R.id.btnCadastroPrincipal);
 
