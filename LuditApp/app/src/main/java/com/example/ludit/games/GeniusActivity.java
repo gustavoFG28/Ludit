@@ -1,12 +1,12 @@
 package com.example.ludit.games;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -25,14 +25,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class GeniusActivity extends AppCompatActivity {
-    Button btnAzul, btnVermelho, btnAmarelo, btnVerde;
-    Button[] btns = new Button[4];
+   // Button btnAzul, btnVermelho, btnAmarelo, btnVerde;
+   // Button[] btns = new Button[4];
+    ImageView btn;
     int[] sequencia;
-    int[] cores = new int[8];
+    int[] cores = new int[4];
     int qtd, max, click;
     float pontosGenius;
     SharedPreferences preferences;
     String email, nomeFilho;
+
+    int padrao = R.drawable.genius_padrao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,9 @@ public class GeniusActivity extends AppCompatActivity {
                         // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
-        btnAmarelo = (Button) findViewById(R.id.btnAmarelo);
+
+
+        /*btnAmarelo = (Button) findViewById(R.id.btnAmarelo);
         btnAzul = (Button) findViewById(R.id.btnAzul);
         btnVerde = (Button) findViewById(R.id.btnVerde);
         btnVermelho = (Button) findViewById(R.id.btnVermelho);
@@ -56,15 +61,16 @@ public class GeniusActivity extends AppCompatActivity {
         btns[0] = btnAmarelo;  cores[0] = Color.parseColor("#f57f17");
         btns[1] = btnAzul;     cores[1] = Color.parseColor("#01579b");
         btns[2] = btnVermelho; cores[2] = Color.parseColor("#b71c1c");
-        btns[3] = btnVerde;    cores[3] = Color.parseColor("#1b5e20");
+        btns[3] = btnVerde;    cores[3] = Color.parseColor("#1b5e20");*/
 
-        cores[4] = Color.parseColor("#FFFF00");
-        cores[5] = Color.parseColor("#03a9f4");
-        cores[6] = Color.parseColor("#ef5350");
-        cores[7] = Color.parseColor("#c8e6c9");
+        cores[0] = R.drawable.genius_vermelho;
+        cores[1] = R.drawable.genius_azul;
+        cores[2] = R.drawable.genius_verde;
+        cores[3] = R.drawable.genius_amarelo;
+
 
         pontosGenius = qtd = 0;
-
+        btn = findViewById(R.id.genius);
         preferences = getApplicationContext().getSharedPreferences("minhaShared",MODE_PRIVATE);
 
         email = preferences.getString("email", null);
@@ -76,16 +82,16 @@ public class GeniusActivity extends AppCompatActivity {
 
         click = 0;
 
-        for(int i = 0; i< btns.length; i++)
-        {
-            final int id = i;
-            btns[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    verResult(id);
-                }
-            });
-        }
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(int i = 0; i < cores.length; i++)
+                    if(cores[i] == btn.getId()) {
+                        verResult(i);
+                        break;
+                    }
+            }
+        });
     }
 
     public  void  descobrirDificuldade() {
@@ -130,12 +136,12 @@ public class GeniusActivity extends AppCompatActivity {
             public void handleMessage(@NonNull Message msg) {
                 final int qual = sequencia[msg.arg1];
 
-                btns[qual].setBackgroundColor(cores[qual]);
+                btn.setImageResource(cores[qual]);
 
-                btns[qual].animate().setDuration(1500).withEndAction(new Runnable() {
+                btn.animate().setDuration(1500).withEndAction(new Runnable() {
                     @Override
                     public void run() {
-                        btns[qual].setBackgroundColor(cores[qual + 4]);
+                        btn.setBackground(getDrawable(R.drawable.genius_padrao));
                     }
                 }).start();
             }
@@ -224,12 +230,11 @@ public class GeniusActivity extends AppCompatActivity {
             public void handleMessage(@NonNull Message msg) {
                 final int q = msg.arg1;
 
-                btns[q].setBackgroundColor(cores[q]);
-
-                btns[q].animate().setDuration(400).withEndAction(new Runnable() {
+                btn.setImageResource(cores[q]);
+                btn.animate().setDuration(400).withEndAction(new Runnable() {
                     @Override
                     public void run() {
-                        btns[q].setBackgroundColor(cores[q + 4]);
+                        btn.setImageResource(R.drawable.genius_padrao);
                     }
                 }).start();
             }
