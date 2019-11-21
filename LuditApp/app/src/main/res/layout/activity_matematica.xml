@@ -5,15 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".games.MatematicaActivity">
+    tools:context=".games.MatematicaActivity"
+    android:background="#33535F">
 
     <TextView
         android:id="@+id/tvConta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="24dp"
+        android:text="12"
+        android:textAlignment="center"
+        android:textSize="36dp"
+        android:paddingVertical="20dp"
         android:layout_margin="20dp"
+        android:background="@drawable/matematica_visor"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,18 +34,20 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnAzul"
-                android:background="@android:color/holo_blue_dark"
-                android:textSize="24dp"
-                android:text="RESULTADO"/>
+                android:background="@drawable/matematica_azul"
+                android:textSize="36dp"
+                android:padding="40dp"
+                android:layout_margin="20dp"/>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnVermelho"
-                android:textSize="24dp"
-                android:background="@android:color/holo_red_dark"
-                android:text="RESULTADO" />
+                android:textSize="36dp"
+                android:padding="40dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/matematica_vermelho"/>
 
         </LinearLayout>
         <LinearLayout
@@ -53,18 +59,20 @@
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textSize="24dp"
-                android:background="@android:color/holo_green_dark"
-                android:text="RESULTADO"
+                android:textSize="36dp"
+                android:layout_margin="20dp"
+                android:padding="40dp"
+                android:background="@drawable/matematica_verde"
                 android:id="@+id/btnVerde"/>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textSize="24dp"
-                android:background="#FFFF00"
-                android:text="RESULTADO"
+                android:textSize="36dp"
+                android:padding="40dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/matematica_amarelo"
                 android:id="@+id/btnAmarelo"/>
         </LinearLayout>
     </LinearLayout>
