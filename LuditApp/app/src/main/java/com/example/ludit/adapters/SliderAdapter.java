@@ -12,6 +12,9 @@ import android.widget.TextView;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.ludit.R;
+import com.example.ludit.SliderIntro;
+
+import java.util.List;
 
 
 public class SliderAdapter extends PagerAdapter {
@@ -19,15 +22,12 @@ public class SliderAdapter extends PagerAdapter {
     private LayoutInflater inflater;
     private Context context;
     int layout;
-    private int[] imagens;
-    private  String[] titulo, descricao;
+    List<SliderIntro> array;
 
-    public SliderAdapter(Context context, int[] img, int layout, String[] titulo, String[] descricao) {
+    public SliderAdapter(Context context, int layout, List<SliderIntro> array) {
         this.context = context;
-        this.imagens = img;
         this.layout = layout;
-        this.descricao = descricao;
-        this.titulo = titulo;
+        this.array = array;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class SliderAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return imagens.length;
+        return array.size();
     }
 
     @Override
@@ -52,9 +52,9 @@ public class SliderAdapter extends PagerAdapter {
         TextView txtTitulo = (TextView)view.findViewById(R.id.tvTitulo);
         TextView txtDescricao = (TextView)view.findViewById(R.id.tvDescricao);
 
-        txtTitulo.setText(titulo[position]);
-        txtDescricao.setText(descricao[position]);
-        imageView.setImageResource(imagens[position]);
+        txtTitulo.setText(array.get(position).getTitulo());
+        txtDescricao.setText(array.get(position).getTitulo());
+        imageView.setImageResource(array.get(position).getImg());
         container.addView(view);
 
         return view;

@@ -4,14 +4,18 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ludit.R;
+import com.example.ludit.bluetooth.ConnectionThread;
 
 public class PinguimActivity extends AppCompatActivity {
+
+
     LinearLayout linearLayout;
    // Button btnCima;
     SharedPreferences preferences;
@@ -50,18 +54,9 @@ public class PinguimActivity extends AppCompatActivity {
                 view.mexerPinguim(-100);
             }
         });*/
+
+
     }
-
-    public static Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-
-            Bundle bundle = msg.getData();
-            byte[] data = bundle.getByteArray("data");
-            String dataString= new String(data);
-
-        }
-    };
 }
 
 

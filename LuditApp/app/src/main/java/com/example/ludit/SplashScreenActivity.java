@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ludit.user.PerfilActivity;
 
+import java.util.ArrayList;
+
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -17,6 +19,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
                         // Set the content to appear under the system bars so that the
@@ -47,6 +50,16 @@ public class SplashScreenActivity extends AppCompatActivity {
     private void trocarPagina(Class<?> qualActivity)
     {
         Intent i = new Intent(SplashScreenActivity.this, qualActivity);
+        if(qualActivity == SliderActivity.class)
+        {
+            ArrayList<SliderIntro> lista = new ArrayList<>();
+            lista.add(new SliderIntro("Vídeos", "Vídeos direto do youtube, selecionados para você", R.drawable.slider_videos));
+            lista.add(new SliderIntro("Músicas", "Músicas muito divertidas para te fazer mexer o esqueleto", R.drawable.slider_musica));
+            lista.add(new SliderIntro("Histórias", "Histórias animadas com muito amor e dedicação", R.drawable.slider_livros));
+            lista.add(new SliderIntro("Jogos", "Jogos super legais para aprender enquanto se diverte", R.drawable.slider_jogos));
+
+            i.putExtra("array", lista);
+        }
         startActivity(i);
         finish();
     }
