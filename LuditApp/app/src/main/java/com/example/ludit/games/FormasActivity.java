@@ -1,22 +1,15 @@
 package com.example.ludit.games;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
-import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.ludit.R;
 import com.example.ludit.webservice.Filho;
@@ -31,6 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FormasActivity extends AppCompatActivity {
+
     ImageView img;
     final int qtdFormas = 24;
     int[] imagens;

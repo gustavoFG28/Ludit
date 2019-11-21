@@ -15,6 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/FullScreen"
         android:usesCleartextTraffic="true">
+        <activity android:name=".atividades.LivrosActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".bluetooth.BluetoothActivity"/>
         <activity android:name=".atividades.SongActivity" />
         <activity android:name=".user.MenuActivity" />
@@ -23,11 +30,7 @@
             android:screenOrientation="landscape" />
         <activity android:name=".atividades.VideosActivity" />
         <activity android:name=".atividades.JogosActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".games.MatematicaActivity" />
         <activity android:name=".games.ReciclagemActivity" />

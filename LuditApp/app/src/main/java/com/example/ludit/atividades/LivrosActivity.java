@@ -1,5 +1,6 @@
 package com.example.ludit.atividades;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,7 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ludit.R;
-import com.example.ludit.adapters.ListaImagensAdapter;
+import com.example.ludit.adapters.JogosAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,8 @@ import java.util.List;
 public class LivrosActivity extends AppCompatActivity {
 
     ListView lvLista;
-
+    String[] titulos ={"Os Três Porquinhos", "Patinho Feio", "Pinóquio", "Festa no céu", "Lebre e o coelho"};
+    String[] ids ={"Os Três Porquinhos", "Patinho Feio", "Pinóquio", "Festa no céu", "Lebre e o coelho"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,13 +38,13 @@ public class LivrosActivity extends AppCompatActivity {
         lvLista = findViewById(R.id.lista);
 
         List<Integer> imagens = new ArrayList<Integer>();
-        imagens.add(R.drawable.xvbfxb);
-        imagens.add(R.drawable.xvbfxb);
-        imagens.add(R.drawable.xvbfxb);
-        imagens.add(R.drawable.xvbfxb);
-        imagens.add(R.drawable.xvbfxb);
+        imagens.add(R.drawable.capa_porcos);
+        imagens.add(R.drawable.capa_patinhos);
+        imagens.add(R.drawable.capa_pinoquio);
+        imagens.add(R.drawable.capa_ceu);
+        imagens.add(R.drawable.capa_lebre);
 
-        ListaImagensAdapter listaImagensAdapter = new ListaImagensAdapter(getApplicationContext(), imagens);
+        JogosAdapter listaImagensAdapter = new JogosAdapter(getApplicationContext(), imagens, titulos);
         lvLista.setAdapter(listaImagensAdapter);
 
         lvLista.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -50,8 +52,9 @@ public class LivrosActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
-
+                Intent i = new Intent(LivrosActivity.this, VideoPlayer.class);
+                i.putExtra("id", ids[position]);
+                startActivity(i);
             }});
     }
 }
