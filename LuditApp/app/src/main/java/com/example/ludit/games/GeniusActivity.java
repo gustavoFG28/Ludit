@@ -141,7 +141,7 @@ public class GeniusActivity extends AppCompatActivity {
                 btn.animate().setDuration(1500).withEndAction(new Runnable() {
                     @Override
                     public void run() {
-                        btn.setBackground(getDrawable(R.drawable.genius_padrao));
+                        btn.setImageResource(R.drawable.genius_padrao);
                     }
                 }).start();
             }
