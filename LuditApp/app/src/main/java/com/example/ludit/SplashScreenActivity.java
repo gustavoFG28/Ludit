@@ -43,6 +43,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE);
         if(sharedPreferences.contains("email") )
             trocarPagina(PerfilActivity.class);
+        else
         if(sharedPreferences.contains("jaEntrou"))
             trocarPagina(MenuActivity.class);
         else
@@ -61,6 +62,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             lista.add(new SliderIntro("Jogos", "Jogos super legais para aprender enquanto se diverte", R.drawable.slider_jogos));
 
             i.putExtra("array", lista);
+            i.putExtra("destino", MenuActivity.class);
         }
         startActivity(i);
         finish();

@@ -10,6 +10,11 @@ public class SliderIntro implements Serializable {
         this.img = img;
     }
 
+    public SliderIntro(int img) {
+        this.img = img;
+        this.titulo = this.descricao = null;
+    }
+
     private String titulo, descricao;
     private int img;
 

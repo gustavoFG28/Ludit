@@ -4,44 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/background_slider"
     tools:context=".SliderActivity">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
+
+
     </androidx.viewpager.widget.ViewPager>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_alignBottom="@id/viewPager"
-        app:tabBackground="@drawable/dot_tab_selector"
-        app:tabGravity="center"
-        app:tabIndicatorHeight="0dp">
-    </com.google.android.material.tabs.TabLayout>
-
-    <Button
-        android:id="@+id/btnVoltarSlider"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:layout_alignParentBottom="true"
-        android:text="Voltar"
-        android:textColor="#fff"/>
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btnAvancarSlider"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:layout_alignParentBottom="true"
-        android:text="Próximo"
-        android:layout_alignParentEnd="true"
-        android:textColor="#fff"/>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:tabBackground="@drawable/dot_tab_selector"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp">
+        </com.google.android.material.tabs.TabLayout>
+
+        <Button
+            android:id="@+id/btnVoltarSlider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_alignParentBottom="true"
+            android:text="Voltar"
+            android:textColor="#fff"/>
+
+        <Button
+            android:id="@+id/btnAvancarSlider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_alignParentBottom="true"
+            android:text="Próximo"
+            android:layout_alignParentEnd="true"
+            android:textColor="#fff"/>
+    </RelativeLayout>
+
+
 
 </RelativeLayout>
