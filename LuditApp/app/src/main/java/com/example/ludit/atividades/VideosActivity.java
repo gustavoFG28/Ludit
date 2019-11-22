@@ -31,7 +31,7 @@ public class VideosActivity extends AppCompatActivity {
     ListView lista;
 
     public static final String API_KEY = "AIzaSyAZ_TLsDPOQy4w4GZysdXjq83j-P4nFcEM";
-    public final String playlistId = "PLjf0D1j3KgIGa9tBFne55fKZ1_uErgM0i";
+    public final String playlistId = "PLCE7fgij3imiztEMC_ylt5DaFl0N_sYpS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

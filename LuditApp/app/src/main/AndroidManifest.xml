@@ -15,44 +15,34 @@
         android:supportsRtl="true"
         android:theme="@style/FullScreen"
         android:usesCleartextTraffic="true">
-        <activity android:name=".atividades.LivrosActivity">
 
-        </activity>
-        <activity android:name=".bluetooth.BluetoothActivity"/>
-        <activity android:name=".atividades.SongActivity" />
-        <activity android:name=".user.MenuActivity" />
-        <activity
-            android:name=".atividades.VideoPlayer"
-            android:screenOrientation="landscape" />
-        <activity android:name=".atividades.VideosActivity" />
-        <activity android:name=".atividades.JogosActivity" >
+        <activity android:name=".SliderActivity" />
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".games.MatematicaActivity" />
-        <activity android:name=".games.ReciclagemActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".games.FormasActivity"
-            android:screenOrientation="landscape"
-            />
-        <activity android:name=".games.GeniusActivity" />
-        <activity android:name=".user.PontuacaoActivity" />
-        <activity android:name=".user.PerfilActivity" />
-        <activity android:name=".user.FilhoActivity" />
-        <activity android:name=".user.ConfiguracoesActivity" />
-        <activity
-            android:name=".games.PinguimActivity"
-            android:screenOrientation="landscape" />
-        <activity android:name=".SliderActivity" />
+        <activity android:name=".user.MenuActivity" />
         <activity android:name=".user.LoginActivity" />
-        <activity android:name=".SplashScreenActivity">
-        </activity>
         <activity android:name=".user.CadastroActivity" />
+        <activity android:name=".user.PerfilActivity" />
+        <activity android:name=".user.ConfiguracoesActivity" />
         <activity android:name=".user.FilhoCadastroActivity" />
-        <activity android:name=".atividades.AtividadesActivity" ></activity>
+        <activity android:name=".user.FilhoActivity" />
+        <activity android:name=".user.PontuacaoActivity" />
+        <activity android:name=".atividades.AtividadesActivity"/>
+        <activity android:name=".atividades.LivrosActivity"/>
+        <activity android:name=".atividades.VideosActivity"/>
+        <activity android:name=".atividades.SongActivity" />
+        <activity android:name=".atividades.VideoPlayer" android:screenOrientation="landscape"/>
+        <activity android:name=".atividades.JogosActivity"/>
+        <activity android:name=".bluetooth.BluetoothActivity"/>
+        <activity android:name=".games.MatematicaActivity" />
+        <activity android:name=".games.ReciclagemActivity" android:screenOrientation="landscape"/>
+        <activity android:name=".games.FormasActivity" android:screenOrientation="landscape" />
+        <activity android:name=".games.GeniusActivity" />
+        <activity android:name=".games.PinguimActivity" android:screenOrientation="landscape" />
     </application>
-
 </manifest>

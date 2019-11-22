@@ -1,6 +1,7 @@
 package com.example.ludit.user;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,15 @@ public class MenuActivity extends AppCompatActivity {
                         // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE);
+        if(!sharedPreferences.contains("jaEntrou"))
+        {
+            SharedPreferences.Editor edit = sharedPreferences.edit();
+            edit.putBoolean("jaEntrou", true);
+            edit.commit();
+        }
+
 
         btnLogar = findViewById(R.id.btnLogarPrincipal);
         btnCadastro = findViewById(R.id.btnCadastroPrincipal);

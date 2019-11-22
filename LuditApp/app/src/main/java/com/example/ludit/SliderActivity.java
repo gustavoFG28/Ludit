@@ -13,6 +13,8 @@ import com.example.ludit.adapters.SliderAdapter;
 import com.example.ludit.user.MenuActivity;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.List;
+
 public class SliderActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
@@ -20,12 +22,8 @@ public class SliderActivity extends AppCompatActivity {
     private SliderAdapter sliderAdapter;
     private Button btnBack, btnNext;
     int qualPagina = 0;
-    private int[] imagens = {R.drawable.slider_videos, R.drawable.slider_musica, R.drawable.slider_livros, R.drawable.slider_jogos};
-    private String titulo[] = {"Vídeos", "Músicas", "Histórias", "Jogos"};
-    private String descricao[] = {"Vídeos direto do youtube, selecionados para você",
-                                  "Músicas muito divertidas para te fazer mexer o esqueleto",
-                                  "Histórias animadas com muito amor e dedicação",
-                                  "Jogos super legais para aprender enquanto se diverte"};
+    private List<SliderIntro> list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +41,8 @@ public class SliderActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnVoltarSlider);
         btnBack.setVisibility(View.INVISIBLE);
         btnNext = findViewById(R.id.btnAvancarSlider);
-
-        sliderAdapter = new SliderAdapter(this, imagens, R.layout.imagens_slider, titulo, descricao);
+        list =(List<SliderIntro>) getIntent().getSerializableExtra("array");
+        sliderAdapter = new SliderAdapter(this, R.layout.imagens_slider, list);
         viewPager.setAdapter(sliderAdapter);
         viewPager.addOnPageChangeListener(viewListener);
         tabLayout.setupWithViewPager(viewPager, true);
@@ -53,7 +51,7 @@ public class SliderActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(qualPagina >= imagens.length - 1)
+                if(qualPagina >= list.size() - 1)
                 {
                     Intent i = new Intent(SliderActivity.this, MenuActivity.class);
                     startActivity(i);
@@ -84,7 +82,7 @@ public class SliderActivity extends AppCompatActivity {
             if (position == 0) {
                 btnBack.setEnabled(false);
                 btnBack.setVisibility(View.INVISIBLE);
-            } else if (position >= imagens.length - 1) {
+            } else if (position >= list.size() - 1) {
                 btnNext.setEnabled(true);
                 btnNext.setText("Terminar");
             } else {
