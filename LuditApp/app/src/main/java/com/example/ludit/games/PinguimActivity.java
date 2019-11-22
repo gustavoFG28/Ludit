@@ -2,22 +2,17 @@ package com.example.ludit.games;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ludit.R;
-import com.example.ludit.bluetooth.ConnectionThread;
 
 public class PinguimActivity extends AppCompatActivity {
 
 
     LinearLayout linearLayout;
-   // Button btnCima;
     SharedPreferences preferences;
     String email, nomeFilho;
     final MyView view  = new MyView(this, 50, nomeFilho, email);
@@ -46,15 +41,6 @@ public class PinguimActivity extends AppCompatActivity {
 
         linearLayout = (LinearLayout) findViewById(R.id.linear);
         linearLayout.addView(view);
-
-        //btnCima = (Button) findViewById(R.id.btnPula);
-
-       /* btnCima.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                view.mexerPinguim(-100);
-            }
-        });*/
     }
 
     @Override
