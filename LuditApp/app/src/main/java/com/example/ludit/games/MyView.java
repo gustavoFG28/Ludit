@@ -84,7 +84,7 @@ public class MyView extends View {
 
                 Log.d("Mensagem: ", dataString.substring(0,1));
 
-                if(dataString.substring(0,1).equals("R")) {
+                if(dataString.substring(0,1).equals("B")) {
                     mexerPinguim(-100);
                     Log.d("Mensagem: ", "pular");
                 }
@@ -206,5 +206,10 @@ public class MyView extends View {
                 builder.create().show();
             }
         });
+    }
+
+    public void pararJogo()
+    {
+        thread.cancel();
     }
 }

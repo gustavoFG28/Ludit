@@ -3,6 +3,7 @@ package com.example.ludit.games;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.ludit.R;
+import com.example.ludit.bluetooth.ConnectionThread;
 import com.example.ludit.webservice.Filho;
 import com.example.ludit.webservice.RetrofitConfig;
 import com.example.ludit.webservice.UserService;
@@ -25,14 +27,17 @@ import retrofit2.Response;
 
 public class FormasActivity extends AppCompatActivity {
 
+    ConnectionThread thread;
+    private Handler handler;
+
     ImageView img;
     final int qtdFormas = 24;
     int[] imagens;
     int[] respostas;
 
     int btnCerto, pontosForma, qtd;
-    static Button btnAzul, btnVermelho, btnAmarelo, btnVerde;
-    Button[] btns = new Button[4];
+    ImageView btnAzul, btnVermelho, btnAmarelo, btnVerde;
+    ImageView[] btns = new ImageView[4];
 
     String nomeFilho, email, jogo;
 
@@ -50,17 +55,13 @@ public class FormasActivity extends AppCompatActivity {
                         // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
         img = (ImageView) findViewById(R.id.imgConjunto);
 
-        btnAmarelo = (Button) findViewById(R.id.btnAmarelo);
-        btnAzul = (Button) findViewById(R.id.btnAzul);
-        btnVerde = (Button) findViewById(R.id.btnVerde);
-        btnVermelho = (Button) findViewById(R.id.btnVermelho);
-
-        btnAmarelo.setEnabled(false);
-        btnAzul.setEnabled(false);
-        btnVerde.setEnabled(false);
-        btnVermelho.setEnabled(false);
+        btnAmarelo = (ImageView) findViewById(R.id.btnAmarelo);
+        btnAzul = (ImageView) findViewById(R.id.btnAzul);
+        btnVerde = (ImageView) findViewById(R.id.btnVerde);
+        btnVermelho = (ImageView) findViewById(R.id.btnVermelho);
 
         btns[0] = btnAmarelo;
         btns[1] = btnAzul;
@@ -81,7 +82,7 @@ public class FormasActivity extends AppCompatActivity {
 
         construirJogo();
 
-        for(int i = 0; i< btns.length; i++)
+        /*for(int i = 0; i< btns.length; i++)
         {
             final int id = i;
             btns[i].setOnClickListener(new View.OnClickListener() {
@@ -90,7 +91,52 @@ public class FormasActivity extends AppCompatActivity {
                     verResult(id);
                 }
             });
+        }*/
+
+        /* Definição da thread de conexão como cliente.
+            Aqui, você deve incluir o endereço MAC do seu módulo Bluetooth.
+            O app iniciará e vai automaticamente buscar por esse endereço.
+            Caso não encontre, dirá que houve um erro de conexão.
+         */
+        thread = new ConnectionThread("98:D3:31:FD:40:2A");
+        thread.start();
+
+        /* Um descanso rápido, para evitar bugs esquisitos.*/
+        try {
+            Thread.sleep(1000);
+        } catch (Exception E) {
+            E.printStackTrace();
         }
+
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+
+                Bundle bundle = msg.getData();
+                byte[] data = bundle.getByteArray("data");
+                String dataString= new String(data);
+
+                Log.d("Mensagem: ", dataString.substring(0,1));
+
+                switch(dataString.substring(0,1))
+                {
+                    case "Y":
+                        verResult(0);
+                        break;
+                    case "B":
+                        verResult(1);
+                        break;
+                    case "G":
+                        verResult(2);
+                        break;
+                    case "R":
+                        verResult(3);
+                        break;
+                }
+            }
+        };
+
+        thread.setHandler(handler);
     }
 
     public  void  construirJogo() {
@@ -125,6 +171,9 @@ public class FormasActivity extends AppCompatActivity {
             qtd++;
             construirJogo();
         }else {
+
+            thread.cancel();
+
             float pontoFinal = 0.0f;
 
             if(pontosForma >= 0 && pontosForma <= 2) pontoFinal = -0.05f;
@@ -170,30 +219,9 @@ public class FormasActivity extends AppCompatActivity {
         }
     }
 
-    public static Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-
-            Bundle bundle = msg.getData();
-            byte[] data = bundle.getByteArray("data");
-            String dataString= new String(data);
-
-            /*btns[0] = btnAmarelo;
-            btns[1] = btnAzul;
-            btns[2] = btnVermelho;
-            btns[3] = btnVerde;*/
-            switch (dataString)
-            {
-                case "Y":
-                    btnAmarelo.callOnClick();
-                case "B":
-                    btnAzul.callOnClick();
-                case "R":
-                    btnVermelho.callOnClick();
-                case "G":
-                    btnVerde.callOnClick();
-            }
-
-        }
-    };
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        thread.cancel();
+    }
 }

@@ -20,6 +20,8 @@ public class PinguimActivity extends AppCompatActivity {
    // Button btnCima;
     SharedPreferences preferences;
     String email, nomeFilho;
+    final MyView view  = new MyView(this, 50, nomeFilho, email);
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +45,6 @@ public class PinguimActivity extends AppCompatActivity {
         nomeFilho = "Henrique";
 
         linearLayout = (LinearLayout) findViewById(R.id.linear);
-        final MyView view = new MyView(this, 50, nomeFilho, email);
         linearLayout.addView(view);
 
         //btnCima = (Button) findViewById(R.id.btnPula);
@@ -54,8 +55,12 @@ public class PinguimActivity extends AppCompatActivity {
                 view.mexerPinguim(-100);
             }
         });*/
+    }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        view.pararJogo();
     }
 }
 

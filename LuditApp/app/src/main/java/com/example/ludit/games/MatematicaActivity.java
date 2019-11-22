@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ludit.R;
+import com.example.ludit.bluetooth.ConnectionThread;
 import com.example.ludit.webservice.Filho;
 import com.example.ludit.webservice.RetrofitConfig;
 import com.example.ludit.webservice.UserService;
@@ -24,6 +26,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MatematicaActivity extends AppCompatActivity {
+
+    ConnectionThread thread;
+    Handler handler;
+
     TextView tvVisor;
     Button btnAzul, btnVermelho, btnAmarelo, btnVerde;
     Button[] btns = new Button[4];
@@ -31,6 +37,7 @@ public class MatematicaActivity extends AppCompatActivity {
     int pontosMat, botaoCerto, qtd, max = 0;
     SharedPreferences preferences;
     String email, nomeFilho;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +53,13 @@ public class MatematicaActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
         tvVisor = (TextView) findViewById(R.id.tvConta);
+
+        qtd = 0;
+
         btnAmarelo = (Button) findViewById(R.id.btnAmarelo);
         btnAzul = (Button) findViewById(R.id.btnAzul);
         btnVerde = (Button) findViewById(R.id.btnVerde);
         btnVermelho = (Button) findViewById(R.id.btnVermelho);
-        qtd = 0;
 
         btns[0] = btnAmarelo;
         btns[1] = btnAzul;
@@ -67,7 +76,7 @@ public class MatematicaActivity extends AppCompatActivity {
 
         descobrirDificuldade();
 
-        for(int i = 0; i< btns.length; i++)
+        /*for(int i = 0; i< btns.length; i++)
         {
             final int id = i;
             btns[i].setOnClickListener(new View.OnClickListener() {
@@ -77,7 +86,56 @@ public class MatematicaActivity extends AppCompatActivity {
                     atualizarTela();
                 }
             });
+        }*/
+
+        /* Definição da thread de conexão como cliente.
+            Aqui, você deve incluir o endereço MAC do seu módulo Bluetooth.
+            O app iniciará e vai automaticamente buscar por esse endereço.
+            Caso não encontre, dirá que houve um erro de conexão.
+         */
+        thread = new ConnectionThread("98:D3:31:FD:40:2A");
+        thread.start();
+
+        /* Um descanso rápido, para evitar bugs esquisitos.*/
+        try {
+            Thread.sleep(1000);
+        } catch (Exception E) {
+            E.printStackTrace();
         }
+
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+
+                Bundle bundle = msg.getData();
+                byte[] data = bundle.getByteArray("data");
+                String dataString= new String(data);
+
+                Log.d("Mensagem: ", dataString.substring(0,1));
+
+                switch (dataString.substring(0,1))
+                {
+                    case "Y":
+                        verResult(0);
+                        atualizarTela();
+                        break;
+                    case "B":
+                        verResult(1);
+                        atualizarTela();
+                        break;
+                    case "R":
+                        verResult(2);
+                        atualizarTela();
+                        break;
+                    case "G":
+                        verResult(3);
+                        atualizarTela();
+                        break;
+                }
+            }
+        };
+
+        thread.setHandler(handler);
     }
 
     public  void   atualizarTela(){
@@ -85,11 +143,14 @@ public class MatematicaActivity extends AppCompatActivity {
             qtd++;
             construirConta();
         }else {
+
+            thread.cancel();
+
             float pontoFinal = 0.0f;
 
-            if(pontosMat >= 0 && pontosMat <=2) pontoFinal = -0.05f;
+            if(pontosMat >= 0 && pontosMat <= 2) pontoFinal = -0.05f;
             else if(pontosMat == 4 || pontosMat == 5) pontoFinal = 0.05f;
-            else if(pontosMat  >= 6 || pontosMat <=8) pontoFinal = 0.1f;
+            else if(pontosMat  >= 6 || pontosMat <= 8) pontoFinal = 0.1f;
             else if(pontosMat  == 9 || pontosMat == 10) pontoFinal = 0.15f;
 
             UserService service =  RetrofitConfig.getClient().create(UserService.class);
@@ -123,11 +184,13 @@ public class MatematicaActivity extends AppCompatActivity {
     }
 
     public void verResult(int id){
-       if(btns[botaoCerto].getId() == id) {
+       if(botaoCerto == id) {
            pontosMat++;
+           Log.d("Mensagem: ", "acertou");
            //animação feliz
        }
        else if(pontosMat > 0) {
+                Log.d("Mensagem: ", "errou");
                //animacao triste
            }
     }
@@ -197,14 +260,9 @@ public class MatematicaActivity extends AppCompatActivity {
                 btns[i].setText(result + " ");
     }
 
-    public static Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-
-            Bundle bundle = msg.getData();
-            byte[] data = bundle.getByteArray("data");
-            String dataString= new String(data);
-
-        }
-    };
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        thread.cancel();
+    }
 }

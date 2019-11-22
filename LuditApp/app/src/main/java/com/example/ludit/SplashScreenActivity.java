@@ -8,6 +8,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ludit.user.MenuActivity;
 import com.example.ludit.user.PerfilActivity;
 
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
                         // Set the content to appear under the system bars so that the
@@ -30,6 +30,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                         // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
         Handler handle = new Handler();
         handle.postDelayed(new Runnable() {
             @Override public void run() {
@@ -39,10 +40,11 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void Iniciar() {
-
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE);
-        if(sharedPreferences.contains("email"))
+        if(sharedPreferences.contains("email") )
             trocarPagina(PerfilActivity.class);
+        if(sharedPreferences.contains("jaEntrou"))
+            trocarPagina(MenuActivity.class);
         else
             trocarPagina(SliderActivity.class);
     }
