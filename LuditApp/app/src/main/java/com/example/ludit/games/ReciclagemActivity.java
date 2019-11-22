@@ -40,6 +40,7 @@ public class ReciclagemActivity extends AppCompatActivity {
 
     char btnCerto;
     int pontosReciclagem, qtd;
+
     ConnectionThread thread;
     private Handler handler;
 

@@ -223,6 +223,8 @@ public class GeniusActivity extends AppCompatActivity {
                 pontosGenius += 0.5f;
             construirGenius();
         }else{
+
+            thread.cancel();
             float pontoFinal = 0.0f;
 
             if(pontosGenius == 0) pontoFinal = -0.05f;
@@ -303,5 +305,11 @@ public class GeniusActivity extends AppCompatActivity {
 
         if(click > qtd)
             atualizarTela();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        thread.cancel();
     }
 }
