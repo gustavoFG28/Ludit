@@ -1,6 +1,7 @@
 package com.example.ludit.games;
 
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -31,6 +32,11 @@ public class PinguimActivity extends AppCompatActivity {
                         // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
+        MediaPlayer mediaPlayer= MediaPlayer.create(PinguimActivity.this,R.raw.pinguim);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
+
         preferences = getApplicationContext().getSharedPreferences("minhaShared",MODE_PRIVATE);
 
         email = preferences.getString("email", null);

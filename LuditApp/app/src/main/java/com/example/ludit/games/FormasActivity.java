@@ -1,11 +1,11 @@
 package com.example.ludit.games;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -55,6 +55,10 @@ public class FormasActivity extends AppCompatActivity {
                         // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
+        MediaPlayer mediaPlayer= MediaPlayer.create(FormasActivity.this,R.raw.formas);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
 
         img = (ImageView) findViewById(R.id.imgConjunto);
 
