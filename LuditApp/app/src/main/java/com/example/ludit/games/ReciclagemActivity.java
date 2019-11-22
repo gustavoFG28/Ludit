@@ -1,15 +1,13 @@
 package com.example.ludit.games;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,8 +24,6 @@ import java.util.Random;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.widget.Toast.LENGTH_SHORT;
 
 public class ReciclagemActivity extends AppCompatActivity {
 
@@ -61,6 +57,11 @@ public class ReciclagemActivity extends AppCompatActivity {
                         // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
+        MediaPlayer mediaPlayer= MediaPlayer.create(ReciclagemActivity.this,R.raw.reciclagem);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
+
         img = (ImageView) findViewById(R.id.imgLixo);
 
         /* Definição da thread de conexão como cliente.
