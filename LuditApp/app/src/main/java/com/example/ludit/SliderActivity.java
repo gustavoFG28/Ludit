@@ -42,7 +42,10 @@ public class SliderActivity extends AppCompatActivity {
         btnBack.setVisibility(View.INVISIBLE);
         btnNext = findViewById(R.id.btnAvancarSlider);
         list =(List<SliderIntro>) getIntent().getSerializableExtra("array");
-        sliderAdapter = new SliderAdapter(this, R.layout.imagens_slider, list);
+        if(getIntent().getSerializableExtra("destino") != MenuActivity.class)
+            sliderAdapter = new SliderAdapter(this, R.layout.slider_int, list);
+        else
+            sliderAdapter = new SliderAdapter(this, R.layout.imagens_slider, list);
         viewPager.setAdapter(sliderAdapter);
         viewPager.addOnPageChangeListener(viewListener);
         tabLayout.setupWithViewPager(viewPager, true);
@@ -53,7 +56,7 @@ public class SliderActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(qualPagina >= list.size() - 1)
                 {
-                    Intent i = new Intent(SliderActivity.this, MenuActivity.class);
+                    Intent i = new Intent(SliderActivity.this, (Class<?>) getIntent().getSerializableExtra("destino"));
                     startActivity(i);
                     finish();
                 }
