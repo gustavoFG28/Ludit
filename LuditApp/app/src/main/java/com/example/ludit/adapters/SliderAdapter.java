@@ -53,7 +53,7 @@ public class SliderAdapter extends PagerAdapter {
         TextView txtDescricao = (TextView)view.findViewById(R.id.tvDescricao);
 
         txtTitulo.setText(array.get(position).getTitulo());
-        txtDescricao.setText(array.get(position).getTitulo());
+        txtDescricao.setText(array.get(position).getDescricao());
         imageView.setImageResource(array.get(position).getImg());
         container.addView(view);
 
