@@ -38,7 +38,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".bluetooth.BluetoothActivity"/>
         <activity android:name=".games.MatematicaActivity" />
         <activity android:name=".games.ReciclagemActivity" android:screenOrientation="landscape"/>
         <activity android:name=".games.FormasActivity" android:screenOrientation="landscape" />
