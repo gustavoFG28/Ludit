@@ -172,6 +172,13 @@ public class FormasActivity extends AppCompatActivity {
             else if(pontosForma >= 5 && pontosForma <= 7) pontoFinal = 0.05f;
             else pontoFinal = 0.1f;
 
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(FormasActivity.this);
+            builder.setTitle("Sua pontuação foi de "+ pontosForma);
+            builder.setMessage("PARABÉNS, DEU CERTO");
+            builder.setNegativeButton("OK", null);
+            builder.create().show();
+
             UserService service =  RetrofitConfig.getClient().create(UserService.class);
 
             Call<List<Filho>> ponto = service.skill(email,nomeFilho,"rac", pontoFinal);
@@ -179,15 +186,6 @@ public class FormasActivity extends AppCompatActivity {
             ponto.enqueue(new Callback<List<Filho>>() {
                 @Override
                 public void onResponse(Call<List<Filho>> call, Response<List<Filho>> response) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(FormasActivity.this);
-
-                    builder.setTitle("Sua pontuação foi de "+ pontosForma);
-
-                    builder.setMessage("PARABÉNS, DEU CERTO");
-
-                    builder.setNegativeButton("OK", null);
-
-                    builder.create().show();
                 }
 
                 @Override

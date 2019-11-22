@@ -16,7 +16,7 @@ public class PinguimActivity extends AppCompatActivity {
     LinearLayout linearLayout;
     SharedPreferences preferences;
     String email, nomeFilho;
-    final MyView view  = new MyView(this, 50, nomeFilho, email);
+    MyView view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,12 +24,9 @@ public class PinguimActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pinguim);
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
-                        // Set the content to appear under the system bars so that the
-                        // content doesn't resize when the system bars hide and show.
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
 
@@ -45,6 +42,7 @@ public class PinguimActivity extends AppCompatActivity {
         email  = "sasa";
         nomeFilho = "Henrique";
 
+        view  = new MyView(this, 50, nomeFilho, email);
         linearLayout = (LinearLayout) findViewById(R.id.linear);
         linearLayout.addView(view);
     }

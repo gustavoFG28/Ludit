@@ -140,22 +140,18 @@ public class ReciclagemActivity extends AppCompatActivity {
             else if(pontosReciclagem >= 5 && pontosReciclagem <= 7) pontoFinal = 0.05f;
             else pontoFinal = 0.1f;
 
-            UserService service =  RetrofitConfig.getClient().create(UserService.class);
+            AlertDialog.Builder builder = new AlertDialog.Builder(ReciclagemActivity.this);
+            builder.setTitle("Sua pontuação foi de "+ pontosReciclagem);
+            builder.setMessage("PARABÉNS, DEU CERTO");
+            builder.setNegativeButton("OK", null);
+            builder.create().show();
 
+            UserService service =  RetrofitConfig.getClient().create(UserService.class);
             Call<List<Filho>> ponto = service.skill(email,nomeFilho,"rec", pontoFinal);
 
             ponto.enqueue(new Callback<List<Filho>>() {
                 @Override
                 public void onResponse(Call<List<Filho>> call, Response<List<Filho>> response) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(ReciclagemActivity.this);
-
-                    builder.setTitle("Sua pontuação foi de "+ pontosReciclagem);
-
-                    builder.setMessage("PARABÉNS, DEU CERTO");
-
-                    builder.setNegativeButton("OK", null);
-
-                    builder.create().show();
                 }
 
                 @Override
