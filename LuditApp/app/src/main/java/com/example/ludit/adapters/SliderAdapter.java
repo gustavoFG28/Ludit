@@ -47,10 +47,12 @@ public class SliderAdapter extends PagerAdapter {
 
         View view = inflater.inflate(layout, container, false);
 
-        ImageView imageView = (ImageView) view.findViewById(R.id.slideImage);
-        imageView.setImageResource(array.get(position).getImg());
+
         if(layout != R.layout.slider_int)
         {
+            ImageView imageView = (ImageView) view.findViewById(R.id.slideImage);
+            imageView.setImageResource(array.get(position).getImg());
+
             TextView txtTitulo = (TextView) view.findViewById(R.id.tvTitulo);
             TextView txtDescricao = (TextView) view.findViewById(R.id.tvDescricao);
 
@@ -58,6 +60,8 @@ public class SliderAdapter extends PagerAdapter {
             txtDescricao.setText(array.get(position).getDescricao());
 
         }
+        else
+            view.findViewById(R.id.slideLinearLayout).setBackgroundResource(array.get(position).getImg());
         container.addView(view);
 
         return view;

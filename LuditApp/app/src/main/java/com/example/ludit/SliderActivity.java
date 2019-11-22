@@ -2,6 +2,7 @@ package com.example.ludit;
 
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +47,9 @@ public class SliderActivity extends AppCompatActivity {
             sliderAdapter = new SliderAdapter(this, R.layout.slider_int, list);
         else
             sliderAdapter = new SliderAdapter(this, R.layout.imagens_slider, list);
+
+        if(getIntent().getBooleanExtra("ehLandscape", false))
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         viewPager.setAdapter(sliderAdapter);
         viewPager.addOnPageChangeListener(viewListener);
         tabLayout.setupWithViewPager(viewPager, true);

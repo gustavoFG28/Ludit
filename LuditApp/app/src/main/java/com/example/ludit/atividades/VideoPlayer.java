@@ -23,19 +23,16 @@ public class VideoPlayer extends AppCompatActivity{
         setContentView(R.layout.activity_video_playere);
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
-                        // Set the content to appear under the system bars so that the
-                        // content doesn't resize when the system bars hide and show.
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
         video = findViewById(R.id.player);
         Intent i =  getIntent();
         id = i.getStringExtra("id");
 
-        String link = "<body style='margin: 0; padding: 0'><iframe width='100%' height='100%' allowfullscreen src='https://www.youtube.com/embed/" +  id + "'></iframe></body>";
+        String link = "<html style='margin:0'><body style='margin: 0; padding: 0'><iframe width='100%' height='100%' allowfullscreen src='https://www.youtube.com/embed/" +  id + "'></iframe></body></html>";
         video.getSettings().setJavaScriptEnabled(true);
         video.setWebChromeClient(new WebChromeClient());
         video.getSettings().setUseWideViewPort(true);

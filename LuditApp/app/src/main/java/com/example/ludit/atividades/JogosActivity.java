@@ -79,7 +79,7 @@ public class JogosActivity extends AppCompatActivity {
                         lista.add(new SliderIntro("Vídeos", "Vídeos direto do youtube, selecionados para você", R.drawable.rac_ins_1));
                         lista.add(new SliderIntro("Músicas", "Músicas muito divertidas para te fazer mexer o esqueleto", R.drawable.rac_ins_2));
                         destino = FormasActivity.class;
-
+                        i.putExtra("ehLandscape",true);
                         break;
                     case 1:
                         lista.add(new SliderIntro("Vídeos", "Vídeos direto do youtube, selecionados para você", R.drawable.mem_ins_1));
@@ -94,12 +94,14 @@ public class JogosActivity extends AppCompatActivity {
                         lista.add(new SliderIntro("Músicas", "Músicas muito divertidas para te fazer mexer o esqueleto", R.drawable.rec_ins_2));
                         lista.add(new SliderIntro("Vídeos", "Vídeos direto do youtube, selecionados para você", R.drawable.rec_ins_3));
                         destino = ReciclagemActivity.class;
+                        i.putExtra("ehLandscape",true);
                         break;
                     case 3:
                         lista.add(new SliderIntro("Vídeos", "Vídeos direto do youtube, selecionados para você", R.drawable.pin_ins_1));
                         lista.add(new SliderIntro("Músicas", "Músicas muito divertidas para te fazer mexer o esqueleto", R.drawable.pin_ins_2));
                         lista.add(new SliderIntro("Histórias", "Histórias animadas com muito amor e dedicação", R.drawable.pin_ins_3));
                         destino = PinguimActivity.class;
+                        i.putExtra("ehLandscape",true);
                         break;
                     case 4:
                         lista.add(new SliderIntro("Vídeos", "Vídeos direto do youtube, selecionados para você", R.drawable.mat_ins_1));
