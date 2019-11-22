@@ -91,6 +91,8 @@ public class FormasActivity extends AppCompatActivity {
                 }
             });
         }
+
+
     }
 
     public  void  construirJogo() {
@@ -169,31 +171,4 @@ public class FormasActivity extends AppCompatActivity {
             });
         }
     }
-
-    public static Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-
-            Bundle bundle = msg.getData();
-            byte[] data = bundle.getByteArray("data");
-            String dataString= new String(data);
-
-            /*btns[0] = btnAmarelo;
-            btns[1] = btnAzul;
-            btns[2] = btnVermelho;
-            btns[3] = btnVerde;*/
-            switch (dataString)
-            {
-                case "Y":
-                    btnAmarelo.callOnClick();
-                case "B":
-                    btnAzul.callOnClick();
-                case "R":
-                    btnVermelho.callOnClick();
-                case "G":
-                    btnVerde.callOnClick();
-            }
-
-        }
-    };
 }

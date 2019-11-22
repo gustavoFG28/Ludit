@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ludit.R;
+import com.example.ludit.bluetooth.ConnectionThread;
 import com.example.ludit.webservice.Filho;
 import com.example.ludit.webservice.RetrofitConfig;
 import com.example.ludit.webservice.UserService;
@@ -27,6 +29,9 @@ import retrofit2.Response;
 public class GeniusActivity extends AppCompatActivity {
    // Button btnAzul, btnVermelho, btnAmarelo, btnVerde;
    // Button[] btns = new Button[4];
+    Handler handler;
+    ConnectionThread thread;
+
     ImageView btn;
     int[] sequencia;
     int[] cores = new int[4];
@@ -82,7 +87,51 @@ public class GeniusActivity extends AppCompatActivity {
 
         click = 0;
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        /* Definição da thread de conexão como cliente.
+            Aqui, você deve incluir o endereço MAC do seu módulo Bluetooth.
+            O app iniciará e vai automaticamente buscar por esse endereço.
+            Caso não encontre, dirá que houve um erro de conexão.
+         */
+        thread = new ConnectionThread("98:D3:31:FD:40:2A");
+        thread.start();
+
+        /* Um descanso rápido, para evitar bugs esquisitos.*/
+        try {
+            Thread.sleep(1000);
+        } catch (Exception E) {
+            E.printStackTrace();
+        }
+
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+
+                Bundle bundle = msg.getData();
+                byte[] data = bundle.getByteArray("data");
+                String dataString= new String(data);
+
+                Log.d("Mensagem: ", dataString.substring(0,1));
+
+                switch (dataString.substring(0,1))
+                {
+                    case "R":
+                        verResult(0);
+                        break;
+                    case "B":
+                        verResult(1);
+                        break;
+                    case "G":
+                        verResult(2);
+                        break;
+                    case "Y":
+                        verResult(3);
+                        break;
+                }
+            }
+        };
+
+        thread.setHandler(handler);
+        /*btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 for(int i = 0; i < cores.length; i++)
@@ -91,7 +140,7 @@ public class GeniusActivity extends AppCompatActivity {
                         break;
                     }
             }
-        });
+        });*/
     }
 
     public  void  descobrirDificuldade() {
@@ -255,15 +304,4 @@ public class GeniusActivity extends AppCompatActivity {
         if(click > qtd)
             atualizarTela();
     }
-
-    public static Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-
-            Bundle bundle = msg.getData();
-            byte[] data = bundle.getByteArray("data");
-            String dataString= new String(data);
-
-        }
-    };
 }
