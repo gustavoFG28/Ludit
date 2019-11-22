@@ -45,12 +45,11 @@ public class ListaVideosAdapter extends ArrayAdapter {
                 .execute(qualVideo.getUrl());
 
 
-
         TextView txt = viewAtual.findViewById(R.id.playerTitulo);
 
         int menor = MAX_VALUE;
 
-        String opcoes[] = {"EM PORTUGUÊS", "|", "-"};
+        String opcoes[] = {"PORTUGUÊS BRASIL", "|", "-"};
         for(int i = 0; i < opcoes.length; i++)
         {
             int index = qualVideo.getTitulo().toUpperCase().indexOf(opcoes[i]);
