@@ -39,7 +39,7 @@ public class FormasActivity extends AppCompatActivity {
     ImageView btnAzul, btnVermelho, btnAmarelo, btnVerde;
     ImageView[] btns = new ImageView[4];
 
-    String nomeFilho, email, jogo;
+    String nomeFilho, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +47,9 @@ public class FormasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_formas);
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
-                        // Set the content to appear under the system bars so that the
-                        // content doesn't resize when the system bars hide and show.
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
 
@@ -86,16 +83,6 @@ public class FormasActivity extends AppCompatActivity {
 
         construirJogo();
 
-        /*for(int i = 0; i< btns.length; i++)
-        {
-            final int id = i;
-            btns[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    verResult(id);
-                }
-            });
-        }*/
 
         /* Definição da thread de conexão como cliente.
             Aqui, você deve incluir o endereço MAC do seu módulo Bluetooth.

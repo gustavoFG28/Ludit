@@ -45,12 +45,9 @@ public class MatematicaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_matematica);
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
-                        // Set the content to appear under the system bars so that the
-                        // content doesn't resize when the system bars hide and show.
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
 
@@ -81,18 +78,6 @@ public class MatematicaActivity extends AppCompatActivity {
         nomeFilho = "Henrique";
 
         descobrirDificuldade();
-
-        /*for(int i = 0; i< btns.length; i++)
-        {
-            final int id = i;
-            btns[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    verResult(btns[id].getId());
-                    atualizarTela();
-                }
-            });
-        }*/
 
         /* Definição da thread de conexão como cliente.
             Aqui, você deve incluir o endereço MAC do seu módulo Bluetooth.

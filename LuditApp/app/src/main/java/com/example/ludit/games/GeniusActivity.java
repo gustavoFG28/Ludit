@@ -1,6 +1,7 @@
 package com.example.ludit.games;
 
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -38,8 +39,6 @@ public class GeniusActivity extends AppCompatActivity {
     SharedPreferences preferences;
     String email, nomeFilho;
 
-    int padrao = R.drawable.genius_padrao;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +51,14 @@ public class GeniusActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
 
-
+        MediaPlayer mediaPlayer= MediaPlayer.create(GeniusActivity.this,R.raw.genius);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
 
         cores[0] = R.drawable.genius_vermelho;
         cores[1] = R.drawable.genius_azul;
         cores[2] = R.drawable.genius_verde;
         cores[3] = R.drawable.genius_amarelo;
-
 
         pontosGenius = qtd = 0;
         btn = findViewById(R.id.genius);
@@ -117,16 +117,6 @@ public class GeniusActivity extends AppCompatActivity {
         };
 
         thread.setHandler(handler);
-        /*btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for(int i = 0; i < cores.length; i++)
-                    if(cores[i] == btn.getId()) {
-                        verResult(i);
-                        break;
-                    }
-            }
-        });*/
     }
 
     public  void  descobrirDificuldade() {
