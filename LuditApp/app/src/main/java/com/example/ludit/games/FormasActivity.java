@@ -171,6 +171,9 @@ public class FormasActivity extends AppCompatActivity {
             qtd++;
             construirJogo();
         }else {
+
+            thread.cancel();
+
             float pontoFinal = 0.0f;
 
             if(pontosForma >= 0 && pontosForma <= 2) pontoFinal = -0.05f;

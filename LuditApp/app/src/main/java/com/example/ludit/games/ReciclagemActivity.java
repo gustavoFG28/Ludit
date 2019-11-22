@@ -131,6 +131,7 @@ public class ReciclagemActivity extends AppCompatActivity {
         }else {
 
             thread.cancel();
+
             float pontoFinal = 0.0f;
 
             if(pontosReciclagem >= 0 && pontosReciclagem <= 2) pontoFinal = -0.05f;

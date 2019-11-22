@@ -225,6 +225,7 @@ public class GeniusActivity extends AppCompatActivity {
         }else{
 
             thread.cancel();
+
             float pontoFinal = 0.0f;
 
             if(pontosGenius == 0) pontoFinal = -0.05f;
