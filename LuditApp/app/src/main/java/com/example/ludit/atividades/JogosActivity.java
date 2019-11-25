@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ludit.R;
@@ -134,7 +135,9 @@ public class JogosActivity extends AppCompatActivity {
          */
         BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
         if (btAdapter == null) {
-            Toast.makeText(this,"Que pena! Hardware Bluetooth não está funcionando", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"O seu hardware Bluetooth não está funcionando", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(JogosActivity.this, AtividadesActivity.class);
+            startActivity(i);
         } else {
 
          /* A chamada do seguinte método liga o Bluetooth no dispositivo Android
@@ -147,6 +150,25 @@ public class JogosActivity extends AppCompatActivity {
                 Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableIntent, 3);
             }
+
+           /*if(!btAdapter.isEnabled()){
+                Toast.makeText(this,"Ative o bluetooth para jogar", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(JogosActivity.this, AtividadesActivity.class);
+                startActivity(i);
+            }*/
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 3 && resultCode == RESULT_OK)
+            Toast.makeText(this,"Bluetooth ativado", Toast.LENGTH_SHORT).show();
+        else if(requestCode == 3) {
+            Toast.makeText(this, "Ative o bluetooth para jogar", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(JogosActivity.this, AtividadesActivity.class);
+            startActivity(i);
         }
     }
 }
