@@ -1,25 +1,31 @@
 package com.example.ludit.user;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
-import com.anychart.AnyChart;
-import com.anychart.AnyChartView;
-import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.dataentry.ValueDataEntry;
-import com.anychart.charts.Cartesian;
-import com.anychart.core.cartesian.series.Column;
 import com.example.ludit.R;
 import com.example.ludit.webservice.Habilidade;
 import com.example.ludit.webservice.RetrofitConfig;
 import com.example.ludit.webservice.UserService;
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.RadarChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.RadarData;
+import com.github.mikephil.charting.data.RadarDataSet;
+import com.github.mikephil.charting.data.RadarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -28,7 +34,9 @@ import retrofit2.Response;
 
 public class PontuacaoActivity extends AppCompatActivity {
 
-    ArrayList<Habilidade> habilidades;
+    HashMap<String, Habilidade> habilidades;
+    ArrayList<String> arrayNomes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +57,9 @@ public class PontuacaoActivity extends AppCompatActivity {
         Call<List<Habilidade>> call = service.habilidades(getApplicationContext().getSharedPreferences("minhaShared", MODE_PRIVATE).getString("email", ""), nome);
         //mostrarGrafico(); //https://github.com/AnyChart/AnyChart-Android
 
+        habilidades = new HashMap<String, Habilidade>();
+        arrayNomes = new ArrayList<>();
+
         call.enqueue(new Callback<List<Habilidade>>() {
             @Override
             public void onResponse(Call<List<Habilidade>> call, Response<List<Habilidade>> response) {
@@ -56,7 +67,12 @@ public class PontuacaoActivity extends AppCompatActivity {
                     return;
                 }
 
-                habilidades = (ArrayList<Habilidade>) response.body();
+                for(Habilidade habilidade : response.body()) {
+                    habilidades.put(habilidade.getNome(), habilidade);
+                    arrayNomes.add(habilidade.getNome());
+                }
+
+                mostrarGrafico();
             }
 
             @Override
@@ -65,7 +81,7 @@ public class PontuacaoActivity extends AppCompatActivity {
             }
         });
 
-        mostrarGrafico();
+
 
         ((Button)findViewById(R.id.btnSair)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,49 +94,90 @@ public class PontuacaoActivity extends AppCompatActivity {
 
     private void mostrarGrafico(){
 
-        Cartesian grafico = AnyChart.column();
+        RadarChart chart = (RadarChart) findViewById(R.id.graficoFilho);
 
-        List<DataEntry> data = new ArrayList<>();
+        chart.getDescription().setEnabled(false);
+        chart.setWebLineWidth(1f);
+        chart.setWebColor(Color.BLACK);
+        chart.getDescription().setEnabled(false);
 
-        if(habilidades != null) {
-            for (Habilidade habilidade : habilidades) {
-                switch (habilidade.getNome()) {
-                    case "mat":
-                        data.add(new ValueDataEntry("Matematica", habilidade.getPorcentagem() * 100));
-                        break;
+        chart.animateXY(1400,1400, Easing.EasingOption.EaseInOutQuad, Easing.EasingOption.EaseInOutQuad);
 
-                    case "mem":
-                        data.add(new ValueDataEntry("Memoria", habilidade.getPorcentagem() * 100));
-                        break;
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setTextSize(18f);
+        xAxis.setXOffset(0);
+        xAxis.setS
+        xAxis.setYOffset(0);
 
-                    case "ref":
-                        data.add(new ValueDataEntry("Reflexo", habilidade.getPorcentagem() * 100));
-                        break;
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
 
-                    case "rec":
-                        data.add(new ValueDataEntry("Reciclagem", habilidade.getPorcentagem() * 100));
-                        break;
+            private String[] qualities = getNomes();
 
-                    case "rac":
-                        data.add(new ValueDataEntry("Raciocinio", habilidade.getPorcentagem() * 100));
-                        break;
 
-                }
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return qualities[(int) value % qualities.length];
+            }
+        });
+        xAxis.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.endColorGradient));
+
+        chart.getLegend().setEnabled(false);
+        YAxis yAxis = chart.getYAxis();
+
+        yAxis.setLabelCount(5, false);
+        yAxis.setTextSize(18f);
+        yAxis.setAxisMinimum(0);
+        yAxis.setAxisMaximum(100f);
+        yAxis.setDrawLabels(false);
+
+        ArrayList<RadarEntry> employe = new ArrayList<>();
+        if(habilidades.containsKey("mat"))
+            employe.add(new RadarEntry(habilidades.get("mat").getPorcentagem() * 100));
+
+        if(habilidades.containsKey("mem"))
+            employe.add(new RadarEntry(habilidades.get("mem").getPorcentagem() * 100));
+
+        if(habilidades.containsKey("ref"))
+            employe.add(new RadarEntry(habilidades.get("ref").getPorcentagem() * 100));
+
+        if(habilidades.containsKey("rec"))
+            employe.add(new RadarEntry(habilidades.get("rec").getPorcentagem() * 100));
+
+        if(habilidades.containsKey("rac"))
+            employe.add(new RadarEntry(habilidades.get("rac").getPorcentagem() * 100));
+
+        RadarDataSet set = new RadarDataSet(employe, "");
+
+        set.setColor(ContextCompat.getColor(getApplicationContext(), R.color.startColorGradient));
+        set.setFillColor(ContextCompat.getColor(getApplicationContext(), R.color.startColorGradient));
+        set.setDrawFilled(true);
+        set.setFillAlpha(100);
+        set.setLineWidth(2f);
+        set.setDrawHighlightIndicators(true);
+        set.setDrawHighlightCircleEnabled(true);
+
+
+        RadarData data = new RadarData(set);
+
+        chart.setData(data);
+        chart.invalidate();
+
+    }
+
+    private String[] getNomes() {
+        String[] nomes = new String[arrayNomes.size()];
+        for(int i = 0; i < arrayNomes.size(); i++) {
+            switch (arrayNomes.get(i))
+            {
+                case "mat": nomes[i] = "Matematica";break;
+                case "rec": nomes[i] = "Reciclagem";break;
+                case "rac": nomes[i] = "Racicionio";break;
+                case "ref": nomes[i] = "Reflexo";break;
+                case "mem": nomes[i] = "Memoria"; break;
             }
         }
-        data.add(new ValueDataEntry("Matematica", 0));
-        data.add(new ValueDataEntry("Memoria", 0));
-        data.add(new ValueDataEntry("Reflexo", 0));
-        data.add(new ValueDataEntry("Reciclagem", 0));
-        data.add(new ValueDataEntry("Raciocinio", 0));
 
-        Column column = grafico.column(data);
-
-	    grafico.title("Progresso");
-	    grafico.xAxis(0).title("Habilidade");
-	    grafico.yAxis(0).title("Porcentagem(%)");
-
-        AnyChartView anyChartView = (AnyChartView) findViewById(R.id.graficoFilho);
-        anyChartView.setChart(grafico);
+        return nomes;
     }
+
 }

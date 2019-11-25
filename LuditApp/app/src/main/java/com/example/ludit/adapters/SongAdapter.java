@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.example.ludit.R;
 import com.example.ludit.atividades.Video;
 
@@ -32,9 +34,12 @@ public class SongAdapter extends ArrayAdapter {
 
         Video qualMusica = lista.get(position);
         TextView textView = viewAtual.findViewById(R.id.song_title);
+        textView.setText(qualMusica.getTitulo());
 
-       textView.setText(qualMusica.getTitulo());
-
+        if(position % 2 == 0)
+            textView.setTextColor(ContextCompat.getColor(viewAtual.getContext(), R.color.startColorGradient));
+        else
+            textView.setTextColor(ContextCompat.getColor(viewAtual.getContext(), R.color.endColorGradient));
         return  viewAtual;
     }
 }
