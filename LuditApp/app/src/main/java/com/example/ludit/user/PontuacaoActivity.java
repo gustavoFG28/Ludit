@@ -106,7 +106,6 @@ public class PontuacaoActivity extends AppCompatActivity {
         XAxis xAxis = chart.getXAxis();
         xAxis.setTextSize(18f);
         xAxis.setXOffset(0);
-        xAxis.setS
         xAxis.setYOffset(0);
 
         xAxis.setValueFormatter(new IAxisValueFormatter() {

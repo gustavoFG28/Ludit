@@ -76,7 +76,7 @@ public class SongActivity extends AppCompatActivity {
                 Video musicaSelecionada = musicasArray.get(position);
                 String idVideo = musicaSelecionada.getId();
 
-                String link = "<iframe src='https://www.youtube.com/embed/" +  idVideo + "'></iframe>";
+                String link = "<center><iframe style='width:90vw; height:95vh; ' src='https://www.youtube.com/embed/" +  idVideo + "'></iframe></center>";
 
                 reprodutor.getSettings().setJavaScriptEnabled(true);
                 reprodutor.setWebChromeClient(new WebChromeClient());
